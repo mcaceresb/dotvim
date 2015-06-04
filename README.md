@@ -55,17 +55,16 @@ sudo npm -g install instant-markdown-d
 ## Issues (:
 
 * While all the plug-ins seem to work as expected, I get these errors upon running `vim -g`
-
-    ```
-    Error detected while processing dotvimrc/plugins.vim:
-    line   88:
-    E117: Unknown function: expand_region#custom_text_objects
-    line  176:
-    E117: Unknown function: neocomplete#custom#source
-    Error detected while processing bundle/textobj-line/plugin/textobj/line.vim:
-    line   37:
-    E117: Unknown function: textobj#user#plugin
-    ```
+```
+Error detected while processing dotvimrc/plugins.vim:
+line   88:
+E117: Unknown function: expand_region#custom_text_objects
+line  176:
+E117: Unknown function: neocomplete#custom#source
+Error detected while processing bundle/textobj-line/plugin/textobj/line.vim:
+line   37:
+E117: Unknown function: textobj#user#plugin
+```
 
 ## License (:
 
