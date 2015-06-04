@@ -21,20 +21,20 @@ snippet lab "Insert \label{$1:$2}$0" w
 endsnippet
 
 # References
-snippet ref "Insert \ref{$1:$2}$0" w
-\ref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+snippet ref "Insert \ref{...}" w
+\ref{$1}$0
 endsnippet
 
-snippet refa "Insert \autoref{$1:$2}$0" w
-\autoref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+snippet refa "Insert \autoref{...}" w
+\autoref{$1}$0
 endsnippet
 
-snippet refc "Insert \cref{$1:$2}$0" w
-\cref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+snippet refc "Insert \cref{...}" w
+\cref{$1}$0
 endsnippet
 
-snippet refC "Insert \Cref{$1:$2}$0" w
-\Cref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+snippet refC "Insert \Cref{...}" w
+\Cref{$1}$0
 endsnippet
 
 # natbib citations

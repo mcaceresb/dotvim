@@ -24,11 +24,11 @@
 "       /home/mauricio/.vim/spell/moby-names
 "       /home/mauricio/.vim/spell/wordnet-thesaurus
 "   aux files
-"	    ~/Documents/projects/code/dotvim/dotvimr/conceal.vim
-"	    ~/Documents/projects/code/dotvim/dotvimr/fonts.vim
-"	    ~/Documents/projects/code/dotvim/dotvimr/mappings.vim
-"	    ~/Documents/projects/code/dotvim/dotvimr/functions.vim
-"	    ~/Documents/projects/code/dotvim/dotvimr/plugins.vim
+"	    ~/Documents/projects/code/dotvim/dotvimrc/conceal.vim
+"	    ~/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+"	    ~/Documents/projects/code/dotvim/dotvimrc/mappings.vim
+"	    ~/Documents/projects/code/dotvim/dotvimrc/functions.vim
+"	    ~/Documents/projects/code/dotvim/dotvimrc/plugins.vim
 
 " Startup: Load NeoBundle and plug-ins {{{1
 "------------------------------------------
@@ -158,7 +158,8 @@ command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
 
 " Highlight trailing whitespace
 " Note airline points out the first occurrence of this in the file.
-set list listchars=trail:¬
+" Note that nolist causes this to be hidden
+set listchars=trail:¬
 
 " Source Files: mappings, fonts, conceal {{{1
 "------------------------------------------------

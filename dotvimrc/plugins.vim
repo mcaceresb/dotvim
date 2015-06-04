@@ -232,16 +232,16 @@ NeoBundle 'godlygeek/tabular', {'name' : 'tabular'}
     vmap <leader><leader>t :Tabularize /&<CR>
     nmap <leader><leader>t :Tabularize /&<CR>
 
-    vmap <leader><leader># :Tabularize /#<CR>
-    vmap <leader><leader>% :Tabularize /%<CR>
-    vmap <leader><leader>& :Tabularize /&<CR>
-    vmap <leader><leader>* :Tabularize /*<CR>
-    vmap <leader><leader>= :Tabularize /=<CR>
-    vmap <leader><leader>, :Tabularize /,<CR>
-    vmap <leader><leader>" :Tabularize /"<CR>
-    vmap <leader><leader>: :Tabularize /:<CR>
+    vmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
+    vmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
+    vmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
+    vmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
+    vmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
+    vmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
+    vmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
+    vmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
     " vmap <leader><leader>\| :Tabularize /|<CR>
-    vmap <leader><leader>$ :Tabularize /$<CR>
+    vmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
 
     " vmap <leader><leader>## :Tabularize /#\zs<CR>
     " vmap <leader><leader>%% :Tabularize /%\zs<CR>
@@ -254,16 +254,16 @@ NeoBundle 'godlygeek/tabular', {'name' : 'tabular'}
     " " vmap <leader><leader>\|\| :Tabularize /|\zs<CR>
     " vmap <leader><leader>$$ :Tabularize /$\zs<CR>
 
-    nmap <leader><leader># :Tabularize /#<CR>
-    nmap <leader><leader>% :Tabularize /%<CR>
-    nmap <leader><leader>& :Tabularize /&<CR>
-    nmap <leader><leader>* :Tabularize /*<CR>
-    nmap <leader><leader>= :Tabularize /=<CR>
-    nmap <leader><leader>, :Tabularize /,<CR>
-    nmap <leader><leader>" :Tabularize /"<CR>
-    nmap <leader><leader>: :Tabularize /:<CR>
+    nmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
+    nmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
+    nmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
+    nmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
+    nmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
+    nmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
+    nmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
+    nmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
     " nmap <leader><leader>\| :Tabularize /|<CR>
-    nmap <leader><leader>$ :Tabularize /$<CR>
+    nmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
 
     " nmap <leader><leader>## :Tabularize /#\zs<CR>
     " nmap <leader><leader>%% :Tabularize /%\zs<CR>
