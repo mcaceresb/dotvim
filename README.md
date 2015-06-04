@@ -1,8 +1,8 @@
-## dotvim
+## dotvim (:
 
 My personal Vim distribution.
 
-## Quickstart
+## Quickstart (:
 
 I use [NeoBundle](https://github.com/Shougo/neobundle.vim) and a *ton* of plug-ins. All the packages will install automatically once Vim starts. Do this to get started:
 ```sh
@@ -32,7 +32,7 @@ sudo apt-get install xdg-utils
 sudo npm -g install instant-markdown-d
 ```
 
-## Structure
+## Structure (:
 
 * `./bundle` has some specific files I have modified for bundles that I install. Currently houses my mangled version of `vim-latex` as well as (most of) my custom snippets.
 * `./colors` has some colorschemes I actually use.
@@ -42,18 +42,20 @@ sudo npm -g install instant-markdown-d
 * `./session` is just for show.
 * `./undo` is just for show.
 
-## TODO
+## TODO (:
 
 * Make folder naming automatic (currently it is hard-coded to `$HOME/Documents/projects/code/dotvim` in this `README.md` and in my `vimrc`)
 * Figure out a better way of keeping your custom snippets and colorschemes
 * Make python snippets
+* Make Tabular mappings work (currently not mapping)
 * Make copy/paste-able into `~/.vim`?
 * Edit rplugin/common_global.vim to add `--profile white` to `konsole`?
 * Vim in `konsole`, not just `vim -g`?
 
-## Issues
+## Issues (:
 
 * While all the plug-ins seem to work as expected, I get these errors upon running `vim -g`
+
     ```
     Error detected while processing dotvimrc/plugins.vim:
     line   88:
@@ -65,7 +67,7 @@ sudo npm -g install instant-markdown-d
     E117: Unknown function: textobj#user#plugin
     ```
 
-## License
+## License (:
 
 Figure this out.
 
