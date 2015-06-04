@@ -383,6 +383,7 @@ NeoBundleLazy 'Shougo/junkfile.vim',
 " from vim-latex fully?
 NeoBundle 'xuhdev/vim-latex-live-preview', {'name' : 'latex-live-preview'}
 NeoBundle 'LaTeX-Box-Team/LaTeX-Box', {'name' : 'latex-box'}
+call neobundle#local("~/.vim/bundle", {}, ['latex-suite-abridged'])
 
     " Generic LaTeX compile rules
     nnoremap <leader>ok :LLPStartPreview<CR>
