@@ -1,0 +1,203 @@
+priority -50
+
+##############
+# Plots      #
+##############
+
+# Figures
+snippet fig "Figure environment" b
+\begin{figure}${2:[ht!]}
+	\centering
+	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\caption{${5:caption}}
+	\label{fig:${6:${5/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0
+endsnippet
+
+snippet efi "Figure environment" b
+\begin{figure}${2:[ht!]}
+	\centering
+	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\caption{${5:caption}}
+	\label{fig:${6:${5/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0
+endsnippet
+
+snippet tikz "Tikz plot enviornment" b
+\begin{figure}[${1:!ht}]
+	\centering
+	\begin{tikzpicture}[scale=${2:1}]
+			${5}
+	\end{tikzpicture}
+	\caption{${3}}
+	\label{fig:${6:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0 
+endsnippet
+
+# Tikz and plots
+snippet plot "pfgplots plot" w
+\addplot [${1:smooth}] {${2:x}}${0:;}
+endsnippet
+
+snippet node "pgfplots node" w
+node[${1:above}] at (axis cs:${2:x}, ${3:y}) {${4:text}}${0:;}
+endsnippet
+
+snippet draw "pgfplots drawing" w
+\draw [${1:->}${2:, >=latex}]
+	(axis cs:${3:x}, ${4:y}) ${5:--} (axis cs:${6:x}, ${7:y}) ${0:;}
+endsnippet
+
+snippet plotc "pgfplot coordinates" w
+\addplot [${1:only marks}, mark=${2:*}] coordinates {(${3:x, y}) ${4:(x, y)}}${0:;}
+endsnippet
+
+snippet plott "pgfplot coordinates" w
+\addplot [${1:fill=red}${2:, opacity=0.5}] table {
+	${3:x y}
+	${4:x y}
+	${5:x y}
+	${6:x y}
+}${0:;}
+endsnippet
+
+snippet post "Postaction decorations" w
+[postaction={decorate, decoration={markings, mark=between positions ${1:2/10} and ${2:10/10} step ${3:2/10} with ${4:{\arrow[line width=1pt]{latex};}}}}]${0:;}
+endsnippet
+
+snippet nodet "Tikz node" w
+node[${1:above}] at (${2:x}, ${3:y}) {${4:text}}${0:;}
+endsnippet
+
+snippet drawt "Tikz drawing" w
+\draw [${1:->}${2:, >=latex}]
+	(${3:x}, ${4:y}) ${5:--} (${6:x}, ${7:y}) ${0:;}
+endsnippet
+
+# Tikz and plots
+
+snippet tikzplot "pfgplots figure + tikz + axis" b
+\begin{figure}[!ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[name=plot1
+			%,title=
+			,width=12cm
+			,height=8cm
+			,ymin=0
+			,ymax=6
+			,xmin=0
+			,xmax=6
+			,domain=0:6
+			%,ylabel=$y$
+			%,xlabel=$x$
+		]
+		${3}
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{${1}}
+	\label{fig:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0
+endsnippet
+
+snippet tikzplot2 "pgfplots figure + tikz + axis + axis" b
+\begin{figure}[!ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[name=plot1
+			,title={${1}}
+			,width=9cm
+			,height=8cm
+			,ymin=0
+			,ymax=6
+			,xmin=0
+			,xmax=6
+			,domain=0:6
+			%,ylabel=$y$
+			%,xlabel=$x$
+		]
+		$5
+
+		\end{axis}
+
+		\begin{axis}[name=plot2
+			,title={${2}}
+			,at={($(plot1.east) + (0.5cm, 0)$)}
+			,anchor=west
+			,width=9cm
+			,height=8cm
+			,ymin=0
+			,ymax=6
+			,xmin=0
+			,xmax=6
+			,domain=0:6
+			%,ylabel=$y$
+			%,xlabel=$x$
+		]
+		$6
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{${3}}
+	\label{fig:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0
+endsnippet
+
+snippet tikzgame "Game Theory Tree (figure + tikz + node[player] + children)" w
+\begin{figure}[!ht]
+	\centering
+	\begin{tikzpicture}[grow=${1:right}, sloped, scale=1]
+		\node[player]{${4:Root}}
+			child {
+				$5
+				edge from parent node[${6:above}] {${7:action}}
+			}
+			%
+			child {
+				$8
+				edge from parent node[${9:above}] {${10:action}}
+			};$11
+	\end{tikzpicture}
+	\caption{${2}}
+	\label{fig:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{figure}
+$0
+endsnippet
+
+snippet player "Game Theory Player (node[player] + child)" w
+node[player] ${1:(nodea)} {${2:P1}}
+	child {
+		$3
+		edge from parent node[${4:above}] {${5:action}}
+	}$0
+endsnippet
+
+snippet end "Game Theory End Node (node[end,...])" w
+node[end, label=${1:right}:{(${2:x, y})}] {}$0
+endsnippet
+
+snippet child "Game Theory Child (child{...})" w
+child {
+	$1
+	edge from parent node[${2:above}] {${3:action}}
+}$0
+endsnippet
+
+snippet gamedown "Game Theory Down Style" w
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=7cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=3.5cm]
+endsnippet
+
+snippet gameright "Game Theory Right Style" w
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.75cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2.75cm]
+\tikzstyle{level 3}=[level distance=3.5cm, sibling distance=1.75cm]
+\tikzstyle{level 4}=[level distance=3.5cm, sibling distance=0.75cm]
+endsnippet
+

@@ -1,0 +1,282 @@
+# This file contains snippets that are always defined. I personally
+# have snippets for signatures and often needed texts
+
+# sligthly lower priority than everything else since specialized versions
+# should overwrite. The user needs to adjust her priority in her snippets to
+# ~-55 so that other filetypes will still overwrite.
+priority -60
+
+##############
+# NICE BOXES #
+##############
+
+global !p
+import string, vim
+
+""" Maps a filetype to comment format used for boxes.
+Automatically filled during usage"""
+_commentDict = { }
+
+def _parse_comments(s):
+	""" Parses vim's comments option to extract comment format """
+	i = iter(s.split(","))
+
+	rv = []
+	try:
+		while True:
+			# get the flags and text of a comment part
+			flags, text = next(i).split(':', 1)
+
+			if len(flags) == 0:
+				rv.append((text, text, text, ""))
+			# parse 3-part comment, but ignore those with O flag
+			# elif 's' in flags and 'O' not in flags:
+			elif flags[0] == 's' and 'O' not in flags:
+				ctriple = []
+				indent = ""
+
+				if flags[-1] in string.digits:
+					indent = " " * int(flags[-1])
+				ctriple.append(text)
+
+				flags,text = next(i).split(':', 1)
+				assert(flags[0] == 'm')
+				ctriple.append(text)
+
+				flags,text = next(i).split(':', 1)
+				assert(flags[0] == 'e')
+				ctriple.append(text)
+				ctriple.append(indent)
+
+				rv.append(ctriple)
+			# elif 'b' in flags:
+			elif flags[0] == 'b':
+				if len(text) == 1:
+					rv.insert(0, (text,text,text, ""))
+	except StopIteration:
+		return rv
+
+def _get_comment_format():
+	""" Returns a 4-element tuple representing the comment format for
+	the current file. """
+	return _parse_comments(vim.eval("&comments"))[0]
+
+
+def make_box(twidth, bwidth=None):
+	b, m, e, i = _get_comment_format()
+	bwidth_inner = bwidth - 3 - max(len(b), len(i + e)) if bwidth else twidth + 2
+	sline = b + m + bwidth_inner * m[0] + 2 * m[0]
+	nspaces = (bwidth_inner - twidth) // 2
+	mlines = i + m + " " + " " * nspaces
+	mlinee = " " + " "*(bwidth_inner - twidth - nspaces) + m
+	eline = i + m + bwidth_inner * m[0] + 2 * m[0] + e
+	return sline, mlines, mlinee, eline
+
+def foldmarker():
+	"Return a tuple of (open fold marker, close fold marker)"
+	return vim.eval("&foldmarker").split(",")
+
+def getlinechar():
+	b, m, e, i = _get_comment_format()
+	sline = b
+	eline = i + e
+	return b if sline is eline else ' ' + m
+
+endglobal
+
+snippet box "A nice box with the current comment symbol" b
+`!p
+box = make_box(len(t[1]))
+snip.rv = box[0]
+snip += box[1]
+`${1:content}`!p
+box = make_box(len(t[1]))
+snip.rv = box[2]
+snip += box[3]`
+$0
+endsnippet
+
+snippet bbox "A nice box over the full width" b
+`!p
+if not snip.c:
+	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+box = make_box(len(t[1]), width)
+snip.rv = box[0]
+snip += box[1]
+`${1:${VISUAL:content}}`!p
+box = make_box(len(t[1]), width)
+snip.rv = box[2]
+snip += box[3]`
+$0
+endsnippet
+
+snippet fold "Insert a vim fold marker" b
+`!p snip.rv = _get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]`${2:1} `!p snip.rv = _get_comment_format()[2]`
+endsnippet
+
+snippet foldc "Insert a vim fold close marker" b
+`!p snip.rv = _get_comment_format()[0]` ${2:1}`!p snip.rv = foldmarker()[1]` `!p snip.rv = _get_comment_format()[2]`
+endsnippet
+
+snippet foldp "Insert a vim fold marker pair" b
+`!p snip.rv = _get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]` `!p snip.rv = _get_comment_format()[2]`
+${2:${VISUAL:Content}}
+`!p snip.rv = _get_comment_format()[0]` `!p snip.rv = foldmarker()[1]` $1 `!p snip.rv = _get_comment_format()[2]`
+endsnippet
+
+##############
+#  My Stuff  #
+##############
+
+snippet mbox "Pretty bbox" b
+`!p
+if not snip.c:
+	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + (width - 1) * '-' + '\n' + sline + ' '
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0] + '\n' + box[1]`${1:${VISUAL:content}}`!p
+width = int(vim.eval("&textwidth")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is not eline:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[2] + '\n' + box[3]`
+$0
+endsnippet
+
+snippet note "Note message" b
+`!p
+b, m, e, i = _get_comment_format()
+sline = b
+snip.rv = sline` NOTE(`echo $USER`): ${1:${VISUAL:todo}} // `!v strftime("%c")` `!p
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+snip.rv = '' if eline is sline else eline`
+endsnippet
+
+snippet todo "Todo message" b
+`!p
+b, m, e, i = _get_comment_format()
+sline = b
+snip.rv = sline` TODO(`echo $USER`): ${1:${VISUAL:todo}} // `!v strftime("%c")` `!p
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+snip.rv = '' if eline is sline else eline`
+endsnippet
+
+snippet now "Current datetime" w
+`!v strftime("%c")`
+endsnippet
+
+snippet proinfo "Project info" b
+`!p
+if not snip.c:
+	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + (width - 1) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Project: ${1:${VISUAL:content}}
+`!p snip.rv = getlinechar()` Program: ${2:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Purpose: $3
+`!p snip.rv = getlinechar()` Created: ${4:`!v strftime('%c')`}
+`!p snip.rv = getlinechar()` Version: ${5:0.1.0}
+`!p snip.rv = getlinechar()` Updated: `!v strftime('%c')`
+`!p snip.rv = getlinechar()` Author:  ${6:`echo $USER`}
+`!p snip.rv = getlinechar()`
+`!p snip.rv = getlinechar()` Inputs:
+`!p snip.rv = getlinechar()`	$7
+`!p snip.rv = getlinechar()`
+`!p snip.rv = getlinechar()` Runs:
+`!p snip.rv = getlinechar()`	$8
+`!p snip.rv = getlinechar()`
+`!p snip.rv = getlinechar()` Output:
+`!p snip.rv = getlinechar()`	$9`!p
+width = int(vim.eval("&textwidth")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is not eline:
+	box = make_box(len(t[1]), width)
+	snip.rv = '\n' + ' ' + m + box[3][1:]`
+$0
+endsnippet
+
+snippet standby "Standby Message" b
+This project is in standby mode. Very little has been done beyond writing down the idea.
+endsnippet
+
+##############
+#  Licenses  #
+##############
+
+snippet apache2 "Apache license 2.0" b
+Copyright ${1:`date +%Y`}, ${2:`echo $USER`}
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.
+endsnippet
+
+snippet bsd3 "BSD 3-clause license" b
+Copyright (c) ${1:`date +%Y`}, ${2:`echo $USER`}
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+endsnippet
+
+snippet mit "MIT License" b
+Licensed under the MIT License (MIT)
+
+Copyright (c) ${1:`date +%Y`}, ${2:`echo $USER`}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+endsnippet
+
+##########################
+# LOREM IPSUM GENERATORS #
+##########################
+snippet lorem "Lorem Ipsum - 50 Words" b
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
+endsnippet
+
+##########################
+# VIM MODELINE GENERATOR #
+##########################
+# See advice on `:help 'tabstop'` for why these values are set. Uses second
+# modeline form ('set') to work in languages with comment terminators
+# (/* like C */).
+snippet modeline "Vim modeline"
+vim`!v ':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`
+endsnippet
+
+# vim:ft=snippets:

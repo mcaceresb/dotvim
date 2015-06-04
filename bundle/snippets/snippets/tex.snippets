@@ -1,0 +1,52 @@
+# Split
+snippet spl split environment
+	\begin{split}
+		${0}
+	\end{split}
+snippet block block environment
+	\begin{block}{${1:title}}
+	${0}
+	\end{block}
+snippet alert alertblock environment
+	\begin{alertblock}{${1:title}}
+	${0}
+	\end{alertblock}
+snippet example exampleblock environment
+	\begin{exampleblock}{${1:title}}
+	${0}
+	\end{exampleblock}
+snippet col2 two-column environment
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			${1}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			${0}
+		\end{column}
+	\end{columns}
+
+#References
+snippet figure reference to a figure
+	${1:Figure}~\ref{${2:fig:}}
+snippet table reference to a table
+	${1:Table}~\ref{${2:tab:}}
+snippet listing reference to a listing
+	${1:Listing}~\ref{${2:list}}
+snippet section reference to a section
+	${1:Section}~\ref{sec:${2}} ${0}
+snippet page reference to a page
+	${1:page}~\pageref{${2}} ${0}
+snippet index \index
+	\index{${1:index}} ${0}
+
+#Citations
+snippet citen \citen
+	\citen{${1}} ${0}
+
+# Comments
+snippet ctext
+	\CommentText{${1:label}A}{$1B}{${2:text}} ${0}
+snippet cpar
+	\CommentPar[red][shift={(${1:5cm, 0cm})}][->]{${2:label}A}{$2B}{${3:Explain}} ${0}
+snippet box
+	\HandBox{${1}} ${0}

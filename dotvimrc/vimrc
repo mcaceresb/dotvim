@@ -1,0 +1,174 @@
+"-----------------------------------------------------------------------------
+" Project: dotvim
+" Program: vimrc
+" Purpose: Vim settings
+" Version: 0.1.0
+" Updated: Thu 04 Jun 2015 02:02:35 AM EDT
+" Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+"
+" Inputs:
+"   dotvim folders
+"       ~/.vim/undo
+"       ~/.vim/session
+"   plugin manager
+"       ~/.vim/bundle/neobundle
+"	dictionaries and thesaurus
+"       /usr/share/dict/american-english
+"       /home/mauricio/.vim/spell/en.utf-8.add
+"       /home/mauricio/.vim/spell/moby-common-dictionary
+"       /home/mauricio/.vim/spell/moby-official-crossword
+"       /home/mauricio/.vim/spell/moby-usa-constitution
+"       /home/mauricio/.vim/spell/moby-places-us
+"       /home/mauricio/.vim/spell/moby-female-names
+"       /home/mauricio/.vim/spell/moby-male-names
+"       /home/mauricio/.vim/spell/moby-names
+"       /home/mauricio/.vim/spell/wordnet-thesaurus
+"   aux files
+"	    ~/Documents/projects/code/dotvim/dotvimr/conceal.vim
+"	    ~/Documents/projects/code/dotvim/dotvimr/fonts.vim
+"	    ~/Documents/projects/code/dotvim/dotvimr/mappings.vim
+"	    ~/Documents/projects/code/dotvim/dotvimr/functions.vim
+"	    ~/Documents/projects/code/dotvim/dotvimr/plugins.vim
+
+" Startup: Load NeoBundle and plug-ins {{{1
+"------------------------------------------
+
+" Please do not alter anything here!
+" Set nocompatible and runtime path for neobundle
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle/
+endif
+
+" Start NeoBundle; let it manage itself
+call neobundle#begin(expand('/home/mauricio/.vim/bundle'))
+NeoBundleFetch 'Shougo/neobundle.vim', {'name' : 'neobundle'}
+
+" Alter plugins here
+source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+
+" End NeoBundle, enable filetypes, plug-ins, syntax
+call neobundle#end()
+filetype plugin indent on
+syntax enable
+NeoBundleCheck
+
+" Options: Vim options I like {{{1
+"------------------------------------------
+
+" Essential: Some options to make Vim behave more sanely {{{2
+
+set ignorecase smartcase smarttab nocompatible
+set autochdir autoread noswapfile number
+set autoindent lazyredraw ruler showcmd
+set wildmenu wildchar=<Tab>
+set cryptmethod=blowfish2
+set backspace=indent,eol,start
+set winaltkeys=no
+
+" Deprecated: Some options I no longer use {{{2
+
+" set shiftround nrformats-=octal fileformats+=mac
+" set ttimeout ttimeoutlen=50 updatetime=750
+" set fillchars="vert=|,fold=:"
+" set formatoptions=cqwanj
+" set conceallevel=2
+
+" Preferences: Some personal tweaks {{{2
+
+" Map leaders
+let maplocalleader = "\\"
+let mapleader = ","
+
+" Set up completion and dictionary
+" k/usr/share/dict/american-english
+set complete=.,w,b,u,t,i,d,k/home/mauricio/.vim/spell/en.utf-8.add
+set dictionary+=/home/mauricio/.vim/spell/en.utf-8.add
+" set dictionary+=/home/mauricio/.vim/spell/moby-acronyms
+set dictionary+=/home/mauricio/.vim/spell/moby-common-dictionary
+set dictionary+=/home/mauricio/.vim/spell/moby-official-crossword
+set dictionary+=/home/mauricio/.vim/spell/moby-usa-constitution
+set dictionary+=/home/mauricio/.vim/spell/moby-places-us
+set dictionary+=/home/mauricio/.vim/spell/moby-female-names
+set dictionary+=/home/mauricio/.vim/spell/moby-male-names
+set dictionary+=/home/mauricio/.vim/spell/moby-names
+set dictionary+=/usr/share/dict/american-english
+" set thesaurus+=/home/mauricio/.vim/spell/moby-thesaurus
+set thesaurus+=/home/mauricio/.vim/spell/wordnet-thesaurus
+
+" Make sure we are doing utf8
+if &encoding ==# 'latin1' && has('gui_running')
+    set encoding=utf-8 ambiwidth=double
+endif
+
+" Remember more history
+if &undoreload < 10000
+    set undoreload=10000
+endif
+if &undolevels < 1000
+    set undolevels=1000
+endif
+if &history < 100
+    set history=1000
+endif
+if &tabpagemax < 50
+    set tabpagemax=50
+endif
+
+" Use persistent undo
+if has("persistent_undo")
+    set undodir=$HOME/.vim/undo
+    set undofile
+endif
+
+" Use par for hard-wrapping text (requires par)
+if executable('par')
+    set formatprg=par\ -w72req
+endif
+
+" Aesthetics: Personally preferred aesthetics {{{2
+
+" Always show status line
+" Cursor 4 lines off scrolling
+" Minimal GUI
+set laststatus=2 scrolloff=4 guioptions=aegt
+
+" Set all tabs to 4 characters, expand tabs to spaces
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" Highlight search words
+" Incremental search highlights
+" Highlight current line
+set incsearch hlsearch cursorline
+
+" Set spelling, undercurl words not in dictionary
+set spell
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=red gui=undercurl
+
+" Set soft wrap and soft-wrap toggle
+" Set soft wrap hanging line character
+set showbreak=\ \ 
+set wrap linebreak nolist breakindent
+command! -nargs=* Wrap set wrap linebreak nolist
+command! -nargs=* Nowrap set nowrap nolinebreak
+
+" Change grayness of comments of the fly, set it to 42
+command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
+
+" Highlight trailing whitespace
+" Note airline points out the first occurrence of this in the file.
+set list listchars=trail:¬
+
+" Source Files: mappings, fonts, conceal {{{1
+"------------------------------------------------
+
+source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/conceal.vim
+Setgray 36
+
+" Modelines: Fold this file {{{1
+" vim: nowrap fdm=marker
+" }}}

@@ -1,0 +1,408 @@
+priority -50
+
+extends texmath
+extends texplot
+extends textemplates
+
+global !p
+def complete(t, opts):
+	if t:
+		opts = [m[len(t):] for m in opts if m.startswith(t)]
+	if len(opts) == 1:
+		return opts[0]
+	return '(' + '|'.join(opts) + ')'
+endglobal
+
+#----------------------------------------------------------------------
+# Misc
+
+snippet lab "Insert \label{$1:$2}$0" w
+\label{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+endsnippet
+
+# References
+snippet ref "Insert \ref{$1:$2}$0" w
+\ref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+endsnippet
+
+snippet refa "Insert \autoref{$1:$2}$0" w
+\autoref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+endsnippet
+
+snippet refc "Insert \cref{$1:$2}$0" w
+\cref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+endsnippet
+
+snippet refC "Insert \Cref{$1:$2}$0" w
+\Cref{$1`!p snip.rv=complete(t[1], ['eq', 'prt', 'cha', 'fig', 'tab', 'sec', 'sub', 'ssub'])`:$2}$0
+endsnippet
+
+# natbib citations
+snippet citep "Cite in paren - (Authors, Year) \citep{...}" w
+\citep{$1} $0
+endsnippet
+
+snippet citet "Cite in text - Authors (Year) \citet{...}" w
+\citet{$1} $0
+endsnippet
+
+snippet citesp "In paren with options - (Authors, Year, $2) \citep[$2]{$1}" w
+\citep[$2]{$1} $0
+endsnippet
+
+snippet citest "In text with options - Authors (Year, $2) \citet[$2]{$1}" w
+\citet[$2]{$1} $0
+endsnippet
+
+snippet citea "\citeauthor{...}" w
+\citeauthor{$1} $0
+endsnippet
+
+snippet citey "\citeyear{...}" w
+\citeyear{$1} $0
+endsnippet
+
+snippet fcite "\footcite[$2]{$1}$0" w
+\footcite[$2]{$1}$0
+endsnippet
+
+# Verbatim
+snippet lsi "Insert \lstinline|${1:$VISUAL}| $0" w
+\lstinline|${1:${VISUAL}}| $0
+endsnippet
+
+snippet verb "Insert \verb'${1:$VISUAL}' $0" w
+\verb'${1:${VISUAL}}' $0
+endsnippet
+
+# URLs and Hyperlinks
+snippet href "Hyperlink \href{<C-R>+}{$2}" w
+\href{${1:`!v getreg('+')`}}{${2:${VISUAL:display}}} $0
+endsnippet
+
+snippet url "URL \url{<C-R>+}" w
+\url{${1:`!v getreg('+')`}} $0
+endsnippet
+
+#----------------------------------------------------------------------
+# Preamble snippets
+
+snippet nc "\newcommand{$1}[$2]{$3}$0" b
+\newcommand{${1:\cmd}}${2:[opt]}{${3:${VISUAL:realcmd}}}$0
+endsnippet
+
+snippet use "\usepackage[$1]{$2}$0" b
+\usepackage${1:[options]}{${2:${VISUAL:package}}}$0
+endsnippet
+
+snippet nuc "\newunicodechar[$1]{$2}{$3}" b
+\newunicodechar{${1}}{${2:\ensuremath}${3:tex-substitute}}}$0
+endsnippet
+
+snippet dmo "\DeclareMathOperator*{$1}{$2}$0" b
+\DeclareMathOperator*{${1}}{${2:${VISUAL}}}$0
+endsnippet
+
+#----------------------------------------------------------------------
+# environment snippets
+
+snippet lst "lstlisting environment" b
+\begin{lstlisting}[language=${1:language}]
+${2:${VISUAL}}
+\end{listing}
+$0
+endsnippet
+
+snippet "b(eg)?" "Generic begin{$1} / end{$1}" br
+\begin{${1:env}}
+${2:${VISUAL}}
+\end{$1}
+$0
+endsnippet
+
+snippet tab "Tabular environment"
+\begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
+	${3:${VISUAL}}${2/((?<=.)c|l|r)|./(?1: & )/g}
+\end{$1${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}$0
+endsnippet
+
+snippet table "Table environment" b
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:label}}
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+	${0:${VISUAL}}${5/((?<=.)c|l|r)|./(?1: & )/g}
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}
+endsnippet
+
+snippet enu "Enumerate environment" b
+\begin{enumerate}
+	\item ${1:${VISUAL}}
+\end{enumerate}
+$0
+endsnippet
+
+snippet eit "Itemize environment" b
+\begin{itemize}${1:[label=$\bullet$]}
+	\item ${2:${VISUAL}}
+\end{itemize}
+$0
+endsnippet
+
+snippet desc "Description environment" b
+\begin{description}
+	\item[$1] ${2:${VISUAL}}
+\end{description}
+$0
+endsnippet
+
+snippet frame "Frame environment for beamer" b
+%----------------------------------------------------------------------
+\begin{frame}{$1}
+	${2:${VISUAL}}
+\end{frame}
+$0
+endsnippet
+
+#snippet it "Individual item" b
+#\item ${1:${VISUAL}}
+#$0
+#endsnippet
+
+#----------------------------------------------------------------------
+# Sections snippets
+
+snippet part "Part with auto label prt:regex" b
+%----------------------------------------------------------------------
+\part{${1:${VISUAL:part name}}}
+\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet cha "Chapter with auto label cha:regex" b
+%----------------------------------------------------------------------
+\chapter{${1:${VISUAL:chapter name}}}
+\label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}
+endsnippet
+
+snippet sec "Section with auto label sec:regex" b
+%----------------------------------------------------------------------
+\section{${1:${VISUAL:section name}}}
+\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet sub "Subsection with auto label sub:regex" b
+%----------------------------------------------------------------------
+\subsection{${1:${VISUAL:subsection name}}}
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet ssub "Subsubsection with auto label sub:regex" b
+\subsubsection{${1:${VISUAL:subsubsection name}}}
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet par "Paragraph with auto label par:regex" b
+\paragraph{${1:${VISUAL:paragraph name}}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet subp "Subparagraph with auto label par:regex" b
+\subparagraph{${1:${VISUAL:subparagraph name}}}
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${3:${VISUAL}}$0
+endsnippet
+
+snippet ni "Non-indented paragraph" b
+\noindent
+$0
+endsnippet
+
+#----------------------------------------------------------------------
+# Formating text: italic, bold, underline, small capital, emph, etc.
+
+snippet fi "Italics and Bold" w
+\textbf{\textit{${1:${VISUAL}}}}$0
+endsnippet
+
+snippet it "Italic text" w
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+snippet bf "Bold text" w
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet under "Underline text" w
+\underline{${1:${VISUAL}}}$0
+endsnippet
+
+snippet emp "Emphasize text" w
+\emph{${1:${VISUAL}}}$0
+endsnippet
+
+snippet sc "Small Caps" w
+\textsc{${1:${VISUAL}}}$0
+endsnippet
+
+snippet sf "Serif text" w
+\textsf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet rm "Roman text" w
+\textrm{${1:${VISUAL}}}$0
+endsnippet
+
+snippet tt "ttfamily text" w
+\texttt{${1:${VISUAL}}}$0
+endsnippet
+
+snippet foot "Footnote" w
+\footnote{${1:${VISUAL}}}$0
+endsnippet
+
+snippet sl "Slanted text" w
+\textsf{${1:${VISUAL}}} $0
+endsnippet
+
+snippet multic "Multicolumn in tabular" w
+\multicolumn{${1:cols}}{${2:c|l|r}}{${3:${VISUAL:Text}}} $0
+endsnippet
+
+snippet multir "Multirow in tabular" w
+\multicolumn{${1:rows}}{*}{${2:${VISUAL:Text}}} $0
+endsnippet
+
+#----------------------------------------------------------------------
+# Mathy things
+
+snippet > "> Greater than sign" w
+\ge $0
+endsnippet
+
+snippet < "< Less than sign" w
+\le $0
+endsnippet
+
+snippet hat "Wide overhat" w
+\widehat{${1:${VISUAL}}}$0
+endsnippet
+
+snippet til "Wide overtilde" w
+\widetilde{${1:${VISUAL}}}$0
+endsnippet
+
+snippet over "Wide overline" w
+\overline{${1:${VISUAL}}}$0
+endsnippet
+
+snippet line "Wide overline" w
+\overline{${1:${VISUAL}}}$0
+endsnippet
+
+snippet bar "Bar" w
+\bar{${1:${VISUAL}}}$0
+endsnippet
+
+snippet dot "Single dot over letter" w
+\dot{${1:${VISUAL}}}$0
+endsnippet
+
+snippet ddot "Double dot over letter" w
+\ddot{${1:${VISUAL}}}$0
+endsnippet
+
+snippet sq "Square root" w
+\sqrt{${1:${VISUAL}}}$0
+endsnippet
+
+snippet xri "Right arrow with overset" w
+\xrightarrow{${1:${VISUAL}}} $0
+endsnippet
+
+snippet = "Equivalent (defined as)" w
+\equiv $0
+endsnippet
+
+snippet " "Quotes" i
+\`\`${1:${VISUAL}}''$0
+endsnippet
+
+snippet abs "Absolute value" w
+|${1:${VISUAL}}|$0
+endsnippet
+
+# Letters
+snippet nn "Natural numbers" w
+\mathbb{N}${0}
+endsnippet
+
+snippet qq "Rational numbers" w
+\mathbb{Q}${0}
+endsnippet
+
+snippet zz "Integers" w
+\mathbb{Z}${0}
+endsnippet
+
+snippet rr "Real numbers" w
+\mathbb{R}${0}
+endsnippet
+
+snippet bb "Blackboard math" w
+\mathbb{${1}}${0}
+endsnippet
+
+#----------------------------------------------------------------------
+# Random personal snippets
+
+snippet ke "\keyword{$1}$0" w
+\keyword{${1:${VISUAL}}} $0
+endsnippet
+
+snippet key "\keyref{$1}{$2}$0" w
+\keyref{${1:${VISUAL}}}{$2} $0
+endsnippet
+
+snippet wa "\waffle{$1}$0" w
+\waffle{${1:${VISUAL}}} $0
+endsnippet
+
+snippet ta "tacomment environment" w
+\begin{tacomment}{${1:0}}
+${2:${VISUAL:This is a TA comment.}}
+\end{tacomment}
+$0
+endsnippet
+
+snippet hide "hidelevel environment" w
+\begin{hidelevel}{${1:0}}
+${2:${VISUAL}}
+\end{hidelevel}
+$0
+endsnippet
+
+snippet htoc "\hyperref[toc:toc]{$\uparrow$ Back to top}$0" b
+\hyperref[${1:toc:toc}]{$\uparrow$ Back to top}$0
+endsnippet
+
+snippet "can(did)?(ness)?" "\candidness{$1}$0" wr
+\candidness{${1:${VISUAL:a candid statement}}} $0
+endsnippet
+
+# vim: nowrap fdm=marker ft=snippets
+
