@@ -27,7 +27,7 @@ set updatetime=500
 nnoremap z. :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
 " Toggle conceal color bc IndentLines uses conceal
-nnoremap <Leader>g :call ToggleIndentLines()<CR>
+nnoremap <Leader><Leader>g :call ToggleIndentLines()<CR>
 
 " Toggle git gutter highlights
 nnoremap <F3> :call ToggleAllGitGutter()<CR>

@@ -45,7 +45,58 @@ call neobundle#begin(expand('/home/mauricio/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim', {'name' : 'neobundle'}
 
 " Alter plugins here
-source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+NeoBundle 'bling/vim-airline',                    {'name' : 'airline'}
+NeoBundle 'flazz/vim-colorschemes',               {'name' : 'colorschemes'}
+NeoBundle 'lilydjwg/colorizer',                   {'name' : 'colorizer'}
+" NeoBundle 'chrisbra/colorizer',                 {'name' : 'colorizer'}
+NeoBundle 'tpope/vim-commentary',                 {'name' : 'commentary'}
+NeoBundle 'kien/ctrlp.vim',                       {'name' : 'ctrlp'}
+NeoBundle 'godlygeek/csapprox',                   {'name' : 'csapprox'}
+NeoBundle 'Raimondi/delimitMate',                 {'name' : 'delimate'}
+NeoBundle 'Lokaltog/vim-easymotion',              {'name' : 'easymotion'}
+NeoBundle 'tommcdo/vim-exchange',                 {'name' : 'exchange'}
+NeoBundle 'kana/vim-textobj-line',                {'name' : 'textobj-line'}
+NeoBundle 'terryma/vim-expand-region',            {'name' : 'expand-region'}
+NeoBundle 'tpope/vim-fugitive',                   {'name' : 'fugitive'}
+NeoBundle 'sjl/gundo.vim',                        {'name' : 'gundo'}
+NeoBundle 'klen/python-mode',                     {'name' : 'python-mode'}
+NeoBundle 'davidhalter/jedi-vim',                 {'name' : 'jedi'}
+" NeoBundle 'ivanov/vim-ipython',                 {'name' : 'ipython'}
+NeoBundle 'scrooloose/nerdtree',                  {'name' : 'nerdtree'}
+" NeoBundle 'Shougo/vimfiler.vim',                {'name' : 'vimfiler'}
+NeoBundle 'gregsexton/gitv',                      {'name' : 'gitv'}
+NeoBundle 'airblade/vim-gitgutter',               {'name' : 'gitgutter'}
+NeoBundle 'Yggdroot/indentLine',                  {'name' : 'indentline'}
+NeoBundle 'suan/vim-instant-markdown',            {'name' : 'instant-markdown'}
+NeoBundle 'Shougo/neocomplete.vim',               {'name' : 'neocomplete'}
+NeoBundle 'jcfaria/Vim-R-plugin',                 {'name' : 'rplugin'}
+NeoBundle 'tpope/vim-repeat',                     {'name' : 'repeat'}
+NeoBundle 'honza/vim-snippets',                   {'name' : 'snippets'}
+NeoBundle 'jpitblado/vim-stata',                  {'name' : 'stata'}
+NeoBundle 'mhinz/vim-startify',                   {'name' : 'startify'}
+NeoBundle 'tpope/vim-surround',                   {'name' : 'surround'}
+NeoBundle 'salsifis/vim-transpose',               {'name' : 'transpose'}
+NeoBundle 'godlygeek/tabular',                    {'name' : 'tabular'}
+NeoBundle 'SirVer/ultisnips',                     {'name' : 'ultisnips'}
+NeoBundle 'tpope/vim-unimpaired',                 {'name' : 'unimpaired'}
+NeoBundle 'Shougo/unite.vim',                     {'name' : 'unite'}
+    NeoBundleLazy 'Shougo/neomru.vim',
+                \ {'autoload' : {'unite_sources' : 'file_mru'}}
+    NeoBundleLazy 'osyo-manga/unite-airline_themes',
+                \ {'autoload' :  {'unite_sources' : 'airline_themes'}}
+    NeoBundleLazy 'ujihisa/unite-colorscheme',
+                \ {'autoload' :  {'unite_sources' : 'colorscheme'}}
+    NeoBundleLazy 'tsukkee/unite-tag',
+                \ {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
+    NeoBundleLazy 'Shougo/unite-outline',
+                \ {'autoload' : {'unite_sources' : 'outline'}}
+    NeoBundleLazy 'Shougo/unite-help',
+                \ {'autoload' : {'unite_sources' : 'help'}}
+    NeoBundleLazy 'Shougo/junkfile.vim',
+                \ {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile', 'junkfile/new']}}
+NeoBundle 'xuhdev/vim-latex-live-preview',        {'name' : 'latex-live-preview'}
+NeoBundle 'LaTeX-Box-Team/LaTeX-Box',             {'name' : 'latex-box'}
+call neobundle#local("~/.vim/bundle", {}, ['latex-suite-abridged'])
 
 " End NeoBundle, enable filetypes, plug-ins, syntax
 call neobundle#end()
@@ -164,10 +215,11 @@ set listchars=trail:¬
 " Source Files: mappings, fonts, conceal {{{1
 "------------------------------------------------
 
-source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/conceal.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 Setgray 36
 
 " Modelines: Fold this file {{{1

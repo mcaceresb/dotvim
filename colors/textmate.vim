@@ -57,6 +57,11 @@ highlight   stataLocal      guifg=#7EC0EE gui=bold
 highlight   stataGlobal     guifg=#BE646C gui=bold
 highlight   Error           term=reverse cterm=bold ctermfg=7 ctermbg=1 guifg=Red guibg=#FFFFEF gui=bold,italic
 " highlight   Conceal         gui=bold guibg=white guifg=gray92
+highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFD3D3
+highlight OverLength ctermbg=red ctermfg=white  guibg=#FFD3D3
+match OverLength /\%81v.\+/
+highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3
+match ExtraWhitespace /\s\+$/
 
 " GUI: {{{1
 hi   Cursor                         guifg=#FFFFFF   ctermfg=15    guibg=#3C4C72   ctermbg=240
