@@ -81,7 +81,6 @@ def getlinechar():
 	sline = b
 	eline = i + e
 	return b if sline is eline else ' ' + m
-
 endglobal
 
 snippet box "A nice box with the current comment symbol" b
@@ -132,15 +131,17 @@ snippet mbox "Pretty bbox" b
 `!p
 if not snip.c:
 	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+	width = 71
 b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
 if sline is eline:
-	snip.rv = sline + (width - 1) * '-' + '\n' + sline + ' '
+	snip.rv = sline + ' ' + (width - 2) * '-' + '\n' + sline + ' '
 else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0] + '\n' + box[1]`${1:${VISUAL:content}}`!p
 width = int(vim.eval("&textwidth")) or 71
+width = 71
 b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
@@ -184,7 +185,7 @@ b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
 if sline is eline:
-	snip.rv = sline + (width - 1) * '-'
+	snip.rv = sline + ' ' + (width - 2) * '-'
 else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
