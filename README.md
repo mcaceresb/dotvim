@@ -44,28 +44,28 @@ sudo npm -g install instant-markdown-d
 
 ## TODO (:
 
+* Fix up highlighting of trailing whitespace and 80+ column highlighting
+* Decide what features from python plugins to keep
 * Make folder naming automatic (currently it is hard-coded to `$HOME/Documents/projects/code/dotvim` in this `README.md` and in my `vimrc`)
 * Figure out a better way of keeping your custom snippets and colorschemes
 * Make python snippets
-* Make Tabular mappings work (currently not mapping)
-* Make copy/paste-able into `~/.vim`?
-* Edit rplugin/common_global.vim to add `--profile white` to `konsole`?
-* Vim in `konsole`, not just `vim -g`?
+* (LONG) Make copy/paste-able into `~/.vim`
+* (LONG) Edit rplugin/common_global.vim to add `--profile white` to `konsole`
+* (LONG) Vim in `konsole`, not just `vim -g`
 
 ## Issues (:
 
 * While all the plug-ins seem to work as expected, I get these errors upon running `vim -g`
-
-    ```
-    Error detected while processing dotvimrc/plugins.vim:
-    line   88:
-    E117: Unknown function: expand_region#custom_text_objects
-    line  176:
-    E117: Unknown function: neocomplete#custom#source
-    Error detected while processing bundle/textobj-line/plugin/textobj/line.vim:
-    line   37:
-    E117: Unknown function: textobj#user#plugin
-    ```
+```
+Error detected while processing dotvimrc/plugins.vim:
+line   88:
+E117: Unknown function: expand_region#custom_text_objects
+line  176:
+E117: Unknown function: neocomplete#custom#source
+Error detected while processing bundle/textobj-line/plugin/textobj/line.vim:
+line   37:
+E117: Unknown function: textobj#user#plugin
+```
 
 ## License (:
 
