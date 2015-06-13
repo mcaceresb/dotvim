@@ -132,4 +132,7 @@ highlight   texRefZone      guifg=#7587a6
 highlight   Delimiter       guifg=#e3d796
 highlight   vimNotation     guifg=#e3d796
 highlight   vimNotation     guifg=#e3d796
+highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFE5E5
+highlight OverLength  ctermbg=red ctermfg=white guibg=#FFE5E5
+match OverLength /\%81v.\+/
 
