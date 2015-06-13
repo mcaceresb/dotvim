@@ -215,11 +215,11 @@ set listchars=trail:¬
 " Source Files: mappings, fonts, conceal {{{1
 "------------------------------------------------
 
-source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/conceal.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 Setgray 36
 
 " Modelines: Fold this file {{{1

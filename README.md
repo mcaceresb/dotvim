@@ -44,13 +44,14 @@ sudo npm -g install instant-markdown-d
 
 ## TODO (:
 
+* Fix up highlighting of trailing whitespace and 80+ column highlighting
+* Decide what features from python plugins to keep
 * Make folder naming automatic (currently it is hard-coded to `$HOME/Documents/projects/code/dotvim` in this `README.md` and in my `vimrc`)
 * Figure out a better way of keeping your custom snippets and colorschemes
 * Make python snippets
-* Make Tabular mappings work (currently not mapping)
-* Make copy/paste-able into `~/.vim`?
-* Edit rplugin/common_global.vim to add `--profile white` to `konsole`?
-* Vim in `konsole`, not just `vim -g`?
+* (LONG) Make copy/paste-able into `~/.vim`
+* (LONG) Edit rplugin/common_global.vim to add `--profile white` to `konsole`
+* (LONG) Vim in `konsole`, not just `vim -g`
 
 ## Issues (:
 
