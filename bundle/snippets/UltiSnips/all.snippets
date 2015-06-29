@@ -173,8 +173,12 @@ eline = i + e
 snip.rv = '' if eline is sline else eline`
 endsnippet
 
-snippet now "Current datetime" w
-`!v strftime("%c")`
+snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
+`!v strftime("%c")`$0
+endsnippet
+
+snippet nowa "Current datetime, YYYY.MM.DD HH:MM:SS" w
+`!v strftime("%Y.%m.%d %H:%M:%S")`$0
 endsnippet
 
 snippet proinfo "Project info" b

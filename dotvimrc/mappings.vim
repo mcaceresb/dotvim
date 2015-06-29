@@ -2,7 +2,7 @@
 " Project: dotvim
 " Program: mappings.vim
 " Purpose: Personal mappings
-" Updated: Wed 03 Jun 2015 02:17:47 AM EDT
+" Updated: Sat 27 Jun 2015 12:10:47 AM EDT
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 
 " Mappings: {{{1
@@ -15,10 +15,10 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-" nnoremap K 6k
-" nnoremap J 6j
-vnoremap J 6j
-vnoremap K 6k
+nnoremap <C-k> 6k
+nnoremap <C-j> 6j
+vnoremap <C-j> 6j
+vnoremap <C-k> 6k
 
 " Resize split windows
 noremap <A-left> <C-w><
@@ -80,6 +80,12 @@ inoremap <leader><leader>X <Esc>"+dda
 
 " Misc: Other useful mappings {{{2
 
+" Why is vim suddenly updating folds every time I move lines?
+
+" Markdown title
+nnoremap gpt yypVr-
+nnoremap gpc yyp0wv$r-
+
 " Next and repeat
 " nnoremap Q :normal n.<CR>
 
@@ -107,16 +113,12 @@ inoremap <C-w> <C-g>u<C-w>
 "Map s and q to save file and quit buffer
 nnoremap <A-s> :w<CR>
 inoremap <A-s> <Esc>:w<CR>a
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>a
 nnoremap <A-q> :bd<CR>
 inoremap <A-q> <Esc>:bd<CR>a
 
 " Vim quickly enlarge or reduce font
 nnoremap <C-Up> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)+1)', '')<CR> :echo &guifont<CR>
 nnoremap <C-Down> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)', '')<CR> :echo &guifont<CR>
-" nnoremap <C-ScrollWheelUp> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)+1)', '')<CR> :echo &guifont<CR>
-" nnoremap <C-ScrollWheelDown> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)', '')<CR> :echo &guifont<CR>
 
 " Quickly correct spelling
 nnoremap <C-Space> hEa<C-x><C-t>
@@ -138,6 +140,7 @@ nnoremap <F4> i<C-R>=expand('%:p:h')<CR><ESC>
 inoremap <F4> <C-R>=expand('%:p:h')<CR>
 
 " Efficiently open and source vimrc
+nnoremap <leader>el :tabedit $HOME/Documents/projects/code/latex-preamble<CR>
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>rv :source $MYVIMRC<CR>
 

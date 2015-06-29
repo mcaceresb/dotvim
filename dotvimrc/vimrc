@@ -1,9 +1,9 @@
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 " Project: dotvim
 " Program: vimrc
 " Purpose: Vim settings
-" Version: 0.1.0
-" Updated: Thu 04 Jun 2015 02:02:35 AM EDT
+" Version: 0.2.0
+" Updated: Sat 27 Jun 2015 11:59:35 PM EDT
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 "
 " Inputs:
@@ -12,26 +12,16 @@
 "       ~/.vim/session
 "   plugin manager
 "       ~/.vim/bundle/neobundle
-"	dictionaries and thesaurus
-"       /usr/share/dict/american-english
-"       /home/mauricio/.vim/spell/en.utf-8.add
-"       /home/mauricio/.vim/spell/moby-common-dictionary
-"       /home/mauricio/.vim/spell/moby-official-crossword
-"       /home/mauricio/.vim/spell/moby-usa-constitution
-"       /home/mauricio/.vim/spell/moby-places-us
-"       /home/mauricio/.vim/spell/moby-female-names
-"       /home/mauricio/.vim/spell/moby-male-names
-"       /home/mauricio/.vim/spell/moby-names
-"       /home/mauricio/.vim/spell/wordnet-thesaurus
 "   aux files
-"	    ~/Documents/projects/code/dotvim/dotvimrc/conceal.vim
-"	    ~/Documents/projects/code/dotvim/dotvimrc/fonts.vim
-"	    ~/Documents/projects/code/dotvim/dotvimrc/mappings.vim
-"	    ~/Documents/projects/code/dotvim/dotvimrc/functions.vim
-"	    ~/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/conceal.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/functions.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/mappings.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/mycolors.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/plugins.vim
 
 " Startup: Load NeoBundle and plug-ins {{{1
-"------------------------------------------
+" -----------------------------------------
 
 " Please do not alter anything here!
 " Set nocompatible and runtime path for neobundle
@@ -43,60 +33,85 @@ endif
 " Start NeoBundle; let it manage itself
 call neobundle#begin(expand('/home/mauricio/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim', {'name' : 'neobundle'}
+NeoBundle 'Shougo/vimproc.vim', {
+            \ 'build' : {
+            \     'windows' : 'tools\\update-dll-mingw',
+            \     'cygwin' : 'make -f make_cygwin.mak',
+            \     'mac' : 'make -f make_mac.mak',
+            \     'linux' : 'make',
+            \     'unix' : 'gmake',
+            \    },
+            \ }
 
-" Alter plugins here
+" Plugins: {{{2
+
+" Faves
+NeoBundle 'tpope/vim-repeat',                     {'name' : 'repeat'}
+NeoBundle 'tpope/vim-surround',                   {'name' : 'surround'}
+NeoBundle 'tpope/vim-unimpaired',                 {'name' : 'unimpaired'}
+NeoBundle 'tpope/vim-speeddating',                {'name' : 'speeddating'}
+NeoBundle 'tpope/vim-fugitive',                   {'name' : 'fugitive'}
+NeoBundle 'SirVer/ultisnips',                     {'name' : 'ultisnips'}
+NeoBundle 'honza/vim-snippets',                   {'name' : 'snippets'}
+NeoBundle 'tommcdo/vim-exchange',                 {'name' : 'exchange'}
+NeoBundle 'ervandew/screen',                      {'name' : 'screen'}
+NeoBundle 'godlygeek/tabular',                    {'name' : 'tabular'}
+NeoBundle 'salsifis/vim-transpose',               {'name' : 'transpose'}
+NeoBundle 'kien/ctrlp.vim',                       {'name' : 'ctrlp'}
+
+NeoBundle 'mhinz/vim-startify',                   {'name' : 'startify'}
 NeoBundle 'bling/vim-airline',                    {'name' : 'airline'}
 NeoBundle 'flazz/vim-colorschemes',               {'name' : 'colorschemes'}
 NeoBundle 'lilydjwg/colorizer',                   {'name' : 'colorizer'}
-" NeoBundle 'chrisbra/colorizer',                 {'name' : 'colorizer'}
-NeoBundle 'tpope/vim-commentary',                 {'name' : 'commentary'}
-NeoBundle 'kien/ctrlp.vim',                       {'name' : 'ctrlp'}
-NeoBundle 'godlygeek/csapprox',                   {'name' : 'csapprox'}
-NeoBundle 'Raimondi/delimitMate',                 {'name' : 'delimate'}
-NeoBundle 'Lokaltog/vim-easymotion',              {'name' : 'easymotion'}
-NeoBundle 'tommcdo/vim-exchange',                 {'name' : 'exchange'}
-NeoBundle 'kana/vim-textobj-line',                {'name' : 'textobj-line'}
-NeoBundle 'terryma/vim-expand-region',            {'name' : 'expand-region'}
-NeoBundle 'tpope/vim-fugitive',                   {'name' : 'fugitive'}
-NeoBundle 'sjl/gundo.vim',                        {'name' : 'gundo'}
+NeoBundle 'jpitblado/vim-stata',                  {'name' : 'stata'}
+NeoBundle 'suan/vim-instant-markdown',            {'name' : 'instant-markdown'}
+
+" On the fence
+NeoBundle 'JuliaLang/julia-vim',                  {'name' : 'julia'}
+NeoBundle 'jcfaria/Vim-R-plugin',                 {'name' : 'rplugin'}
 NeoBundle 'klen/python-mode',                     {'name' : 'python-mode'}
-NeoBundle 'davidhalter/jedi-vim',                 {'name' : 'jedi'}
-" NeoBundle 'ivanov/vim-ipython',                 {'name' : 'ipython'}
-NeoBundle 'scrooloose/nerdtree',                  {'name' : 'nerdtree'}
-" NeoBundle 'Shougo/vimfiler.vim',                {'name' : 'vimfiler'}
 NeoBundle 'gregsexton/gitv',                      {'name' : 'gitv'}
 NeoBundle 'airblade/vim-gitgutter',               {'name' : 'gitgutter'}
 NeoBundle 'Yggdroot/indentLine',                  {'name' : 'indentline'}
-NeoBundle 'suan/vim-instant-markdown',            {'name' : 'instant-markdown'}
-NeoBundle 'Shougo/neocomplete.vim',               {'name' : 'neocomplete'}
-NeoBundle 'jcfaria/Vim-R-plugin',                 {'name' : 'rplugin'}
-NeoBundle 'tpope/vim-repeat',                     {'name' : 'repeat'}
-NeoBundle 'honza/vim-snippets',                   {'name' : 'snippets'}
-NeoBundle 'jpitblado/vim-stata',                  {'name' : 'stata'}
-NeoBundle 'mhinz/vim-startify',                   {'name' : 'startify'}
-NeoBundle 'tpope/vim-surround',                   {'name' : 'surround'}
-NeoBundle 'salsifis/vim-transpose',               {'name' : 'transpose'}
-NeoBundle 'godlygeek/tabular',                    {'name' : 'tabular'}
-NeoBundle 'SirVer/ultisnips',                     {'name' : 'ultisnips'}
-NeoBundle 'tpope/vim-unimpaired',                 {'name' : 'unimpaired'}
-NeoBundle 'Shougo/unite.vim',                     {'name' : 'unite'}
-    NeoBundleLazy 'Shougo/neomru.vim',
-                \ {'autoload' : {'unite_sources' : 'file_mru'}}
-    NeoBundleLazy 'osyo-manga/unite-airline_themes',
-                \ {'autoload' :  {'unite_sources' : 'airline_themes'}}
-    NeoBundleLazy 'ujihisa/unite-colorscheme',
-                \ {'autoload' :  {'unite_sources' : 'colorscheme'}}
-    NeoBundleLazy 'tsukkee/unite-tag',
-                \ {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
-    NeoBundleLazy 'Shougo/unite-outline',
-                \ {'autoload' : {'unite_sources' : 'outline'}}
-    NeoBundleLazy 'Shougo/unite-help',
-                \ {'autoload' : {'unite_sources' : 'help'}}
-    NeoBundleLazy 'Shougo/junkfile.vim',
-                \ {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile', 'junkfile/new']}}
-NeoBundle 'xuhdev/vim-latex-live-preview',        {'name' : 'latex-live-preview'}
+" NeoBundle 'sjl/gundo.vim',                        {'name' : 'gundo'}
+NeoBundle 'mbbill/undotree',                      {'name' : 'undotree'}
 NeoBundle 'LaTeX-Box-Team/LaTeX-Box',             {'name' : 'latex-box'}
-call neobundle#local("~/.vim/bundle", {}, ['latex-suite-abridged'])
+call neobundle#local("~/.vim/bundle/", {}, ['latex-suite-abridged'])
+" NeoBundle 'xuhdev/vim-latex-live-preview',        {'name' : 'latex-live-preview'}
+
+" Testing
+NeoBundle 'tomtom/tcomment_vim',                  {'name' : 'tcomment'}
+" NeoBundle 'tpope/vim-commentary',                 {'name' : 'commentary'}
+" NeoBundle 'scrooloose/nerdcommenter'              {'name' : 'nerdcommenter'}
+NeoBundle  'Konfekt/FastFold',                    {'name' : 'fastfold'}
+
+NeoBundle 'scrooloose/nerdtree',                  {'name' : 'nerdtree'}
+NeoBundle 'Shougo/neocomplete.vim',               {'name' : 'neocomplete'}
+NeoBundle 'Shougo/vimfiler.vim',                  {'name' : 'vimfiler'}
+NeoBundle 'Shougo/unite.vim',                     {'name' : 'unite'}
+NeoBundleLazy 'Shougo/neomru.vim',
+            \ {'autoload' : {'unite_sources' : 'file_mru'}}
+NeoBundleLazy 'osyo-manga/unite-airline_themes',
+            \ {'autoload' :  {'unite_sources' : 'airline_themes'}}
+NeoBundleLazy 'ujihisa/unite-colorscheme',
+            \ {'autoload' :  {'unite_sources' : 'colorscheme'}}
+NeoBundleLazy 'tsukkee/unite-tag',
+            \ {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
+NeoBundleLazy 'Shougo/unite-outline',
+            \ {'autoload' : {'unite_sources' : 'outline'}}
+NeoBundleLazy 'Shougo/unite-help',
+            \ {'autoload' : {'unite_sources' : 'help'}}
+NeoBundleLazy 'Shougo/junkfile.vim',
+            \ {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile', 'junkfile/new']}}
+
+" NeoBundle 'terryma/vim-expand-region',            {'name' : 'expand-region'}
+" NeoBundle 'kana/vim-textobj-line',                {'name' : 'textobj-line'}
+" NeoBundle 'godlygeek/csapprox',                   {'name' : 'csapprox'}
+" NeoBundle 'Raimondi/delimitMate',                 {'name' : 'delimate'}
+" NeoBundle 'Lokaltog/vim-easymotion',              {'name' : 'easymotion'}
+" NeoBundle 'davidhalter/jedi-vim',                 {'name' : 'jedi'}
+" NeoBundle 'ivanov/vim-ipython',                 {'name' : 'ipython'}
+" NeoBundle 'scrooloose/syntastic',                 {'name' : 'syntastic'}
 
 " End NeoBundle, enable filetypes, plug-ins, syntax
 call neobundle#end()
@@ -105,25 +120,17 @@ syntax enable
 NeoBundleCheck
 
 " Options: Vim options I like {{{1
-"------------------------------------------
+" --------------------------------
 
 " Essential: Some options to make Vim behave more sanely {{{2
 
-set ignorecase smartcase smarttab nocompatible
-set autochdir autoread noswapfile number
-set autoindent lazyredraw ruler showcmd
+set autoindent lazyredraw ruler showcmd number
+set ignorecase smartcase smarttab
+set autochdir autoread noswapfile
 set wildmenu wildchar=<Tab>
 set cryptmethod=blowfish2
 set backspace=indent,eol,start
 set winaltkeys=no
-
-" Deprecated: Some options I no longer use {{{2
-
-" set shiftround nrformats-=octal fileformats+=mac
-" set ttimeout ttimeoutlen=50 updatetime=750
-" set fillchars="vert=|,fold=:"
-" set formatoptions=cqwanj
-" set conceallevel=2
 
 " Preferences: Some personal tweaks {{{2
 
@@ -131,21 +138,25 @@ set winaltkeys=no
 let maplocalleader = "\\"
 let mapleader = ","
 
+" Remove octal from nubmer formats
+set nrformats-=octal
+
 " Set up completion and dictionary
-" k/usr/share/dict/american-english
 set complete=.,w,b,u,t,i,d,k/home/mauricio/.vim/spell/en.utf-8.add
-set dictionary+=/home/mauricio/.vim/spell/en.utf-8.add
+
+" This might be overkill
+" set dictionary+=/home/mauricio/.vim/spell/en.utf-8.add
 " set dictionary+=/home/mauricio/.vim/spell/moby-acronyms
-set dictionary+=/home/mauricio/.vim/spell/moby-common-dictionary
-set dictionary+=/home/mauricio/.vim/spell/moby-official-crossword
-set dictionary+=/home/mauricio/.vim/spell/moby-usa-constitution
-set dictionary+=/home/mauricio/.vim/spell/moby-places-us
-set dictionary+=/home/mauricio/.vim/spell/moby-female-names
-set dictionary+=/home/mauricio/.vim/spell/moby-male-names
-set dictionary+=/home/mauricio/.vim/spell/moby-names
-set dictionary+=/usr/share/dict/american-english
+" set dictionary+=/home/mauricio/.vim/spell/moby-common-dictionary
+" set dictionary+=/home/mauricio/.vim/spell/moby-official-crossword
+" set dictionary+=/home/mauricio/.vim/spell/moby-usa-constitution
+" set dictionary+=/home/mauricio/.vim/spell/moby-places-us
+" set dictionary+=/home/mauricio/.vim/spell/moby-female-names
+" set dictionary+=/home/mauricio/.vim/spell/moby-male-names
+" set dictionary+=/home/mauricio/.vim/spell/moby-names
+" set dictionary+=/usr/share/dict/american-english
 " set thesaurus+=/home/mauricio/.vim/spell/moby-thesaurus
-set thesaurus+=/home/mauricio/.vim/spell/wordnet-thesaurus
+" set thesaurus+=/home/mauricio/.vim/spell/wordnet-thesaurus
 
 " Make sure we are doing utf8
 if &encoding ==# 'latin1' && has('gui_running')
@@ -182,7 +193,7 @@ endif
 " Always show status line
 " Cursor 4 lines off scrolling
 " Minimal GUI
-set laststatus=2 scrolloff=4 guioptions=aegt
+set laststatus=2 scrolloff=2 guioptions=aegtr
 
 " Set all tabs to 4 characters, expand tabs to spaces
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -190,7 +201,8 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 " Highlight search words
 " Incremental search highlights
 " Highlight current line
-set incsearch hlsearch cursorline
+" Highlight textwidth column
+set incsearch hlsearch cursorline colorcolumn=
 
 " Set spelling, undercurl words not in dictionary
 set spell
@@ -205,22 +217,22 @@ command! -nargs=* Wrap set wrap linebreak nolist
 command! -nargs=* Nowrap set nowrap nolinebreak
 
 " Change grayness of comments of the fly, set it to 42
-command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
+command! -nargs=1 Setgray hi Comment cterm=italic gui=italic guifg=grey<args>
 
 " Highlight trailing whitespace
 " Note airline points out the first occurrence of this in the file.
 " Note that nolist causes this to be hidden
-set listchars=trail:¬
+" set listchars=trail:¬
 
 " Source Files: mappings, fonts, conceal {{{1
-"------------------------------------------------
+"--------------------------------------------
 
-source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
-source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/conceal.vim
-source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
-Setgray 36
+source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/mycolors.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
 
 " Modelines: Fold this file {{{1
 " vim: nowrap fdm=marker

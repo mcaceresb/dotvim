@@ -1,0 +1,309 @@
+" ----------------------------------------------------------------------
+" Project: Personal vim settings for using vim in NBER servers
+" Program: vimrc
+" Version: 0.1.1
+" Updated: Wed 17 Jun 2015 02:05:10 AM EDT
+" Author:  Mauricio Caceres <caceres@nber.org>
+
+" Startup: {{{1
+" -------------
+
+filetype plugin indent on
+syntax enable
+
+" Options: {{{1
+" -------------
+
+" Make Vim behave sanely
+set ignorecase smartcase smarttab nocompatible
+set autochdir autoread noswapfile number
+set autoindent lazyredraw ruler showcmd
+set wildmenu wildchar=<Tab>
+set backspace=indent,eol,start
+set winaltkeys=no
+
+" Map leaders
+let maplocalleader = "\\"
+let mapleader = ","
+
+" Remove octal from nubmer formats
+set nrformats-=octal
+
+" Aesthetics: {{{1
+" ----------------
+
+" Always show status line
+" Cursor 4 lines off scrolling
+" Minimal GUI
+set laststatus=2 scrolloff=4 guioptions=aegtr
+
+" Set all tabs to 4 characters, expand tabs to spaces
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+
+" Highlight search words
+" Incremental search highlights
+" Highlight current line
+" Highlight textwidth column
+set incsearch hlsearch cursorline
+
+" Set spelling, undercurl words not in dictionary
+set spell
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=red gui=undercurl
+
+" Set soft wrap and soft-wrap toggle
+" Set soft wrap hanging line character
+set showbreak=\ \
+set wrap linebreak nolist
+command! -nargs=* Wrap set wrap linebreak nolist
+command! -nargs=* Nowrap set nowrap nolinebreak
+
+" Change grayness of comments of the fly, set it to 42
+command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
+
+" Mappings: {{{1
+" --------------
+
+" Navigation: Quicker/Easier Movement {{{2
+
+" Move visual lines
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+vnoremap J 6j
+vnoremap K 6k
+
+" Navigate tabs/buffers
+noremap <C-h> gT
+noremap <C-l> gt
+noremap <A-l> :bnext<CR>
+noremap <A-h> :bprevious<CR>
+
+" Navigate Splits
+nnoremap gh <C-w>h
+nnoremap gj <C-w>j
+nnoremap gk <C-w>k
+nnoremap gl <C-w>l
+
+" Swap lines
+nnoremap <A-j> :m+<CR>==
+nnoremap <A-k> :m-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Open split and open in new tab
+nnoremap gf <C-w>gf
+nnoremap gF gf
+nnoremap gs <C-w>f
+
+" Clipboard: cut/copy/paste maps {{{2
+
+" Visual. Only need for current select
+vnoremap <leader>v "+p
+vnoremap <leader>c "+y
+vnoremap <leader>x "+d
+
+" Normal. Lower for word. Upper for line.
+nnoremap <leader>v "+p
+nnoremap <leader>V "+P
+nnoremap <leader>c "+yiW
+nnoremap <leader>C "+yy
+nnoremap <leader>x "+diW
+nnoremap <leader>X "+dd
+
+" Insert. ,, escapes then same as normal
+inoremap <leader><leader>v <Esc>"+pa
+inoremap <leader><leader>V <Esc>"+Pa
+inoremap <leader><leader>c <Esc>"+yiWa
+inoremap <leader><leader>C <Esc>"+yya
+inoremap <leader><leader>x <Esc>"+diWa
+inoremap <leader><leader>X <Esc>"+dda
+
+" Misc: Other useful mappings {{{2
+
+" Capitalize first letters
+vnoremap <Leader>a gu:s/\v<(.)(\w*)/\u\1\L\2/g<CR>
+
+" Remove whitespace
+nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
+
+" More undo
+inoremap <A-z> <Esc>ua
+inoremap <A-u> <C-g>u<C-u>
+inoremap <A-w> <C-g>u<C-w>
+inoremap <C-z> <Esc>ua
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
+
+"Map s and q to save file and quit buffer
+nnoremap <A-s> :w<CR>
+inoremap <A-s> <Esc>:w<CR>a
+nnoremap <A-q> :bd<CR>
+inoremap <A-q> <Esc>:bd<CR>a
+
+" Quickly correct spelling
+nnoremap <S-Space> a<C-x>s
+
+" Precision rounding
+nnoremap <leader>ro :%s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+vnoremap <leader>ro :s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+
+" Insert current file's directory
+inoremap <F4> <C-R>=expand('%:p:h')<CR>
+
+" Keep highlighting when indenting
+vnoremap > ><CR>gv
+vnoremap < <<CR>gv
+
+" Get quicker macro replay
+nnoremap <F12> @q
+
+" Search and replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" Map Y to yank until the end of the line
+nnoremap Y y$
+
+" Only this buffer
+nnoremap <Leader>- :on<CR>
+
+" Toggle Spell, highlight, smart indent, list
+nnoremap <leader>s :set spell!<CR>
+nmap <leader><CR> :noh<CR>cxc
+set pastetoggle=<F5>
+
+" Colors: {{{1
+" ------------
+
+" Note this is mostly taken from Drew Neil's textmate.vim
+" Startup: {{{2
+if has("gui_running")
+    if has("gui_gtk2")
+        set guifont=Monospace\ 11
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
+
+    set background=light
+    highlight clear
+
+    " Colors: {{{2
+    let s:black           = '#000000'
+    let s:blue_grey       = '#3C4C72'
+    let s:dark_blue       = '#0000A2'
+    let s:dark_purple     = '#7F00FF'
+    let s:blue            = '#1E39F6'
+    let s:light_blue      = '#0066FF'
+    let s:light_purple    = '#6E79F1'
+    let s:blue_green      = '#318495'
+    let s:dark_green      = '#007B22'
+    let s:light_green     = '#00BC41'
+    let s:burgundy        = '#990000'
+    let s:redred          = '#D51015'
+    let s:pink            = '#E18AC7'
+    let s:orange          = '#FFCE77'
+    let s:light_orange    = '#FFE6BB'
+    let s:verylight_blue  = '#C6DEFF'
+    let s:grey_lines      = '#808080'
+    let s:grey_vsplit     = '#CFCFCF'
+    let s:grey_invisibles = '#DFDFDF'
+    let s:grey_statusline = '#EFEFEF'
+    let s:grey_cursorline = '#F0F6FF'
+    let s:white           = '#FFFFFF'
+    let s:matte_blue      = '#7EC0EE'
+    let s:matte_red       = '#BE646C'
+
+    " GUI: {{{2
+    exe 'highlight Cursor         guifg='.s:white
+                \ .' guibg='.s:blue_grey
+    exe 'highlight Visual         guibg='.s:verylight_blue
+    exe 'highlight CursorLine     guibg='.s:grey_cursorline
+    exe 'highlight CursorColumn   guibg='.s:grey_statusline
+    exe 'highlight StatusLine     guibg='.s:grey_statusline
+                \ .' guifg='.s:blue_grey .' gui=italic,bold'
+    exe 'highlight StatusLineNC   guibg='.s:verylight_blue
+                \ .' guifg='.s:blue_grey
+
+    exe 'highlight LineNr         guibg='.s:grey_statusline
+                \ .' guifg='.s:grey_lines
+    exe 'highlight VertSplit      guibg='.s:grey_vsplit
+                \ .' guifg='.s:white
+    exe 'highlight MatchParen     guifg='.s:blue
+                \ .' gui=bold,italic'
+    exe 'highlight Pmenu          guibg='.s:grey_statusline
+    exe 'highlight PmenuSel       guibg='.s:verylight_blue
+    exe 'highlight Directory      guifg='.s:redred
+                \ .' gui=bold'
+    exe 'highlight Folded         guibg='.s:white
+                \ .' guifg='.s:light_blue
+    exe 'highlight IncSearch      guibg='.s:orange
+    exe 'highlight Search         guibg='.s:light_orange
+
+    " Syntax: {{{2
+    exec 'highlight  Normal       guifg='.s:black
+                \ .' guibg='.s:white
+    exec 'highlight  Boolean      guifg='.s:light_purple .' gui=bold'
+    exec 'highlight  Character    guifg='.s:redred       .' gui=bold'
+    exec 'highlight  Conditional  guifg='.s:blue         .' gui=bold'
+    exec 'highlight  Constant     guifg='.s:redred       .' gui=bold'
+    exec 'highlight  Define       guifg='.s:blue         .' gui=bold'
+    exec 'highlight  ErrorMsg     guifg='.s:white
+                \ .' guibg='.s:burgundy
+    exec 'highlight  WarningMsg   guifg='.s:white
+                \ .' guibg='.s:burgundy
+    exec 'highlight  Float        guifg='.s:dark_blue
+    exec 'highlight  Function     guifg='.s:dark_blue    .' gui=bold'
+    exec 'highlight  Identifier   guifg='.s:blue         .' gui=bold'
+    exec 'highlight  Keyword      guifg='.s:blue         .' gui=bold'
+    exec 'highlight  Label        guifg='.s:dark_green
+    exec 'highlight  Number       guifg='.s:dark_blue
+    exec 'highlight  Operator     guifg='.s:blue         .' gui=bold'
+    exec 'highlight  PreProc      guifg='.s:blue         .' gui=bold'
+    exec 'highlight  Special      guifg='.s:black
+    exec 'highlight  Statement    guifg='.s:blue         .' gui=bold'
+    exec 'highlight  StorageClass guifg='.s:blue         .' gui=bold'
+    exec 'highlight  String       guifg='.s:dark_green
+    exec 'highlight  Title        guifg='.s:black        .' gui=bold'
+    exec 'highlight  Todo         guifg='.s:light_blue
+                \ .' gui=inverse,bold,italic'
+    exec 'highlight Delimiter     guifg='.s:dark_purple
+    exec 'highlight Error         guifg='.s:redred
+                \ .' gui=bold,italic guibg=#FFFFEF'
+
+    " Specifics: {{{2
+    exec 'highlight stataLocal       guifg='.s:matte_blue .' gui=bold'
+    exec 'highlight stataGlobal      guifg='.s:matte_red  .' gui=bold'
+    exec 'highlight vimNotation      guifg='.s:dark_purple
+    exec 'highlight vimGroup         guifg='.s:dark_green .'   gui=bold'
+    exec 'highlight vimCommentTitle  guifg='.s:blue_grey  .'   gui=bold'
+    exec 'highlight helpSpecial      guifg='.s:dark_purple
+    exec 'highlight link             vimHiGroup           vimGroup'
+    exec 'highlight markdownBold     gui=bold'
+    exec 'highlight markdownItalic   gui=italic'
+    exec 'highlight markdownCode     guifg='.s:dark_green
+    exec 'highlight link             markdownCodeBlock    markdownCode'
+    exec 'highlight texMathZoneW     guifg='.s:dark_purple
+    exec 'highlight texMathZoneX     guifg='.s:dark_purple
+    exec 'highlight texBeginEndName  gui=Italic'
+    exec 'highlight texItalStyle     gui=Italic'
+    exec 'highlight texBoldStyle     gui=Bold'
+    exec 'highlight texBoldItalStyle gui=Bold,Italic'
+    exec 'highlight link texBeginEndName Normal'
+
+    " Misc {{{2
+    exec 'highlight BT1   guifg='.s:grey_lines  .' gui=italic'
+    exec 'highlight OL1   guifg='.s:black       .' gui=bold'
+    exec 'highlight OL2   guifg='.s:dark_purple .' gui=bold'
+    exec 'highlight OL3   guifg='.s:dark_green  .' gui=bold'
+    exec 'highlight OL4   guifg='.s:light_purple
+    exec 'highlight NonText    guifg='.s:grey_invisibles
+                \ .' guibg='.s:white
+    exec 'highlight SpecialKey guifg='.s:grey_invisibles
+                \ .' guibg='.s:white
+    highlight Comment cterm=italic gui=italic guifg=grey50
+endif
+
+" Modelines: Fold this file {{{1
+" vim: nowrap fdm=marker
+" }}}

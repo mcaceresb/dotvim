@@ -8,29 +8,25 @@
 " Function Mappings: {{{1
 "------------------------------------------------
 
-" Toggle J -> 6j and just J
-let jumpinglevel=0
-nnoremap <F2> <ESC>:call JumpingEfficienciesToggle()<CR>
-
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
-
-" Show syntax highlighting groups for word under cursor
-nmap <C-A-P> :call <SID>SynStack()<CR>
-
-" Custom highlighting of code chunks
-nnoremap <leader><F12> :call TextEnableCodeSnip('r', '\\begin{Scode}', '\\end{Scode}', 'SpecialComment')<CR>
-nnoremap <leader><F11> :call TextEnableCodeSnip('r', '>>=', '@', 'SpecialComment')<CR>
+" Toggle git gutter highlights
+nnoremap <F3> :call ToggleAllGitGutter()<CR>
 
 " Highlight word under cursor
 set updatetime=500
 nnoremap z. :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
+" Set tabstop, softtabstop and shiftwidth to the same value
+command! -nargs=* Stab call Stab()
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-A-p> :call <SID>SynStack()<CR>
+
+" Custom highlighting of code chunks
+nnoremap <leader><F12> :call TextEnableCodeSnip('r', '\\begin{Scode}', '\\end{Scode}', 'SpecialComment')<CR>
+nnoremap <leader><F11> :call TextEnableCodeSnip('r', '>>=', '@', 'SpecialComment')<CR>
+
 " Toggle conceal color bc IndentLines uses conceal
 nnoremap <Leader><Leader>g :call ToggleIndentLines()<CR>
-
-" Toggle git gutter highlights
-nnoremap <F3> :call ToggleAllGitGutter()<CR>
 
 " WordNet word lookup
 command! -nargs=+ Wn call WordNetOverviews("<args>")
@@ -97,21 +93,6 @@ endfunction
 
 " General Functions: {{{1
 "------------------------------------------------
-
-" JumpingEfficienciesToggle: Toggle J -> 6j and just J {{{2
-function! JumpingEfficienciesToggle()
-    if g:jumpinglevel == 0
-        nnoremap J 6j
-        nnoremap K 6k
-        let g:jumpinglevel=1
-        echo "Jumping a bunch with J/K now"
-    else
-        nnoremap J J
-        nnoremap K f i<CR><ESC>
-        let g:jumpinglevel=0
-        echo "Joining and splitting lines with J/K now"
-    endif
-endfunction
 
 " SynStack: Show syntax highlighting groups for word under cursor {{{2
 " From http://vimcasts.org/episodes/creating-colorschemes-for-vim/
