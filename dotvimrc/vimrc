@@ -2,122 +2,108 @@
 " Project: dotvim
 " Program: vimrc
 " Purpose: Vim settings
-" Version: 0.2.0
-" Updated: Sat 27 Jun 2015 11:59:35 PM EDT
+" Version: 0.4.0
+" Updated: Thu Dec 17 11:58:52 EST 2015
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
-"
 " Inputs:
-"   dotvim folders
 "       ~/.vim/undo
+"       ~/.vim/spell
 "       ~/.vim/session
-"   plugin manager
-"       ~/.vim/bundle/neobundle
-"   aux files
-"       ~/Documents/projects/code/dotvim/dotvimrc/conceal.vim
-"       ~/Documents/projects/code/dotvim/dotvimrc/functions.vim
+"       ~/.vim/bundle
 "       ~/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 "       ~/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+"       ~/Documents/projects/code/dotvim/dotvimrc/functions.vim
 "       ~/Documents/projects/code/dotvim/dotvimrc/mycolors.vim
 "       ~/Documents/projects/code/dotvim/dotvimrc/plugins.vim
 
-" Startup: Load NeoBundle and plug-ins {{{1
-" -----------------------------------------
+" Startup: Load plug-ins {{{1
+" ---------------------------
 
-" Please do not alter anything here!
-" Set nocompatible and runtime path for neobundle
-if has('vim_starting')
-    set nocompatible
-    set runtimepath+=~/.vim/bundle/neobundle/
-endif
+" Start NeoBundle or Vundle
+filetype off
+set nocompatible
 
-" Start NeoBundle; let it manage itself
-call neobundle#begin(expand('/home/mauricio/.vim/bundle'))
-NeoBundleFetch 'Shougo/neobundle.vim', {'name' : 'neobundle'}
-NeoBundle 'Shougo/vimproc.vim', {
-            \ 'build' : {
-            \     'windows' : 'tools\\update-dll-mingw',
-            \     'cygwin' : 'make -f make_cygwin.mak',
-            \     'mac' : 'make -f make_mac.mak',
-            \     'linux' : 'make',
-            \     'unix' : 'gmake',
-            \    },
-            \ }
+" NeoBundle
+" if has('vim_starting')
+"     set nocompatible
+"     set runtimepath+=~/.vim/bundle/neobundle.vim/
+" endif
+" call neobundle#begin(expand('~/.vim/bundle/'))
+" NeoBundleFetch 'Shougo/neobundle.vim'
+" NeoBundle 'Shougo/vimproc.vim', {
+"             \ 'build' : {
+"             \     'windows' : 'tools\\update-dll-mingw',
+"             \     'cygwin' : 'make -f make_cygwin.mak',
+"             \     'mac' : 'make -f make_mac.mak',
+"             \     'linux' : 'make',
+"             \     'unix' : 'gmake',
+"             \    },
+"             \ }
 
-" Plugins: {{{2
+" Vundle
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
-" Faves
-NeoBundle 'tpope/vim-repeat',                     {'name' : 'repeat'}
-NeoBundle 'tpope/vim-surround',                   {'name' : 'surround'}
-NeoBundle 'tpope/vim-unimpaired',                 {'name' : 'unimpaired'}
-NeoBundle 'tpope/vim-speeddating',                {'name' : 'speeddating'}
-NeoBundle 'tpope/vim-fugitive',                   {'name' : 'fugitive'}
-NeoBundle 'SirVer/ultisnips',                     {'name' : 'ultisnips'}
-NeoBundle 'honza/vim-snippets',                   {'name' : 'snippets'}
-NeoBundle 'tommcdo/vim-exchange',                 {'name' : 'exchange'}
-NeoBundle 'ervandew/screen',                      {'name' : 'screen'}
-NeoBundle 'godlygeek/tabular',                    {'name' : 'tabular'}
-NeoBundle 'salsifis/vim-transpose',               {'name' : 'transpose'}
-NeoBundle 'kien/ctrlp.vim',                       {'name' : 'ctrlp'}
+" Bundles!
 
-NeoBundle 'mhinz/vim-startify',                   {'name' : 'startify'}
-NeoBundle 'bling/vim-airline',                    {'name' : 'airline'}
-NeoBundle 'flazz/vim-colorschemes',               {'name' : 'colorschemes'}
-NeoBundle 'lilydjwg/colorizer',                   {'name' : 'colorizer'}
-NeoBundle 'jpitblado/vim-stata',                  {'name' : 'stata'}
-NeoBundle 'suan/vim-instant-markdown',            {'name' : 'instant-markdown'}
+" Harmless and useful (simple)
+Plugin 'tpope/vim-repeat',        {'name' : 'repeat'}
+Plugin 'tpope/vim-surround',      {'name' : 'surround'}
+Plugin 'tpope/vim-unimpaired',    {'name' : 'unimpaired'}
+Plugin 'tpope/vim-speeddating',   {'name' : 'speeddating'}
+Plugin 'tpope/vim-fugitive',      {'name' : 'fugitive'}
+Plugin 'tpope/vim-characterize',  {'name' : 'characterize'}
+Plugin 'tommcdo/vim-exchange',    {'name' : 'exchange'}
+Plugin 'salsifis/vim-transpose',  {'name' : 'transpose'}
+Plugin 'godlygeek/tabular',       {'name' : 'tabular'}
+Plugin 'tomtom/tcomment_vim',     {'name' : 'tcomment'}
 
-" On the fence
-NeoBundle 'JuliaLang/julia-vim',                  {'name' : 'julia'}
-NeoBundle 'jcfaria/Vim-R-plugin',                 {'name' : 'rplugin'}
-NeoBundle 'klen/python-mode',                     {'name' : 'python-mode'}
-NeoBundle 'gregsexton/gitv',                      {'name' : 'gitv'}
-NeoBundle 'airblade/vim-gitgutter',               {'name' : 'gitgutter'}
-NeoBundle 'Yggdroot/indentLine',                  {'name' : 'indentline'}
-" NeoBundle 'sjl/gundo.vim',                        {'name' : 'gundo'}
-NeoBundle 'mbbill/undotree',                      {'name' : 'undotree'}
-NeoBundle 'LaTeX-Box-Team/LaTeX-Box',             {'name' : 'latex-box'}
-call neobundle#local("~/.vim/bundle/", {}, ['latex-suite-abridged'])
-" NeoBundle 'xuhdev/vim-latex-live-preview',        {'name' : 'latex-live-preview'}
+" Mostly harmless and useful (less simple)
+Plugin 'ervandew/screen',         {'name' : 'screen'}
+Plugin 'kien/ctrlp.vim',          {'name' : 'ctrlp'}
+Plugin 'SirVer/ultisnips',        {'name' : 'ultisnips'}
+Plugin 'honza/vim-snippets',      {'name' : 'snippets'}
+Plugin 'gregsexton/gitv',         {'name' : 'gitv'}
+Plugin 'airblade/vim-gitgutter',  {'name' : 'gitgutter'}
+Plugin 'mbbill/undotree',         {'name' : 'undotree'}
+Plugin 'scrooloose/nerdtree',     {'name' : 'nerdtree'}
+Plugin 'Lokaltog/vim-easymotion', {'name' : 'easymotion'}
+Plugin 'Shougo/neocomplete.vim',  {'name' : 'neocomplete'}
 
-" Testing
-NeoBundle 'tomtom/tcomment_vim',                  {'name' : 'tcomment'}
-" NeoBundle 'tpope/vim-commentary',                 {'name' : 'commentary'}
-" NeoBundle 'scrooloose/nerdcommenter'              {'name' : 'nerdcommenter'}
-NeoBundle  'Konfekt/FastFold',                    {'name' : 'fastfold'}
+" Bling
+Plugin 'bling/vim-airline',       {'name' : 'airline'}
+Plugin 'flazz/vim-colorschemes',  {'name' : 'colorschemes'}
+Plugin 'lilydjwg/colorizer',      {'name' : 'colorizer'}
+Plugin 'mhinz/vim-startify',      {'name' : 'startify'}
+" Plugin 'Yggdroot/indentLine'
 
-NeoBundle 'scrooloose/nerdtree',                  {'name' : 'nerdtree'}
-NeoBundle 'Shougo/neocomplete.vim',               {'name' : 'neocomplete'}
-NeoBundle 'Shougo/vimfiler.vim',                  {'name' : 'vimfiler'}
-NeoBundle 'Shougo/unite.vim',                     {'name' : 'unite'}
-NeoBundleLazy 'Shougo/neomru.vim',
-            \ {'autoload' : {'unite_sources' : 'file_mru'}}
-NeoBundleLazy 'osyo-manga/unite-airline_themes',
-            \ {'autoload' :  {'unite_sources' : 'airline_themes'}}
-NeoBundleLazy 'ujihisa/unite-colorscheme',
-            \ {'autoload' :  {'unite_sources' : 'colorscheme'}}
-NeoBundleLazy 'tsukkee/unite-tag',
-            \ {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
-NeoBundleLazy 'Shougo/unite-outline',
-            \ {'autoload' : {'unite_sources' : 'outline'}}
-NeoBundleLazy 'Shougo/unite-help',
-            \ {'autoload' : {'unite_sources' : 'help'}}
-NeoBundleLazy 'Shougo/junkfile.vim',
-            \ {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile', 'junkfile/new']}}
+" Language support
+Plugin 'jcfaria/Vim-R-plugin',    {'name' : 'rplugin'}
+Plugin 'LaTeX-Box-Team/LaTeX-Box',{'name' : 'latex-box'}
+" Plugin 'jpitblado/vim-stata',     {'name' : 'stata'}
+Plugin 'JuliaLang/julia-vim',     {'name' : 'julia'}
+Plugin 'klen/python-mode',        {'name' : 'python-mode'}
+" Plugin 'suan/vim-instant-markdown', {'name' : 'instant-markdown'}
+" Plugin 'adimit/prolog.vim',       {'name' : 'prolog'}
+Plugin 'file:///home/mauricio/Documents/projects/code/dotvim/bundle/latex-suite-abridged'
 
-" NeoBundle 'terryma/vim-expand-region',            {'name' : 'expand-region'}
-" NeoBundle 'kana/vim-textobj-line',                {'name' : 'textobj-line'}
-" NeoBundle 'godlygeek/csapprox',                   {'name' : 'csapprox'}
-" NeoBundle 'Raimondi/delimitMate',                 {'name' : 'delimate'}
-" NeoBundle 'Lokaltog/vim-easymotion',              {'name' : 'easymotion'}
-" NeoBundle 'davidhalter/jedi-vim',                 {'name' : 'jedi'}
-" NeoBundle 'ivanov/vim-ipython',                 {'name' : 'ipython'}
-" NeoBundle 'scrooloose/syntastic',                 {'name' : 'syntastic'}
+" Unite LOOKS veritably amazing but it is really slow
+" Plugin 'Shougo/unite.vim',  {'name' : 'unite'}
+" Plugin 'Shougo/neomru.vim', {'autoload' : {'unite_sources' : 'file_mru'}}
+" Plugin 'osyo-manga/unite-airline_themes', {'autoload' :  {'unite_sources' : 'airline_themes'}}
+" Plugin 'ujihisa/unite-colorscheme', {'autoload' :  {'unite_sources' : 'colorscheme'}}
+" Plugin 'tsukkee/unite-tag', {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
+" Plugin 'Shougo/unite-outline', {'autoload' : {'unite_sources' : 'outline'}}
+" Plugin 'Shougo/unite-help', {'autoload' : {'unite_sources' : 'help'}}
+" Plugin 'Shougo/junkfile.vim', {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile', 'junkfile/new']}}
 
-" End NeoBundle, enable filetypes, plug-ins, syntax
-call neobundle#end()
+" End bundling
+" call neobundle#end()
+call vundle#end()
 filetype plugin indent on
 syntax enable
-NeoBundleCheck
+" NeoBundleCheck
 
 " Options: Vim options I like {{{1
 " --------------------------------
@@ -142,21 +128,7 @@ let mapleader = ","
 set nrformats-=octal
 
 " Set up completion and dictionary
-set complete=.,w,b,u,t,i,d,k/home/mauricio/.vim/spell/en.utf-8.add
-
-" This might be overkill
-" set dictionary+=/home/mauricio/.vim/spell/en.utf-8.add
-" set dictionary+=/home/mauricio/.vim/spell/moby-acronyms
-" set dictionary+=/home/mauricio/.vim/spell/moby-common-dictionary
-" set dictionary+=/home/mauricio/.vim/spell/moby-official-crossword
-" set dictionary+=/home/mauricio/.vim/spell/moby-usa-constitution
-" set dictionary+=/home/mauricio/.vim/spell/moby-places-us
-" set dictionary+=/home/mauricio/.vim/spell/moby-female-names
-" set dictionary+=/home/mauricio/.vim/spell/moby-male-names
-" set dictionary+=/home/mauricio/.vim/spell/moby-names
-" set dictionary+=/usr/share/dict/american-english
-" set thesaurus+=/home/mauricio/.vim/spell/moby-thesaurus
-" set thesaurus+=/home/mauricio/.vim/spell/wordnet-thesaurus
+" set complete=.,w,b,u,t,i,d,k/home/mauricio/.vim/spell/en.utf-8.add
 
 " Make sure we are doing utf8
 if &encoding ==# 'latin1' && has('gui_running')
@@ -219,18 +191,12 @@ command! -nargs=* Nowrap set nowrap nolinebreak
 " Change grayness of comments of the fly, set it to 42
 command! -nargs=1 Setgray hi Comment cterm=italic gui=italic guifg=grey<args>
 
-" Highlight trailing whitespace
-" Note airline points out the first occurrence of this in the file.
-" Note that nolist causes this to be hidden
-" set listchars=trail:¬
+" Source Files: mappings, fonts, options, etc. {{{1
+"--------------------------------------------------
 
-" Source Files: mappings, fonts, conceal {{{1
-"--------------------------------------------
-
-source $HOME/Documents/projects/code/dotvim/dotvimrc/conceal.vim
-source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/mappings.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/fonts.vim
+source $HOME/Documents/projects/code/dotvim/dotvimrc/functions.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/mycolors.vim
 source $HOME/Documents/projects/code/dotvim/dotvimrc/plugins.vim
 

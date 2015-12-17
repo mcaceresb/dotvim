@@ -92,8 +92,8 @@ exec 'highlight Error         guifg='.s:redred       .' gui=bold,italic guibg=#F
 exec 'highlight stataLocal       guifg='.s:matte_blue .' gui=bold'
 exec 'highlight stataGlobal      guifg='.s:matte_red  .' gui=bold'
 exec 'highlight vimNotation      guifg='.s:dark_purple
-exec 'highlight vimGroup         guifg='.s:dark_green .'   gui=bold'
-exec 'highlight vimCommentTitle  guifg='.s:blue_grey  .'   gui=bold'
+exec 'highlight vimGroup         guifg='.s:dark_green .' gui=bold'
+exec 'highlight vimCommentTitle  guifg='.s:blue_grey  .' gui=bold'
 exec 'highlight helpSpecial      guifg='.s:dark_purple
 exec 'highlight link             vimHiGroup           vimGroup'
 exec 'highlight markdownBold     gui=bold'
@@ -106,6 +106,7 @@ exec 'highlight texBeginEndName  gui=Italic'
 exec 'highlight texItalStyle     gui=Italic'
 exec 'highlight texBoldStyle     gui=Bold'
 exec 'highlight texBoldItalStyle gui=Bold,Italic'
+exec 'highlight sasMacroVar      guifg='.s:dark_purple .' gui=bold'
 exec 'highlight link texBeginEndName Normal'
 
 " Misc {{{1

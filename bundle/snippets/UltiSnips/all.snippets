@@ -97,8 +97,8 @@ endsnippet
 
 snippet bbox "A nice box over the full width" b
 `!p
-if not snip.c:
-	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+width = 71
 box = make_box(len(t[1]), width)
 snip.rv = box[0]
 snip += box[1]
@@ -126,6 +126,33 @@ endsnippet
 ##############
 #  My Stuff  #
 ##############
+
+snippet name "My name" w
+Mauricio Caceres
+endsnippet
+
+snippet email "My Email" w
+mauricio.caceres.bravo@gmail.com
+endsnippet
+
+snippet namail "Name <e-mail>" w
+Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+endsnippet
+
+snippet doyledaily "Daily progress for Doyle" w
+From: Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+To: Joseph Doyle <jjdoyle@mit.edu>
+Subject: Daily Progress
+Date: `date`
+
+Today
+1. $0
+
+Tomorrow
+1.
+
+Mauricio
+endsnippet
 
 snippet mbox "Pretty bbox" b
 `!p
@@ -155,7 +182,7 @@ snippet note "Note message" b
 `!p
 b, m, e, i = _get_comment_format()
 sline = b
-snip.rv = sline` NOTE(`echo $USER`): ${1:${VISUAL:todo}} // `!v strftime("%c")` `!p
+snip.rv = sline` NOTE(`echo $USER`): ${1:${VISUAL:note}} // `date +%Y-%m-%d\ %H:%M\ %Z``!p
 b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
@@ -163,6 +190,17 @@ snip.rv = '' if eline is sline else eline`
 endsnippet
 
 snippet todo "Todo message" b
+`!p
+b, m, e, i = _get_comment_format()
+sline = b
+snip.rv = sline` TODO: ${1:${VISUAL:todo}} // `date +%Y-%m-%d\ %H:%M\ %Z``!p
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+snip.rv = '' if eline is sline else eline`
+endsnippet
+
+snippet TODO "Todo message" b
 `!p
 b, m, e, i = _get_comment_format()
 sline = b
@@ -174,11 +212,27 @@ snip.rv = '' if eline is sline else eline`
 endsnippet
 
 snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
-`!v strftime("%c")`$0
+`date`$0
 endsnippet
 
 snippet nowa "Current datetime, YYYY.MM.DD HH:MM:SS" w
 `!v strftime("%Y.%m.%d %H:%M:%S")`$0
+endsnippet
+
+snippet today "Current date, YYYYMMDD" w
+`!v strftime("%Y%m%d")`$0
+endsnippet
+
+snippet todaya "Current date, YYYY-MM-DD" w
+`!v strftime("%Y-%m-%d")`$0
+endsnippet
+
+snippet todayb "Current date, MM/DD/YYYY" w
+`!v strftime("%m/%d/%Y")`$0
+endsnippet
+
+snippet todayc "Current date, Mmm DD, CCYY" w
+`!v strftime("%b %d, %Y")`$0
 endsnippet
 
 snippet proinfo "Project info" b
@@ -221,6 +275,20 @@ endsnippet
 
 snippet standby "Standby Message" b
 This project is in standby mode. Very little has been done beyond writing down the idea.
+endsnippet
+
+snippet chesspgn "Chess PGN" b
+[Event "${1:Friendly}"]
+[Site "${2:London, England|ENG}"]
+[Date "${3:`!v strftime("%Y.%m.%d")`}"]
+[Result "${4:1/2-1/2}"]
+[Round "${5:1}"]
+[White "${6:House, Gregory}"]
+[Black "${7:Holmes, Sherlock}"]
+[WhiteElo "${8:3000}"]
+[BlackElo "${9:3000}"]
+
+$0
 endsnippet
 
 ##############
@@ -282,6 +350,190 @@ endsnippet
 # (/* like C */).
 snippet modeline "Vim modeline"
 vim`!v ':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`
+endsnippet
+
+##################
+#  Project Docs  #
+##################
+
+snippet proheader "Project info" b
+`!p
+if not snip.c:
+	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Program: ${2:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Author:  ${3:`echo $USER`} <caceres@nber.org>
+`!p snip.rv = getlinechar()` Created: ${4:`date`}
+`!p snip.rv = getlinechar()` Updated: `date`
+`!p snip.rv = getlinechar()` Purpose: $5
+`!p snip.rv = getlinechar()` Note:    $6
+$0
+endsnippet
+
+snippet progress "Track progress" b
+`!v strftime("%a %b %d %Y")` 08:00,
+`!v strftime("%a %b %d %Y")` 09:00,
+`!v strftime("%a %b %d %Y")` 10:00,
+`!v strftime("%a %b %d %Y")` 11:00,
+`!v strftime("%a %b %d %Y")` 12:00,
+`!v strftime("%a %b %d %Y")` 13:00,
+`!v strftime("%a %b %d %Y")` 14:00,
+`!v strftime("%a %b %d %Y")` 15:00,
+`!v strftime("%a %b %d %Y")` 16:00,
+`!v strftime("%a %b %d %Y")` 17:00,
+`!v strftime("%a %b %d %Y")` 18:00,
+`!v strftime("%a %b %d %Y")` 19:00,
+`!v strftime("%a %b %d %Y")` 20:00,
+`!v strftime("%a %b %d %Y")` 21:00,
+`!v strftime("%a %b %d %Y")` 22:00,
+`!v strftime("%a %b %d %Y")` 23:00,
+`!v strftime("%a %b %d %Y")` 00:00,
+`!v strftime("%a %b %d %Y")` 01:00,
+`!v strftime("%a %b %d %Y")` 02:00,
+`!v strftime("%a %b %d %Y")` 03:00,
+`!v strftime("%a %b %d %Y")` 04:00,
+`!v strftime("%a %b %d %Y")` 05:00,
+`!v strftime("%a %b %d %Y")` 06:00,
+`!v strftime("%a %b %d %Y")` 07:00,
+endsnippet
+
+snippet projectlog "Project Log" b
+Project Info
+============
+
+$1
+
+Current
+=======
+
+1. $2
+
+History
+=======
+
+Event: $3
+Date: `!v strftime("%c")`
+Note: $4
+	$0
+endsnippet
+
+##########
+#  Misc  #
+##########
+
+snippet infojson "Info JSON template" b
+{
+    "project": "",
+    "description": "",
+    "status": "",
+    "dates": {
+        "start": "",
+        "involved": "",
+        "updated": "",
+        "end": ""
+    },
+    "people": {
+        "Joseph Doyle": {
+            "role": "Co-investigator",
+            "institution": "MIT",
+			"title": "PhD",
+            "email": "jjdoyle@mit.edu"
+        },
+        "Mauricio Caceres": {
+            "role": "Joseph Doyle's RA",
+            "institution": "NBER",
+			"title": "MA",
+            "email": "caceres@nber"
+        }
+    },
+    "sync": {
+        "local": "./",
+        "server": "server",
+        "remote-full": "/path",
+        "remote-partial": "/path",
+        "exclude-full": ["data"],
+        "include-partial": ["code", "writeup", "admin"]
+    },
+    "self": {
+        "user": "caceres",
+        "name": "Mauricio Caceres",
+        "role": "Joseph Doyle's RA",
+        "email": "caceres@nber.org"
+    }
+}
+endsnippet
+
+snippet rct "Temp for RCTs" b
+"${0:${VISUAL:NCT}}":
+{
+    "Study": "Title",
+    "Study Purpose": "Purpose",
+    "Study Included for": "Relevance",
+    "Study Population": "Target/recruitment population",
+    "Study Interventions": ["Arm 1 with incentive name and intervention description",
+                            "Arm 2 with incentive name and intervention description",
+                            "Control with control description"],
+    "Study Time Horizon": "Study duration (possible note) and follow-up horizon",
+    "Study Settings": "Clinic|Home|School Cafeteria|etc.",
+    "Study Caveats": ["Why the study is not so relevant",
+                      "Criticisms of the study",
+                      "Actual problems with the study"],
+    "Study Tags": "Smoking|Dieting|Exercise|Prevention|Medication Adherence/Management|etc.",
+    "Study Articles": "Citation tag from Zotero bib",
+    "Incentive": ["Incentive name"],
+    "Incentive Type": ["Cash|Vouchers|Gift Cards|Points|Lottery|Peer|Access|Nudge|Subsidy|Contingency Management"],
+    "Incentive Frequency": ["Short. Weekly|Monthly|Schedule over X days|etc."],
+    "Incentive For": ["Behavior that earns incentive."],
+    "Incentive Mechanism": ["Cash|etc. earned at X rate for X behavior, redeemable at X rate"],
+    "Incentive Reward": ["Participants could accrue and redeem at any time|Participants could redeem every X weeks|Participants got amount at end of study|Participants got incentive right away"],
+    "Incentive For Participating": ["Incentive for showing up"],
+    "Incentive Total": ["Total amount possible to earn (perfect behavior)"],
+    "Outcome Sample": ["Note|None",
+                       "X assessed/recruited",
+                       "Y randomized",
+                       "Z in results",
+                       "A in follow-up|None"],
+    "Outcome Measures": ["Measure a",
+                         "Measure b"],
+    "Outcome Results": ["Smoking = abstinence rate",
+                        "Weight = weight loss",
+                        "Diet = Healthful food intake per time unit",
+                        "Exercise = Physical activity in time units per time unit",
+                        "Adherence = % Adhering",
+                        "Other conclusions"],
+    "Outcome Follow-up": "No follow-up|No drop/minimal drop|Long-run drop",
+    "Notes": null,
+    "Google Scholar": "Citations from Google Scholar"
+},
+endsnippet
+
+snippet stuffs "temporary stuffs" b
+% Citation: $0
+
+Relevance:
+
+Notes:
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+Conclusions:
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+Critique:
+\begin{enumerate}
+  \item
+\end{enumerate}
+
 endsnippet
 
 # vim:ft=snippets:

@@ -15,10 +15,10 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-nnoremap <C-k> 6k
-nnoremap <C-j> 6j
-vnoremap <C-j> 6j
-vnoremap <C-k> 6k
+nnoremap <C-k> 5k
+nnoremap <C-j> 5j
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
 
 " Resize split windows
 noremap <A-left> <C-w><
@@ -80,14 +80,9 @@ inoremap <leader><leader>X <Esc>"+dda
 
 " Misc: Other useful mappings {{{2
 
-" Why is vim suddenly updating folds every time I move lines?
-
 " Markdown title
-nnoremap gpt yypVr-
-nnoremap gpc yyp0wv$r-
-
-" Next and repeat
-" nnoremap Q :normal n.<CR>
+nnoremap gpt yypv$r-
+nnoremap gpc yypwv$r-
 
 " Make
 nnoremap <Leader>m :make<CR>
@@ -123,6 +118,7 @@ nnoremap <C-Down> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)'
 " Quickly correct spelling
 nnoremap <C-Space> hEa<C-x><C-t>
 nnoremap <S-Space> a<C-x>s
+nnoremap m<Space>  mma<C-x>s<ESC>`m
 
 " Sudo tee
 cnoremap w!! w !sudo tee > /dev/null %

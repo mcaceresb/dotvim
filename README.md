@@ -14,8 +14,9 @@ mkdir ~/.vim/spell/
 mkdir ~/.vim/undo/
 cp $DOTVIM/fonts/* ~/.fonts/
 ln -s $DOTVIM/dotvimrc/vimrc ~/.vimrc
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-mv ~/.vim/bundle/neobundle.vim ~/.vim/bundle/neobundle
+# curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+# mv ~/.vim/bundle/neobundle.vim ~/.vim/bundle/neobundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 You should edit the path `$HOME/Documents/projects/code/dotvim` here *and* in `./vimrc` if you copied this repository to a different directory (used for dictionaries, thesaurus, source). Then start `vim` and `NeoBundle` should install all the packages. Once they have all installed, run

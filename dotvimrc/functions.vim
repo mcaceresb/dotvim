@@ -43,11 +43,7 @@ noremap <C-A-q> "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
 " ToggleIndentLines: Toggle conceal color bc IndentLines uses conceal {{{2
 function! ConcealBackgroundCheck()
     if &background=='light'
-        " hi Conceal gui=none guifg=#000000
-        hi Conceal gui=none guifg=#7F00FF
     else
-        " hi Conceal guifg=#fffffa
-        hi Conceal guifg=#e3d796
     endif
 endfunction
 
@@ -57,7 +53,6 @@ function! ToggleIndentLines()
         silent exec "IndentLinesToggle"
         echo "Showing tab markers"
         let g:indentLine_myToggle = 1
-        highlight Conceal gui=none guifg=gray42
     else
         silen exec "IndentLinesToggle"
         echo "Hiding tab markers"
@@ -65,19 +60,6 @@ function! ToggleIndentLines()
         call ConcealBackgroundCheck()
     endif
 endfunction
-
-" Multiple Cursors Fix: Neocomplete and multiple-cursors compatibility fix {{{2
-
-" From https://github.com/terryma/vim-multiple-cursors#interactions-with-other-plugins
-" function! Multiple_cursors_before()
-"     exe 'NeoCompleteLock'
-"     echo 'Disabled autocomplete'
-" endfunction
-
-" function! Multiple_cursors_after()
-"     exe 'NeoCompleteUnlock'
-"     echo 'Enabled autocomplete'
-" endfunction
 
 " ToggleAllGitGutter: Toggle git gutter's highlighting with console msg {{{2
 function! ToggleAllGitGutter()
