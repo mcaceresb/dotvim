@@ -32,13 +32,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:ctrlp_follow_symlinks = 1
 nnoremap <C-g> :CtrlPBuffer<CR>
 
-" EasyMotion: Easy motion to places {{{2
-nmap <Tab>s <Plug>(easymotion-s2)
-nmap <Tab> <Plug>(easymotion-prefix)
-nmap <Tab><Tab> <Plug>(easymotion-sn)
-
 " Undo: Visualize undo history {{{2
-" nnoremap <F11> :GundoToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
 
 " NERDTree: Nice file explorer for Vim {{{2
@@ -48,93 +42,6 @@ nnoremap <F10> :NERDTreeToggle<CR>
 let g:gitgutter_enabled = 0
 let g:gitgutter_signs = 0
 let g:gitgutter_highlight_lines = 0
-
-" IndentLines: Indentation Markers {{{2
-let g:indentLine_myToggle = 1
-let g:indentLine_color_gui = '#EAEAEA'
-let g:indentLine_char = "│"
-
-" NeoComplete: And other {{{2
-
-" These are options I like
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-
-" This is for proper <TAB> completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-P>" : "\<S-TAB>"
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" This is for keyword completion
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns._ = '^\\\?\h\w*$'
-let keyword_patterns = {}
-let keyword_patterns = {'tex' : '\h\w\{,2}:\%(\w*\|\w*_\w*\)\?'}
-" let keyword_patterns = {'tex' : '\h\w*:\%(\w*_\w*\)\?'}
-let g:neocomplete#force_omni_input_patterns = {'tex' : '\v\\\a*(ref|cite)\a*\**([^]]*\])?\{(|[^}]*,)'}
-call neocomplete#custom#source('buffer', 'keyword_patterns', keyword_patterns)
-
-" let g:neocomplete#sources#dictionary#dictionaries = {
-"             \ 'default' : '',
-"             \ 'tex' : '/home/mauricio/.vim/spell/en.utf-8.add,/home/mauricio/.vim/spell/random-spelling-help'
-"             \ }
-
-" " This may not be necessary
-" if !exists('g:neocomplete#sources')
-"     let g:neocomplete#sources = {}
-" endif
-" let g:neocomplete#sources.tex = ['buffer',
-"             \ 'ultisnips',
-"             \ 'dictionary',
-"             \ 'file',
-"             \ 'syntax',
-"             \ 'include',
-"             \ 'member',
-"             \ 'omni',
-"             \ 'tag',
-"             \ 'file/include']
-
-" Python Mode: Vim Python Mode {{{2
-let g:pymode_lint_ignore = "E221,E251,E261,E302,E501," . "W0401"
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_rope_autoimport = 0
-let g:pymode_options_colorcolumn  = 0
-let g:pymode_rope_complete_on_dot = 0
-" let g:pymode_rope_completion_bind = '<C-L>'
-" nnoremap <leader><Leader>c :PymodeLintToggle<CR>
-
-" Julia: {{{2
-" let g:latex_to_unicode_tab = 0
-
-" R: Vim R plug-in {{{2
-let r_syntax_folding = 1
-let vimrplugin_term = "konsole"
-let g:vimrplugin_maxdeparse = 10000
-
-" Sweave files (figure it out if you ever use Sweave again)
-" au BufNewFile,BufRead *.Rnw set filetype=tex
-" let g:SweaveTexReorder = "fnam=\"%:r.tex\";echo $\"`sed -n '1,2p' $fnam`\"$'\n'\"\usepackage{Sweave}\"" .
-"             \ "$'\n'$\"`awk '/\\documentclass/{flag=1;next}/\\usepackage{Sweave}/{flag=0}flag' $fnam`\"" .
-"             \ "$'\n'$\"`awk '/\\usepackage{Sweave}/{flag=1;next}/\\end{document}/{flag=0}flag' $fnam`\"" .
-"             \ "$'\n'\"\end{document}\" > \"$fnam\"<CR>"
-" nnoremap \sm :call StartR("R")<CR>:call RSweave()<CR>
-"             \:call g:SendCmdToR(system(g:SweaveTexReorder))<CR>
-"             \:call RMakePDF("nobib", 0)<CR>
-" nnoremap \sr :!fnam="%:r.tex";
-"             \ echo $"`sed -n '1,2p' $fnam`"$'\n'$"\usepackage{Sweave}"
-"             \ $'\n'$"`awk '/\\documentclass/{flag=1;next}/\\usepackage{Sweave}/{flag=0}flag' $fnam`"
-"             \ $'\n'$"`awk '/\\usepackage{Sweave}/{flag=1;next}/\\end{document}/{flag=0}flag' $fnam`"
-"             \ $'\n'"\end{document}" > "$fnam"<CR>
-"             \ :sleep 100m<CR>
-"             \ :!pdflatex "%:r.tex"<CR>
 
 " Screen: Vim interface with Gnu-Screen {{{2
 let g:ScreenShellTerminal = 'konsole'
@@ -160,28 +67,48 @@ let g:startify_bookmarks = [
 let g:startify_session_persistence = 1
 
 " Tabular: Nice alignment features {{{2
-vmap <leader><leader>t :Tabularize /&<CR>
-nmap <leader><leader>t :Tabularize /&<CR>
+vnoremap <leader><leader>t :Tabularize /&<CR>
+nnoremap <leader><leader>t :Tabularize /&<CR>
 
-vmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
-vmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
-vmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
-vmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
-vmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
-vmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
-vmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
-vmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
-vmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader><leader># :Tabularize /#/l1r1<CR>
+vnoremap <leader><leader>% :Tabularize /%/l1r1<CR>
+vnoremap <leader><leader>& :Tabularize /&/l1r1<CR>
+vnoremap <leader><leader>* :Tabularize /*/l1r1<CR>
+vnoremap <leader><leader>= :Tabularize /=/l1r1<CR>
+vnoremap <leader><leader>, :Tabularize /,/l1r1<CR>
+vnoremap <leader><leader>" :Tabularize /"/l1r1<CR>
+vnoremap <leader><leader>: :Tabularize /:/l1r1<CR>
+vnoremap <leader><leader>$ :Tabularize /$/l1r1<CR>
 
-nmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
-nmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
-nmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
-nmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
-nmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
-nmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
-nmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
-nmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
-nmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
+nnoremap <leader><leader># :Tabularize /#/l1r1<CR>
+nnoremap <leader><leader>% :Tabularize /%/l1r1<CR>
+nnoremap <leader><leader>& :Tabularize /&/l1r1<CR>
+nnoremap <leader><leader>* :Tabularize /*/l1r1<CR>
+nnoremap <leader><leader>= :Tabularize /=/l1r1<CR>
+nnoremap <leader><leader>, :Tabularize /,/l1r1<CR>
+nnoremap <leader><leader>" :Tabularize /"/l1r1<CR>
+nnoremap <leader><leader>: :Tabularize /:/l1r1<CR>
+nnoremap <leader><leader>$ :Tabularize /$/l1r1<CR>
+
+vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
+vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
+vnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
+vnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
+vnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
+vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
+vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+
+nnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
+nnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
+nnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
+nnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
+nnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+nnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
+nnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
+nnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+nnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2
@@ -189,87 +116,55 @@ let g:UltiSnipsExpandTrigger = "<s-space>"
 let g:ultisnips_python_style = "google"
 let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 
-" Unite: Fuzzy file finder and aux plug-ins {{{2
+" YouCompleteMe: Language and Auto-Completion {{{2
 
-" Unite: The plug-in itself {{{3
-" let bundle = neobundle#get('unite')
-" function! bundle.hooks.on_source(bundle)
-"     call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"     call unite#filters#sorter_default#use(['sorter_rank'])
-"     call unite#custom#profile('default', 'context', {
-"                 \ 'start_insert': 1
-"                 \ })
-" endfunction
+" let g:ycm_min_num_of_chars_for_completion = 2
+" let g:ycm_min_num_identifier_candidate_chars = 0
+" let g:ycm_auto_trigger = 1
+" let g:ycm_path_to_python_interpreter = ''
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" " let g:unite_data_directory=s:get_cache_dir('unite')
-" let g:unite_data_directory='~/.cache/unite/'
-" let g:unite_source_history_yank_enable=1
-" let g:unite_source_rec_max_cache_files=5000
+" SimplyFold: Simple folding for Python {{{2
 
-" if executable('ag')
-"     let g:unite_source_grep_command='ag'
-"     let agargs='--nocolor --line-numbers --nogroup -S -B2 -A3'
-"     let g:unite_source_grep_default_opts=agargs
-"     let g:unite_source_grep_recursive_opt=''
-" elseif executable('ack')
-"     let g:unite_source_grep_command='ack'
-"     let ackargs='--no-heading --no-color -B2 -A3'
-"     let g:unite_source_grep_default_opts=ackargs
-"     let g:unite_source_grep_recursive_opt=''
-" endif
+let g:SimpylFold_docstring_preview = 1
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 
-" function! s:unite_settings()
-"     nmap <buffer> <ESC> <plug>(unite_exit)
-"     imap <buffer> <ESC> <plug>(unite_exit)
-"     nmap <buffer> <A-q> <plug>(unite_exit)
-"     imap <buffer> <A-q> <plug>(unite_exit)
-"     imap <buffer> <C-j> <plug>(unite_select_next_line)
-"     imap <buffer> <C-k> <plug>(unite_select_previous_line)
-" endfunction
-" autocmd FileType unite call s:unite_settings()
+" Syntastic: Syntax Checking {{{2
 
-" nmap <space> [unite]
-" nnoremap [unite] <nop>
-" nnoremap <silent> [unite]<space> :<C-u>Unite -auto-resize -auto-preview -buffer-name=mixed -toggle file_rec/async:! buffer file_mru bookmark<cr><c-u>
-" nnoremap <silent> [unite]p :<C-u>Unite -auto-resize -auto-preview -buffer-name=files -toggle file_rec/async:!<cr><c-u>
-" nnoremap <silent> [unite]e :<C-u>Unite -auto-resize -auto-preview -buffer-name=recent file_mru<cr>
-" nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -auto-preview -buffer-name=buffers buffer file_mru<cr>
-" nnoremap <silent> [unite]y :<C-u>Unite -auto-resize -buffer-name=yanks history/yank<cr>
-" nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
-" nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-" nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-" nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+map <F9> :SyntasticToggleMode<CR>
+let g:syntastic_tex_checkers = ['']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" " Neomru: unite-airline_themes search {{{3
-"
-" " Unite Airline: unite-airline_themes search {{{3
-" nnoremap <silent> [unite]a :<C-u>Unite -winheight=10 -auto-preview -buffer-name=airline_themes airline_themes<cr>
-"
-" " Unite Color Scheme: unite-colorscheme search {{{3
-" nnoremap <silent> [unite]c :<C-u>Unite -auto-resize -auto-preview -buffer-name=colorschemes colorscheme<cr>
-"
-" " Unite Tag: unite-tag search {{{3
-" nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
-"
-" " Unite Outline: unite-outline search {{{3
-" nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<cr>
-"
-" " Unite Help: unite-help search  {{{3
-" nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
-"
-" " Junkfile: Junk files {{{3
-" " let g:junkfile#directory=s:get_cache_dir('junk')
-" let g:junkfile#directory='~/.cache/junk/'
-" nnoremap <silent> [unite]j :<C-u>Unite -auto-resize -buffer-name=junk junkfile junkfile/new<cr>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,E501,W293'
+" let g:syntastic_python_python_exec = ' /usr/bin/python3'
 
-" Latex: Vim latex plug-in (also latex preview) {{{2
-" Please note I currently used a mangled version of vim-latex, which
-" I put in vim-latex-abridged, because a lot of its features are more
-" annoying than useful. I complement it with LaTeX-Box and a lot of
-" snippets (UltiSnips is my engine). Should I attempt to migrate away
-" from vim-latex fully?
+" EasyMotion: Vim Motions on Steroids: {{{2
 
-" Generic LaTeX compile rules
+map <space> <Plug>(easymotion-prefix)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+
+" R: Vim R plug-in {{{2
+
+let r_syntax_folding = 1
+let vimrplugin_term = "konsole"
+let g:vimrplugin_maxdeparse = 10000
+
+" LaTeX: Custom LaTeX Options {{{2
+
 nnoremap <leader>ok :LLPStartPreview<CR>
 nnoremap <leader>lx :!xelatex -synctex=1 -shell-escape %<CR>
 nnoremap <leader>lw :!pdflatex -synctex=1 "%"<CR>
@@ -285,19 +180,34 @@ let Tex_FoldedEnvironments=",frame,flashcard,tacomment,theorem,proof,definition"
 let g:Tex_ViewRule_pdf='okular'
 
 " Ignore warnings
-let g:Tex_IgnoreLevel = 10
-let g:Tex_IgnoredWarnings=
-            \'Underfull'."\n".
-            \'Overfull'."\n".
-            \'specifier changed to'."\n".
-            \'You have requested'."\n".
-            \'Missing number, treated as zero.'."\n".
-            \'There were undefined references'."\n".
-            \'Citation %.%# undefined'."\n".
-            \'LaTeX Font Warning'."\n".
-            \'Text page %.%# contains only floats.'
+" let g:Tex_IgnoreLevel = 10
+" let g:Tex_IgnoredWarnings=
+"             \'Underfull'."\n".
+"             \'Overfull'."\n".
+"             \'specifier changed to'."\n".
+"             \'You have requested'."\n".
+"             \'Missing number, treated as zero.'."\n".
+"             \'There were undefined references'."\n".
+"             \'Citation %.%# undefined'."\n".
+"             \'LaTeX Font Warning'."\n".
+"             \'Text page %.%# contains only floats.'
 
 " FileType Options: Specific file-specific options {{{2
+
+" Double-Check that we're in PEP8 format
+au BufNewFile,BufRead *.py set
+            \ tabstop=4
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+
+" au BufNewFile,BufRead *.js, *.html, *.css, *.tex set
+"             \ tabstop=2
+"             \ softtabstop=2
+"             \ shiftwidth=2
+"             \ expandtab
 
 " Custom spacing, folding, settings
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2
@@ -310,16 +220,17 @@ autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
 autocmd FileType stata setlocal commentstring=*%s
 autocmd FileType julia NeoCompleteLock
 autocmd FileType sas   setlocal comments=s0:/*,m0:*,ex0:*/
-autocmd FileType text 2match OverLength //
+autocmd FileType text  2match OverLength //
 
-" autocmd FileType python setlocal fdm=manual
-" Omnifunc
-" autocmd FileType tex set omnifunc=LatexBox_Complete
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__ = activate_this))
+EOF
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker

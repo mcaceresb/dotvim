@@ -1,10 +1,10 @@
-## dotvim (:
+## dotvim
 
 My personal Vim distribution.
 
-## Quickstart (:
+## Quickstart
 
-I use [NeoBundle](https://github.com/Shougo/neobundle.vim) and a *ton* of plug-ins. All the packages will install automatically once Vim starts. Do this to get started:
+I use [Bundle](https://github.com/VundleVim/Vundle.vim) and a *ton* of plug-ins. All the packages will install automatically once Vim starts. Do this to get started:
 ```sh
 export DOTVIM=$HOME/Documents/projects/code/dotvim
 mkdir ~/.vim/
@@ -14,14 +14,11 @@ mkdir ~/.vim/spell/
 mkdir ~/.vim/undo/
 cp $DOTVIM/fonts/* ~/.fonts/
 ln -s $DOTVIM/dotvimrc/vimrc ~/.vimrc
-# curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-# mv ~/.vim/bundle/neobundle.vim ~/.vim/bundle/neobundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 You should edit the path `$HOME/Documents/projects/code/dotvim` here *and* in `./vimrc` if you copied this repository to a different directory (used for dictionaries, thesaurus, source). Then start `vim` and `NeoBundle` should install all the packages. Once they have all installed, run
 ```sh
-ln -s $DOTVIM/bundle/latex-suite-abridged/ ~/.vim/bundle/latex-suite-abridged
 cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/bundle/snippets/snippets/
 cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/bundle/snippets/UltiSnips/ -sf
 cp $DOTVIM/colors/* ~/.vim/bundle/colorschemes/colors/ -sf
@@ -33,7 +30,7 @@ sudo apt-get install xdg-utils
 sudo npm -g install instant-markdown-d
 ```
 
-## Structure (:
+## Structure
 
 * `./bundle` has some specific files I have modified for bundles that I install. Currently houses my mangled version of `vim-latex` as well as (most of) my custom snippets.
 * `./colors` has some colorschemes I actually use.
@@ -43,7 +40,7 @@ sudo npm -g install instant-markdown-d
 * `./session` is just for show.
 * `./undo` is just for show.
 
-## TODO (:
+## TODO
 
 * Fix up highlighting of trailing whitespace and 80+ column highlighting
 * Decide what features from python plugins to keep
@@ -54,21 +51,6 @@ sudo npm -g install instant-markdown-d
 * (LONG) Edit rplugin/common_global.vim to add `--profile white` to `konsole`
 * (LONG) Vim in `konsole`, not just `vim -g`
 
-## Issues (:
-
-* While all the plug-ins seem to work as expected, I get these errors upon running `vim -g`
-```
-Error detected while processing dotvimrc/plugins.vim:
-line   88:
-E117: Unknown function: expand_region#custom_text_objects
-line  176:
-E117: Unknown function: neocomplete#custom#source
-Error detected while processing bundle/textobj-line/plugin/textobj/line.vim:
-line   37:
-E117: Unknown function: textobj#user#plugin
-```
-
-## License (:
+## License
 
 Figure this out.
-

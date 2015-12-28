@@ -235,6 +235,10 @@ snippet todayc "Current date, Mmm DD, CCYY" w
 `!v strftime("%b %d, %Y")`$0
 endsnippet
 
+snippet todays "Current date, Stata, DDmmmCCYY" w
+`!v strftime("%d%b%Y")`$0
+endsnippet
+
 snippet proinfo "Project info" b
 `!p
 if not snip.c:
@@ -533,7 +537,18 @@ Critique:
 \begin{enumerate}
   \item
 \end{enumerate}
+endsnippet
 
+snippet () "Braces (...)" i
+(${1:${VISUAL}})$0
+endsnippet
+
+snippet [] "Brackets [...]" i
+[${1:${VISUAL}}]$0
+endsnippet
+
+snippet {} "Curly {...}" i
+{${1:${VISUAL}}}$0
 endsnippet
 
 # vim:ft=snippets:

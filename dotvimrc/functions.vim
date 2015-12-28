@@ -8,6 +8,12 @@
 " Function Mappings: {{{1
 "------------------------------------------------
 
+" Toggle OverLength match
+nnoremap <leader><leader><CR> :call OverLengthToggle()<CR>
+
+" Toggle conceal level
+nnoremap <Leader>h :call ConcealLevelToggle()<CR>
+
 " Toggle git gutter highlights
 nnoremap <F3> :call ToggleAllGitGutter()<CR>
 
@@ -34,8 +40,8 @@ command! -nargs=+ Wordnet call WordNetOverviews("<args>")
 
 noremap <Leader>we "wyiw:call WordNetOverviews(@w,"-synsn")<CR>
 noremap <Leader>wd "wyiw:call WordNetBrowse(@w,"-over")<CR>
-noremap <C-A-w> "wyiw:call WordNetOverviews(@w,"-over")<CR>
-noremap <C-A-q> "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
+noremap <Leader>ww "wyiw:call WordNetOverviews(@w,"-over")<CR>
+noremap <Leader>wq "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
 
 " Plugin Functions: {{{1
 "------------------------------------------------
@@ -75,6 +81,28 @@ endfunction
 
 " General Functions: {{{1
 "------------------------------------------------
+
+" OverLength Toggle: Toggle OverLength highlighting {{{2
+function! OverLengthToggle()
+    if exists('g:myoverlength_toggle')
+        2match OverLength /\%81v.\+/
+        unlet g:myoverlength_toggle
+    else
+        2match OverLength //
+        let g:myoverlength_toggle = 1
+    endif
+endfunction
+
+" Conceal Mappings: Toggle conceal level {{{2
+function! ConcealLevelToggle()
+    if &conceallevel == 0
+        setl conceallevel=2
+        echo "Conceal blocks displayed as characters"
+    else
+        setl conceallevel=0
+        echo "Conceal blocks displayed raw"
+    endif
+endfunction
 
 " SynStack: Show syntax highlighting groups for word under cursor {{{2
 " From http://vimcasts.org/episodes/creating-colorschemes-for-vim/
@@ -231,4 +259,3 @@ endif
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}
-

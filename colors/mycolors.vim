@@ -85,8 +85,8 @@ exec 'highlight  StorageClass guifg='.s:blue         .' gui=bold'
 exec 'highlight  String       guifg='.s:dark_green
 exec 'highlight  Title        guifg='.s:black        .' gui=bold'
 exec 'highlight  Todo         guifg='.s:light_blue   .' gui=inverse,bold,italic'
-exec 'highlight Delimiter     guifg='.s:dark_purple
-exec 'highlight Error         guifg='.s:redred       .' gui=bold,italic guibg=#FFFFEF'
+exec 'highlight  Delimiter    guifg='.s:dark_purple
+exec 'highlight  Error        guifg='.s:redred       .' gui=bold,italic guibg=#FFFFEF'
 
 " Specifics: {{{1
 exec 'highlight stataLocal       guifg='.s:matte_blue .' gui=bold'
@@ -119,7 +119,7 @@ exec 'highlight NonText    guifg='.s:grey_invisibles .' guibg='.s:white
 exec 'highlight SpecialKey guifg='.s:grey_invisibles .' guibg='.s:white
 " highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFD3D3
 highlight Comment cterm=italic gui=italic guifg=grey50
-highlight OverLength  ctermbg=red ctermfg=white guibg=#FFD3D3
+highlight OverLength ctermbg=red ctermfg=white guibg=#FFD3D3
 highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3
 match ExtraWhitespace /\s\+$/
 2match OverLength /\%81v.\+/
@@ -130,9 +130,9 @@ hi   diffRemoved   guifg=#D51015   guibg=#FFFFFF   ctermfg=160   ctermbg=15
 hi   diffFile      guifg=#6E79F1   guibg=#FFFFFF   ctermfg=69    ctermbg=15
 hi   diffNewFile   guifg=#6E79F1   guibg=#FFFFFF   ctermfg=69    ctermbg=15
 hi   diffLine      guifg=#000000   guibg=#FFFFFF   ctermfg=0     ctermbg=15
-hi   diffAdd      guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
-hi   diffChange   guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
-hi   diffText     guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
+hi   diffAdd       guifg=#007B22   guibg=#FFFFFF   ctermfg=28    ctermbg=15
+hi   diffChange    guifg=#007B22   guibg=#FFFFFF   ctermfg=28    ctermbg=15
+hi   diffText      guifg=#007B22   guibg=#FFFFFF   ctermfg=28    ctermbg=15
 hi   link diffDelete diffRemoved
 
 " Git styles {{{1

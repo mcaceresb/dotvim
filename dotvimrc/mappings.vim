@@ -31,7 +31,7 @@ noremap <C-h> gT
 noremap <C-l> gt
 noremap <A-l> :bnext<CR>
 noremap <A-h> :bprevious<CR>
-noremap <A-Insert> :tabnew<CR>
+noremap <A-Insert> :tabnew<CR>:Startify<CR>
 noremap <A-Delete> :tabclose<CR>
 
 " Navigate Splits
@@ -55,7 +55,7 @@ nnoremap gs <C-w>f
 
 " Select all (and copy)
 nnoremap <A-a> GVgg
-nnoremap <A-c> mmggyG`m
+nnoremap <A-c> mmggyG`mzz
 
 " Visual. Only need for current select
 vnoremap <leader>v "+p
@@ -158,7 +158,7 @@ nnoremap <Leader>- :on<CR>
 
 " Toggle Spell, highlight, smart indent, list
 nnoremap <leader>s :set spell!<CR>
-nmap <leader><CR> :noh<CR>cxc
+nmap <leader><CR> :noh<CR>cxc2
 set pastetoggle=<F5>
 
 " Modelines: {{{1
