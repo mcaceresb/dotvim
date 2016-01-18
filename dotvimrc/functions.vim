@@ -7,30 +7,44 @@
 
 " Function Mappings: {{{1
 "------------------------------------------------
+"
+" Precision rounding
+" nnoremap <leader>ro :%s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+" vnoremap <leader>ro :s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+nnoremap <leader>ro :call Rounding("%")<CR>
+vnoremap <leader>ro :call Rounding("")<CR>
 
-" Toggle J -> 6j and just J
-let jumpinglevel=0
-nnoremap <F2> <ESC>:call JumpingEfficienciesToggle()<CR>
+" Preserve mappings (run a command and preserve history/cursor)
+" nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
+nmap <silent> <Leader>rs :call Preserve("%s/\\s\\+$//e")<CR>
+nmap <silent> <Leader>r= :call Preserve("normal gg=G")<CR>
+" autocmd BufWritePre *.py,*.js :call Preserve("%s/\\s\\+$//e")
 
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
+" Toggle OverLength match
+nnoremap <leader><leader><CR> :call OverLengthToggle()<CR>
 
-" Show syntax highlighting groups for word under cursor
-nmap <C-A-P> :call <SID>SynStack()<CR>
+" Toggle conceal level
+nnoremap <Leader>h :call ConcealLevelToggle()<CR>
 
-" Custom highlighting of code chunks
-nnoremap <leader><F12> :call TextEnableCodeSnip('r', '\\begin{Scode}', '\\end{Scode}', 'SpecialComment')<CR>
-nnoremap <leader><F11> :call TextEnableCodeSnip('r', '>>=', '@', 'SpecialComment')<CR>
+" Toggle git gutter highlights
+nnoremap <F3> :call ToggleAllGitGutter()<CR>
 
 " Highlight word under cursor
 set updatetime=500
 nnoremap z. :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
+" Set tabstop, softtabstop and shiftwidth to the same value
+command! -nargs=* Stab call Stab()
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-A-p> :call <SID>SynStack()<CR>
+
+" Custom highlighting of code chunks
+nnoremap <leader><F12> :call TextEnableCodeSnip('r', '\\begin{Scode}', '\\end{Scode}', 'SpecialComment')<CR>
+nnoremap <leader><F11> :call TextEnableCodeSnip('r', '>>=', '@', 'SpecialComment')<CR>
+
 " Toggle conceal color bc IndentLines uses conceal
 nnoremap <Leader><Leader>g :call ToggleIndentLines()<CR>
-
-" Toggle git gutter highlights
-nnoremap <F3> :call ToggleAllGitGutter()<CR>
 
 " WordNet word lookup
 command! -nargs=+ Wn call WordNetOverviews("<args>")
@@ -38,8 +52,8 @@ command! -nargs=+ Wordnet call WordNetOverviews("<args>")
 
 noremap <Leader>we "wyiw:call WordNetOverviews(@w,"-synsn")<CR>
 noremap <Leader>wd "wyiw:call WordNetBrowse(@w,"-over")<CR>
-noremap <C-A-w> "wyiw:call WordNetOverviews(@w,"-over")<CR>
-noremap <C-A-q> "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
+noremap <Leader>ww "wyiw:call WordNetOverviews(@w,"-over")<CR>
+noremap <Leader>wq "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
 
 " Plugin Functions: {{{1
 "------------------------------------------------
@@ -47,11 +61,7 @@ noremap <C-A-q> "wyiw:call WordNetBrowse(@w,"-synsn")<CR>
 " ToggleIndentLines: Toggle conceal color bc IndentLines uses conceal {{{2
 function! ConcealBackgroundCheck()
     if &background=='light'
-        " hi Conceal gui=none guifg=#000000
-        hi Conceal gui=none guifg=#7F00FF
     else
-        " hi Conceal guifg=#fffffa
-        hi Conceal guifg=#e3d796
     endif
 endfunction
 
@@ -61,7 +71,6 @@ function! ToggleIndentLines()
         silent exec "IndentLinesToggle"
         echo "Showing tab markers"
         let g:indentLine_myToggle = 1
-        highlight Conceal gui=none guifg=gray42
     else
         silen exec "IndentLinesToggle"
         echo "Hiding tab markers"
@@ -69,19 +78,6 @@ function! ToggleIndentLines()
         call ConcealBackgroundCheck()
     endif
 endfunction
-
-" Multiple Cursors Fix: Neocomplete and multiple-cursors compatibility fix {{{2
-
-" From https://github.com/terryma/vim-multiple-cursors#interactions-with-other-plugins
-" function! Multiple_cursors_before()
-"     exe 'NeoCompleteLock'
-"     echo 'Disabled autocomplete'
-" endfunction
-
-" function! Multiple_cursors_after()
-"     exe 'NeoCompleteUnlock'
-"     echo 'Enabled autocomplete'
-" endfunction
 
 " ToggleAllGitGutter: Toggle git gutter's highlighting with console msg {{{2
 function! ToggleAllGitGutter()
@@ -98,18 +94,96 @@ endfunction
 " General Functions: {{{1
 "------------------------------------------------
 
-" JumpingEfficienciesToggle: Toggle J -> 6j and just J {{{2
-function! JumpingEfficienciesToggle()
-    if g:jumpinglevel == 0
-        nnoremap J 6j
-        nnoremap K 6k
-        let g:jumpinglevel=1
-        echo "Jumping a bunch with J/K now"
+" Make Short Log: Make short log from long log {{{2
+command! MakeShortLog call MakeShortLog()
+function! MakeShortLog() range
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+
+    execute 'normal! /History (Short)'
+    execute 'normal! }jV}kc``````qaqmm'
+    execute 'g/Event:.*\_.Date:.*$/normal! v/^Date$"Ay'
+    execute 'normal! `m0"aPV}k'
+    execute 'normal! :s/Date://ggv'
+    execute 'normal! :g/^ /AdjustDategv'
+    execute 'normal! :g/Event: /move+1gv'
+    execute 'normal! :s/\vEvent: //ggvok'
+    execute 'normal! :g/^\[/joingv'
+    execute 'normal! :s/\] \*\*/] /ggv'
+    execute 'normal! :s/\*\*\s*$//g'
+
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+command! AdjustDate call AdjustDate()
+function! AdjustDate()
+let g:mline = split(getline('.'))
+python << EOF
+from dateutil import parser
+import datetime
+import vim
+
+try:
+    result = parser.parse(' '.join(vim.eval("g:mline")))
+    vim.command("let g:result = '" + result.strftime("[%Y-%m-%d]") + "'")
+except:
+    vim.command("let g:result = '[Unknown DT]'")
+EOF
+execute "normal! ddk"
+put =g:result
+endfunction
+
+" Rounding: Precision rounding of floats {{{2
+function! Rounding(selection) range
+    let g:rounding = 1 * input('Round to how many decimals? ')
+    if g:rounding < 0
+        echo "Negative rounding not implemented at this time"
+        return
+    endif
+    if a:selection == ""
+        let g:selection = a:firstline . "," . a:lastline
     else
-        nnoremap J J
-        nnoremap K f i<CR><ESC>
-        let g:jumpinglevel=0
-        echo "Joining and splitting lines with J/K now"
+        let g:selection = a:selection
+    endif
+    execute g:selection . "s/\\d*\\.\\d\\+/" .
+                \ "\\=printf('%." . g:rounding . "f', str2float(submatch(0)))/g"
+endfunction
+
+" Preserve: Execute a command while preserving history and cursor position {{{2
+command! -nargs=* Preserve call Preserve("<args>")
+function! Preserve(command)
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" OverLength Toggle: Toggle OverLength highlighting {{{2
+function! OverLengthToggle()
+    if exists('g:myoverlength_toggle')
+        2match OverLength /\%81v.\+/
+        unlet g:myoverlength_toggle
+    else
+        2match OverLength //
+        let g:myoverlength_toggle = 1
+    endif
+endfunction
+
+" Conceal Mappings: Toggle conceal level {{{2
+function! ConcealLevelToggle()
+    if &conceallevel == 0
+        setl conceallevel=2
+        echo "Conceal blocks displayed as characters"
+    else
+        setl conceallevel=0
+        echo "Conceal blocks displayed raw"
     endif
 endfunction
 
@@ -200,7 +274,7 @@ function! SummarizeTabs()
 endfunction
 
 " WordNet: Look up word in word net {{{2
-" Based on https://github.com/timcharper/wordnet.vim/blob/master/plugin/wordnet.vim
+" https://github.com/timcharper/wordnet.vim/blob/master/plugin/wordnet.vim
 function! WordNetBrowse (word,args)
     let getsynsn =  ' | xargs -d= | grep -i \>'
     let allsynsn = system('wordnet ' . a:word . ' ' .a:args . getsynsn)
@@ -268,4 +342,3 @@ endif
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}
-

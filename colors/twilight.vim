@@ -71,7 +71,6 @@ exe 'hi Folded         guifg='.s:grey_blue         .' guibg='.s:dark_grey_blue  
 exe 'hi FoldColumn     guifg='.s:grey_blue         .' guibg='.s:dark_grey_blue  .' gui=none'
 exe 'hi SignColumn     guifg='.s:grey_blue         .' guibg='.s:dark_grey_blue  .' gui=none'
 
-exe 'hi Comment        guifg='.s:mid_grey_blue     .' guibg='.s:darkgrey        .' gui=italic'
 exe 'hi TODO           guifg='.s:light_grey_blue   .' guibg='.s:pasty           .' gui=italic,bold'
 
 exe 'hi Title          guifg='.s:red               .' guibg='.s:darkgrey        .' gui=underline'
@@ -120,19 +119,41 @@ hi Search guifg=#606000 guibg=#c0c000 gui=bold
 hi Directory guifg=#dad085 gui=NONE
 hi Error guibg=#602020
 
-highlight texBeginEndName gui=Italic
-highlight texItalStyle gui=Italic
-highlight texBoldStyle gui=Bold
+highlight texItalStyle     gui=Italic,Bold
+highlight texBoldStyle     gui=Bold
 highlight texBoldItalStyle gui=Bold,Italic
-highlight Conceal guifg=#fffffa
-highlight   texMathZoneW    guifg=#e3d796
-highlight   texMathZoneX    guifg=#dd6c6c
-highlight   texMathSymbol   guifg=#dd6c6c
-highlight   texRefZone      guifg=#7587a6
-highlight   Delimiter       guifg=#e3d796
-highlight   vimNotation     guifg=#e3d796
-highlight   vimNotation     guifg=#e3d796
+highlight Conceal          guifg=#fffffa
+highlight texMathZoneW     guifg=#e3d796
+highlight texMathZoneX     guifg=#dd6c6c
+highlight texMathSymbol    guifg=#dd6c6c
+highlight texRefZone       guifg=#7587a6
+highlight Delimiter        guifg=#e3d796
+highlight vimNotation      guifg=#e3d796
+highlight vimNotation      guifg=#e3d796
 highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFE5E5
 highlight OverLength  ctermbg=red ctermfg=white guibg=#FFE5E5
-match OverLength /\%81v.\+/
+match ExtraWhitespace /\s\+$/
+2match OverLength /\%81v.\+/
 
+let s:comment_grey = '#6b7275'
+let s:texyellow    = '#b2aa7e'
+let s:tex_bluegray = '#6c7c8e'
+let s:tex_bluegray_light = '#8794a3'
+let s:matte_blue   = '#8083ad'
+let s:matte_blue_light = '#9dc3dd'
+let s:matte_blue_dark = '#8c5496'
+let s:matte_red_light  = '#aa5252'
+exe 'hi Comment         guifg='.s:comment_grey  .' guibg='.s:darkgrey  .' gui=italic'
+
+exe 'hi texStatement    guifg='.s:texyellow     .' guibg='.s:darkgrey  .' gui=bold'
+exe 'hi texBeginEnd     guifg='.s:texyellow     .' guibg='.s:darkgrey  .' gui=bold'
+exe 'hi texDocType      guifg='.s:texyellow     .' guibg='.s:darkgrey  .' gui=bold'
+exe 'hi texInputFile    guifg='.s:tex_bluegray_light  .' guibg='.s:darkgrey  .' gui=italic'
+exe 'hi texRefZone      guifg='.s:tex_bluegray_light  .' guibg='.s:darkgrey  .' gui=italic'
+exe 'hi texBeginEndName guifg='.s:tex_bluegray_light  .' guibg='.s:darkgrey  .' gui=italic'
+exe 'hi texSection      guifg='.s:tex_bluegray        .' guibg='.s:darkgrey  .' gui=bold'
+
+exec 'highlight stataLocal   guifg='.s:matte_blue_light .' guibg='.s:darkgrey .' gui=bold'
+exec 'highlight stataGlobal  guifg='.s:matte_red_light  .' guibg='.s:darkgrey .' gui=bold'
+exec 'highlight stataCommand guifg='.s:matte_blue       .' guibg='.s:darkgrey .' gui=bold'
+exec 'highlight Function     guifg='.s:matte_blue_dark  .' guibg='.s:darkgrey .' gui=bold'

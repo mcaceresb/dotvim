@@ -2,7 +2,7 @@
 " Project: dotvim
 " Program: mappings.vim
 " Purpose: Personal mappings
-" Updated: Wed 03 Jun 2015 02:17:47 AM EDT
+" Updated: Sat 27 Jun 2015 12:10:47 AM EDT
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 
 " Mappings: {{{1
@@ -15,10 +15,10 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-" nnoremap K 6k
-" nnoremap J 6j
-vnoremap J 6j
-vnoremap K 6k
+nnoremap <C-k> 5k
+nnoremap <C-j> 5j
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
 
 " Resize split windows
 noremap <A-left> <C-w><
@@ -31,7 +31,7 @@ noremap <C-h> gT
 noremap <C-l> gt
 noremap <A-l> :bnext<CR>
 noremap <A-h> :bprevious<CR>
-noremap <A-Insert> :tabnew<CR>
+noremap <A-Insert> :tabnew<CR>:Startify<CR>
 noremap <A-Delete> :tabclose<CR>
 
 " Navigate Splits
@@ -55,7 +55,7 @@ nnoremap gs <C-w>f
 
 " Select all (and copy)
 nnoremap <A-a> GVgg
-nnoremap <A-c> mmggyG`m
+nnoremap <A-c> mmggyG`mzz
 
 " Visual. Only need for current select
 vnoremap <leader>v "+p
@@ -80,21 +80,15 @@ inoremap <leader><leader>X <Esc>"+dda
 
 " Misc: Other useful mappings {{{2
 
-" Next and repeat
-" nnoremap Q :normal n.<CR>
+" Markdown title
+nnoremap gpt yypv$r-
+nnoremap gpc yypwv$r-
 
 " Make
 nnoremap <Leader>m :make<CR>
 
 " Capitalize first letters
 vnoremap <Leader>a gu:s/\v<(.)(\w*)/\u\1\L\2/g<CR>
-
-" Remove whitespace
-nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
-
-" Grammar abbreviations
-iabbrev teh the
-iabbrev nad and
 
 " More undo
 inoremap <A-z> <Esc>ua
@@ -107,20 +101,17 @@ inoremap <C-w> <C-g>u<C-w>
 "Map s and q to save file and quit buffer
 nnoremap <A-s> :w<CR>
 inoremap <A-s> <Esc>:w<CR>a
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <Esc>:w<CR>a
 nnoremap <A-q> :bd<CR>
 inoremap <A-q> <Esc>:bd<CR>a
 
 " Vim quickly enlarge or reduce font
 nnoremap <C-Up> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)+1)', '')<CR> :echo &guifont<CR>
 nnoremap <C-Down> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)', '')<CR> :echo &guifont<CR>
-" nnoremap <C-ScrollWheelUp> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)+1)', '')<CR> :echo &guifont<CR>
-" nnoremap <C-ScrollWheelDown> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)', '')<CR> :echo &guifont<CR>
 
 " Quickly correct spelling
 nnoremap <C-Space> hEa<C-x><C-t>
 nnoremap <S-Space> a<C-x>s
+nnoremap m<Space>  mma<C-x>s<ESC>`m
 
 " Sudo tee
 cnoremap w!! w !sudo tee > /dev/null %
@@ -129,15 +120,12 @@ cnoremap w!! w !sudo tee > /dev/null %
 nnoremap <A-g> :diffget<CR>]c
 nnoremap <A-p> :diffput<CR>]c
 
-" Precision rounding
-nnoremap <leader>ro :%s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
-vnoremap <leader>ro :s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
-
 " List files, change/insert current file's directory
 nnoremap <F4> i<C-R>=expand('%:p:h')<CR><ESC>
 inoremap <F4> <C-R>=expand('%:p:h')<CR>
 
 " Efficiently open and source vimrc
+nnoremap <leader>el :tabedit $HOME/Documents/code/latex-preamble<CR>
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>rv :source $MYVIMRC<CR>
 
@@ -159,7 +147,7 @@ nnoremap <Leader>- :on<CR>
 
 " Toggle Spell, highlight, smart indent, list
 nnoremap <leader>s :set spell!<CR>
-nmap <leader><CR> :noh<CR>cxc
+nmap <silent> <leader><CR> :noh<CR>cxc
 set pastetoggle=<F5>
 
 " Modelines: {{{1

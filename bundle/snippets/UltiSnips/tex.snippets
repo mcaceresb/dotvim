@@ -109,7 +109,7 @@ endsnippet
 snippet lst "lstlisting environment" b
 \begin{lstlisting}[language=${1:language}]
 ${2:${VISUAL}}
-\end{listing}
+\end{lstlisting}
 $0
 endsnippet
 
@@ -140,15 +140,13 @@ endsnippet
 snippet enu "Enumerate environment" b
 \begin{enumerate}
 	\item ${1:${VISUAL}}
-\end{enumerate}
-$0
+\end{enumerate}$0
 endsnippet
 
 snippet eit "Itemize environment" b
 \begin{itemize}${1:[label=$\bullet$]}
 	\item ${2:${VISUAL}}
-\end{itemize}
-$0
+\end{itemize}$0
 endsnippet
 
 snippet desc "Description environment" b
@@ -179,7 +177,7 @@ snippet part "Part with auto label prt:regex" b
 \part{${1:${VISUAL:part name}}}
 \label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet cha "Chapter with auto label cha:regex" b
@@ -187,7 +185,7 @@ snippet cha "Chapter with auto label cha:regex" b
 \chapter{${1:${VISUAL:chapter name}}}
 \label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}
+$3$0
 endsnippet
 
 snippet sec "Section with auto label sec:regex" b
@@ -195,7 +193,7 @@ snippet sec "Section with auto label sec:regex" b
 \section{${1:${VISUAL:section name}}}
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet sub "Subsection with auto label sub:regex" b
@@ -203,28 +201,28 @@ snippet sub "Subsection with auto label sub:regex" b
 \subsection{${1:${VISUAL:subsection name}}}
 \label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet ssub "Subsubsection with auto label sub:regex" b
 \subsubsection{${1:${VISUAL:subsubsection name}}}
 \label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet par "Paragraph with auto label par:regex" b
 \paragraph{${1:${VISUAL:paragraph name}}}
 \label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet subp "Subparagraph with auto label par:regex" b
 \subparagraph{${1:${VISUAL:subparagraph name}}}
 \label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
-${3:${VISUAL}}$0
+$3$0
 endsnippet
 
 snippet ni "Non-indented paragraph" b
@@ -402,6 +400,29 @@ endsnippet
 
 snippet "can(did)?(ness)?" "\candidness{$1}$0" wr
 \candidness{${1:${VISUAL:a candid statement}}} $0
+endsnippet
+
+snippet longtable "Longtable" b
+\begin{longtable}{l l}
+  \caption[$1]{{${1:Title}}}
+  \label{tab:${2:label}} \\
+
+  \toprule
+    ${3:Cols} & \\\midrule
+  \endfirsthead
+
+  \multicolumn{2}{c}{{\tablename\ \thetable{} -- ctd.}} \\\midrule
+  \endhead
+
+  \midrule
+  \multicolumn{2}{r}{\footnotesize Continued on next page} \\
+  \endfoot
+
+  \bottomrule
+  \endlastfoot
+
+  & \\
+\end{longtable}
 endsnippet
 
 # vim: nowrap fdm=marker ft=snippets

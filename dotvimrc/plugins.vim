@@ -1,17 +1,15 @@
-"-----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 " Project: dotvim
 " Program: plugins.vim
 " Purpose: Various plugin options and customizations
-" Updated: Wed 03 Jun 2015 02:18:47 AM EDT
+" Updated: Sub 28 Jun 2015 12:18:47 AM EDT
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 
 " Plug-ins and file-specific {{{1
-"------------------------------------------------
-
-" Vimproc: vimproc plugin {{{2
+" -----------------------------------------------
 
 " Airline: Awesome status indicator {{{2
-let g:airline_theme='sol'
+let g:airline_theme = 'sol'
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -30,226 +28,95 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" Color Schemes: Various color schemes {{{2
-" Please note I modify textmate from Drew Neil and twilight
-
-" Colorizer: Hex color visualizer {{{2
-
-" Commentary: Easy commenting {{{2
-
 " CtrlP: Fast file navitation {{{2
 let g:ctrlp_follow_symlinks = 1
 nnoremap <C-g> :CtrlPBuffer<CR>
 
-" CSApprox: Approximate colors in terminal vim {{{2
-
-" Delimate: Auto-completion of delimiters {{{2
-
-" EasyMotion: Easy motion to places {{{2
-nmap s <Plug>(easymotion-s2)
-nmap <Tab> <Plug>(easymotion-prefix)
-nmap <Tab><Tab> <Plug>(easymotion-sn)
-
-" Exchange: Exchange vim objects {{{2
-
-" Expand: Expand visual selection {{{2
-call expand_region#custom_text_objects('tex', {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1,
-      \ 'ib'  :1,
-      \ 'iB'  :1,
-      \ 'is'  :0,
-      \ 'il'  :0,
-      \ 'ip'  :0,
-      \ 'ie'  :0,
-      \ })
-
-" Text object for visual selection plug-in
-" call textobj#user#plugin('line', {
-" \      '-': {
-" \        'select-a': 'al', '*select-a-function*': 'textobj#line#select_a',
-" \        'select-i': 'il', '*select-i-function*': 'textobj#line#select_i',
-" \      },
-" \    })
-
-" Fugitive: Git integration {{{2
-
-" Gundo: Visualize undo history {{{2
-nnoremap <F11> :GundoToggle<CR>
+" Undo: Visualize undo history {{{2
+nnoremap <F11> :UndotreeToggle<CR>
 
 " NERDTree: Nice file explorer for Vim {{{2
 nnoremap <F10> :NERDTreeToggle<CR>
 
-" Gitv: Git tree visualization {{{2
-
 " Gigutter: Git file changes visualization {{{2
-let g:gitgutter_signs = 1
-let g:gitgutter_highlight_lines = 1
-" nnoremap <F3> :GitGutterToggle<CR>:GitGutterSignsToggle<CR>:GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_enabled = 0
+let g:gitgutter_signs = 0
+let g:gitgutter_highlight_lines = 0
 
-" IndentLines: Indentation Markers {{{2
-let g:indentLine_char = "│"
-" let g:indentLine_color_gui = '#C0C0C0'
-let g:indentLine_color_gui = '#696969'
-let g:indentLine_enabled = 0
-let g:indentLine_myToggle = 0
-
-" Instant Markdown: Instant markdown preview {{{2
-" let g:instant_markdown_autostart = 0
-" let g:instant_markdown_slow = 1
-" nnoremap <leader>p :InstantMarkdownPreview<CR>
-
-" NeoComplete: And other {{{2
-
-" These are options I like
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#sources#dictionary#dictionaries = {
-            \ 'default' : '/home/mauricio/.vim/spell/en.utf-8.add,/home/mauricio/.vim/spell/random-spelling-help',
-            \ 'tex' : '/home/mauricio/.vim/spell/en.utf-8.add,/home/mauricio/.vim/spell/random-spelling-help'
-            \ }
-
-" This is for proper <TAB> completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-P>" : "\<S-TAB>"
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" This may not be necessary
-if !exists('g:neocomplete#sources')
-    let g:neocomplete#sources = {}
-endif
-let g:neocomplete#sources.tex = ['buffer',
-            \ 'ultisnips',
-            \ 'dictionary',
-            \ 'file',
-            \ 'syntax',
-            \ 'include',
-            \ 'member',
-            \ 'omni',
-            \ 'tag',
-            \ 'file/include']
-
-" This is for keyword completion
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns._ = '^\\\?\h\w*$'
-let keyword_patterns = {}
-" let keyword_patterns = {'tex' : '\h\w*:\%(\w*_\w*\)\?'}
-let keyword_patterns = {'tex' : '\h\w\{,2}:\%(\w*\|\w*_\w*\)\?'}
-call neocomplete#custom#source('buffer', 'keyword_patterns', keyword_patterns)
-
-" This is for reference completion (should have LaTeX-Box)
-let g:neocomplete#force_omni_input_patterns = {'tex' : '\v\\\a*(ref|cite)\a*\**([^]]*\])?\{(|[^}]*,)'}
-
-" R: Vim R plug-in {{{2
-let r_syntax_folding = 1
-let vimrplugin_term  = "konsole"
-let g:vimrplugin_maxdeparse = 10000
-" let vimrplugin_term_cmd="konsole --profile white"
-" vnoremap <Space> <Plug>RDSendSelection
-" nnoremap <Space> <Plug>RDSendLine
-
-" Sweave files
-" au BufNewFile,BufRead *.Rnw set filetype=tex
-let g:SweaveTexReorder = "fnam=\"%:r.tex\";echo $\"`sed -n '1,2p' $fnam`\"$'\n'\"\usepackage{Sweave}\"" .
-            \ "$'\n'$\"`awk '/\\documentclass/{flag=1;next}/\\usepackage{Sweave}/{flag=0}flag' $fnam`\"" .
-            \ "$'\n'$\"`awk '/\\usepackage{Sweave}/{flag=1;next}/\\end{document}/{flag=0}flag' $fnam`\"" .
-            \ "$'\n'\"\end{document}\" > \"$fnam\"<CR>"
-nnoremap \sm :call StartR("R")<CR>:call RSweave()<CR>
-            " \:call g:SendCmdToR(system(g:SweaveTexReorder))<CR>
-            " \:call RMakePDF("nobib", 0)<CR>
-nnoremap \sr :!fnam="%:r.tex";
-            \ echo $"`sed -n '1,2p' $fnam`"$'\n'$"\usepackage{Sweave}"
-            \ $'\n'$"`awk '/\\documentclass/{flag=1;next}/\\usepackage{Sweave}/{flag=0}flag' $fnam`"
-            \ $'\n'$"`awk '/\\usepackage{Sweave}/{flag=1;next}/\\end{document}/{flag=0}flag' $fnam`"
-            \ $'\n'"\end{document}" > "$fnam"<CR>
-            \ :sleep 100m<CR>
-            \ :!pdflatex "%:r.tex"<CR>
-
-" Repeat: Improved dot command {{{2
-
-" Snippets: Various snippets {{{2
-" Please note that I modify all.snippets and tex*.snippets heavily
-
-" Stata: Basic stata {{{2
+" Screen: Vim interface with Gnu-Screen {{{2
+let g:ScreenShellTerminal = 'konsole'
+nmap <LocalLeader>d V:ScreenSend<CR>j
+vmap <LocalLeader>d :ScreenSend<CR>j
 
 " Startify: Nice start screen {{{2
 let g:startify_session_dir = '~/.vim/session'
-let g:startify_list_order  = [
-        \ ['    My most recently used files:'],
-        \ 'files',
-        \ ['    My most recently used files in the current directory:'],
-        \ 'dir',
-        \ ['    Bookmarks:'],
-        \ 'bookmarks',
-        \ ['    Sessions:'],
-        \ 'sessions',
-        \ ]
+let g:startify_list_order = [
+            \ ['    My most recently used files:'],
+            \ 'files',
+            \ ['    My most recently used files in the current directory:'],
+            \ 'dir',
+            \ ['    Bookmarks:'],
+            \ 'bookmarks',
+            \ ['    Sessions:'],
+            \ 'sessions',
+            \ ]
 let g:startify_bookmarks = [
             \ '~/.vim',
             \ '$PROJECTS'
             \]
 let g:startify_session_persistence = 1
 
-" Surround: Improved surround {{{2
-
-" Transpose: Transpose text {{{2
-
 " Tabular: Nice alignment features {{{2
-vmap <leader><leader>t :Tabularize /&<CR>
-nmap <leader><leader>t :Tabularize /&<CR>
+vnoremap <leader>at :Tabularize /&<CR>
+nnoremap <leader>at :Tabularize /&<CR>
 
-vmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
-vmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
-vmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
-vmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
-vmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
-vmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
-vmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
-vmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
-" vmap <leader><leader>\| :Tabularize /|<CR>
-vmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader>a# :Tabularize /#/l1r1<CR>
+vnoremap <leader>a% :Tabularize /%/l1r1<CR>
+vnoremap <leader>a& :Tabularize /&/l1r1<CR>
+vnoremap <leader>a* :Tabularize /*/l1r1<CR>
+vnoremap <leader>a= :Tabularize /=/l1r1<CR>
+vnoremap <leader>a- :Tabularize /-/l1r1<CR>
+vnoremap <leader>a, :Tabularize /,/l1r1<CR>
+vnoremap <leader>a" :Tabularize /"/l1r1<CR>
+vnoremap <leader>a: :Tabularize /:/l1r1<CR>
+vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
+vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
 
-" vmap <leader><leader>## :Tabularize /#\zs<CR>
-" vmap <leader><leader>%% :Tabularize /%\zs<CR>
-" vmap <leader><leader>&& :Tabularize /&\zs<CR>
-" vmap <leader><leader>** :Tabularize /*\zs<CR>
-" vmap <leader><leader>"" :Tabularize /"\zs<CR>
-" vmap <leader><leader>,, :Tabularize /,\zs<CR>
-" vmap <leader><leader>== :Tabularize /=\zs<CR>
-" vmap <leader><leader>:: :Tabularize /:\zs<CR>
-" " vmap <leader><leader>\|\| :Tabularize /|\zs<CR>
-" vmap <leader><leader>$$ :Tabularize /$\zs<CR>
+nnoremap <leader>a# :Tabularize /#/l1r1<CR>
+nnoremap <leader>a% :Tabularize /%/l1r1<CR>
+nnoremap <leader>a& :Tabularize /&/l1r1<CR>
+nnoremap <leader>a* :Tabularize /*/l1r1<CR>
+nnoremap <leader>a= :Tabularize /=/l1r1<CR>
+nnoremap <leader>a- :Tabularize /-/l1r1<CR>
+nnoremap <leader>a, :Tabularize /,/l1r1<CR>
+nnoremap <leader>a" :Tabularize /"/l1r1<CR>
+nnoremap <leader>a: :Tabularize /:/l1r1<CR>
+nnoremap <leader>a$ :Tabularize /$/l1r1<CR>
+nnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
 
-nmap <leader><leader># :Tabularize /#\zs/l0r1<CR>
-nmap <leader><leader>% :Tabularize /%\zs/l0r1<CR>
-nmap <leader><leader>& :Tabularize /&\zs/l0r1<CR>
-nmap <leader><leader>* :Tabularize /*\zs/l0r1<CR>
-nmap <leader><leader>= :Tabularize /=\zs/l0r1<CR>
-nmap <leader><leader>, :Tabularize /,\zs/l0r1<CR>
-nmap <leader><leader>" :Tabularize /"\zs/l0r1<CR>
-nmap <leader><leader>: :Tabularize /:\zs/l0r1<CR>
-" nmap <leader><leader>\| :Tabularize /|<CR>
-nmap <leader><leader>$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
+vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
+vnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
+vnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
+vnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+vnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
+vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
+vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
+vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
 
-" nmap <leader><leader>## :Tabularize /#\zs<CR>
-" nmap <leader><leader>%% :Tabularize /%\zs<CR>
-" nmap <leader><leader>&& :Tabularize /&\zs<CR>
-" nmap <leader><leader>** :Tabularize /*\zs<CR>
-" nmap <leader><leader>"" :Tabularize /"\zs<CR>
-" nmap <leader><leader>,, :Tabularize /,\zs<CR>
-" nmap <leader><leader>== :Tabularize /=\zs<CR>
-" nmap <leader><leader>:: :Tabularize /:\zs<CR>
-" " nmap <leader><leader>\|\| :Tabularize /|\zs<CR>
-" nmap <leader><leader>$$ :Tabularize /$\zs<CR>
+nnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
+nnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
+nnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
+nnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
+nnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+nnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
+nnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
+nnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
+nnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+nnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+nnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2
@@ -257,94 +124,78 @@ let g:UltiSnipsExpandTrigger = "<s-space>"
 let g:ultisnips_python_style = "google"
 let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 
-" Unimpaired: Various [] mappings {{{2
+" YouCompleteMe: Language and Auto-Completion {{{2
 
-" Unite: Fuzzy file finder and aux plug-ins {{{2
+" let g:ycm_min_num_of_chars_for_completion = 2
+" let g:ycm_min_num_identifier_candidate_chars = 0
+" let g:ycm_auto_trigger = 1
+" let g:ycm_path_to_python_interpreter = ''
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_filetype_blacklist = {
+            \ 'tagbar' : 1,
+            \ 'qf' : 1,
+            \ 'unite' : 1,
+            \ 'vimwiki' : 1,
+            \ 'pandoc' : 1,
+            \ 'infolog' : 1,
+            \ }
 
-" Unite: The plug-in itself {{{3
-let bundle = neobundle#get('unite')
-function! bundle.hooks.on_source(bundle)
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    call unite#filters#sorter_default#use(['sorter_rank'])
-    call unite#custom#profile('default', 'context', {
-                \ 'start_insert': 1
-                \ })
-endfunction
+" Zeavim: Zeal integration for vim {{{
 
-" let g:unite_data_directory=s:get_cache_dir('unite')
-let g:unite_data_directory='~/.cache/unite/'
-let g:unite_source_history_yank_enable=1
-let g:unite_source_rec_max_cache_files=5000
+" let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'
+" nnoremap gz :!zeal --query "<cword>"&<CR><CR>
+let g:zv_disable_mapping = 1
+nmap gz <Plug>Zeavim
+vmap gz <Plug>ZVVisSelection
+nmap gZ <Plug>ZVKeyDocset
 
-if executable('ag')
-    let g:unite_source_grep_command='ag'
-    let agargs='--nocolor --line-numbers --nogroup -S -B2 -A3'
-    let g:unite_source_grep_default_opts=agargs
-    let g:unite_source_grep_recursive_opt=''
-elseif executable('ack')
-    let g:unite_source_grep_command='ack'
-    let ackargs='--no-heading --no-color -B2 -A3'
-    let g:unite_source_grep_default_opts=ackargs
-    let g:unite_source_grep_recursive_opt=''
-endif
+" SimplyFold: Simple folding for Python {{{2
 
-function! s:unite_settings()
-    nmap <buffer> <ESC> <plug>(unite_exit)
-    imap <buffer> <ESC> <plug>(unite_exit)
-    nmap <buffer> <A-q> <plug>(unite_exit)
-    imap <buffer> <A-q> <plug>(unite_exit)
-    imap <buffer> <C-j> <plug>(unite_select_next_line)
-    imap <buffer> <C-k> <plug>(unite_select_previous_line)
-endfunction
-autocmd FileType unite call s:unite_settings()
+let g:SimpylFold_docstring_preview = 1
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 
-nmap <space> [unite]
-nnoremap [unite] <nop>
-nnoremap <silent> [unite]<space> :<C-u>Unite -auto-resize -auto-preview -buffer-name=mixed -toggle file_rec/async:! buffer file_mru bookmark<cr><c-u>
-nnoremap <silent> [unite]p :<C-u>Unite -auto-resize -auto-preview -buffer-name=files -toggle file_rec/async:!<cr><c-u>
-nnoremap <silent> [unite]e :<C-u>Unite -auto-resize -auto-preview -buffer-name=recent file_mru<cr>
-nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -auto-preview -buffer-name=buffers buffer file_mru<cr>
-nnoremap <silent> [unite]y :<C-u>Unite -auto-resize -buffer-name=yanks history/yank<cr>
-nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
-nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+" Syntastic: Syntax Checking {{{2
 
-" Neomru: unite-airline_themes search {{{3
+map <F9> :SyntasticToggleMode<CR>
+let g:syntastic_tex_checkers = ['']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Unite Airline: unite-airline_themes search {{{3
-nnoremap <silent> [unite]a :<C-u>Unite -winheight=10 -auto-preview -buffer-name=airline_themes airline_themes<cr>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,W293'
+let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_python_exec = ' /usr/bin/python3'
 
-" Unite Color Scheme: unite-colorscheme search {{{3
-nnoremap <silent> [unite]c :<C-u>Unite -auto-resize -auto-preview -buffer-name=colorschemes colorscheme<cr>
+" EasyMotion: Vim Motions on Steroids: {{{2
 
-" Unite Tag: unite-tag search {{{3
-nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
+map <space> <Plug>(easymotion-prefix)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
 
-" Unite Outline: unite-outline search {{{3
-nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<cr>
+" R: Vim R plug-in {{{2
 
-" Unite Help: unite-help search  {{{3
-nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
+let r_syntax_folding = 1
+let vimrplugin_term = "konsole"
+let g:vimrplugin_maxdeparse = 10000
 
-" Junkfile: Junk files {{{3
-" let g:junkfile#directory=s:get_cache_dir('junk')
-let g:junkfile#directory='~/.cache/junk/'
-nnoremap <silent> [unite]j :<C-u>Unite -auto-resize -buffer-name=junk junkfile junkfile/new<cr>
+" LaTeX: Custom LaTeX Options {{{2
 
-
-" Latex: Vim latex plug-in (also latex preview) {{{2
-" Please note I currently used a mangled version of vim-latex, which
-" I put in vim-latex-abridged, because a lot of its features are more
-" annoying than useful. I complement it with LaTeX-Box and a lot of
-" snippets (UltiSnips is my engine). Should I attempt to migrate away
-" from vim-latex fully?
-
-" Generic LaTeX compile rules
 nnoremap <leader>ok :LLPStartPreview<CR>
-nnoremap <leader>lx :!xelatex %<CR>
+nnoremap <leader>lx :!xelatex -synctex=1 -shell-escape %<CR>
 nnoremap <leader>lw :!pdflatex -synctex=1 "%"<CR>
 nnoremap <leader>lb :!pdflatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!pdflatex -synctex=1 "%"<CR>:!pdflatex -synctex=1 "%"<CR>
+nnoremap <leader>lq :!xelatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!xelatex -synctex=1 "%"<CR>:!xelatex -synctex=1 "%"<CR>
 
 " latex-suite options
 let g:Tex_Leader=','
@@ -355,89 +206,71 @@ let Tex_FoldedEnvironments=",frame,flashcard,tacomment,theorem,proof,definition"
 let g:Tex_ViewRule_pdf='okular'
 
 " Ignore warnings
-let g:Tex_IgnoreLevel = 10
-let g:Tex_IgnoredWarnings=
-            \'Underfull'."\n".
-            \'Overfull'."\n".
-            \'specifier changed to'."\n".
-            \'You have requested'."\n".
-            \'Missing number, treated as zero.'."\n".
-            \'There were undefined references'."\n".
-            \'Citation %.%# undefined'."\n".
-            \'LaTeX Font Warning'."\n".
-            \'Text page %.%# contains only floats.'
+" let g:Tex_IgnoreLevel = 10
+" let g:Tex_IgnoredWarnings=
+"             \'Underfull'."\n".
+"             \'Overfull'."\n".
+"             \'specifier changed to'."\n".
+"             \'You have requested'."\n".
+"             \'Missing number, treated as zero.'."\n".
+"             \'There were undefined references'."\n".
+"             \'Citation %.%# undefined'."\n".
+"             \'LaTeX Font Warning'."\n".
+"             \'Text page %.%# contains only floats.'
 
-" Live preview options
-let g:livepreview_previewer = 'okular'
+" Markdown: {{{2
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+" Preview: Preview various file types in browser {{{2
+
+let g:PreviewBrowsers = 'google-chrome-unstable,chromium-browser,firefox,opera,epiphany,safari'
+nmap <Leader>pp  :Preview<CR>
+nmap <Leader>pm :PreviewMarkdown<CR>
+nmap <Leader>pt :PreviewTextile<CR>
+nmap <Leader>pr :PreviewRdoc<CR>
+nmap <Leader>ph :PreviewHtml<CR>
 
 " FileType Options: Specific file-specific options {{{2
+
+" Double-Check that we're in PEP8 format
+au BufNewFile,BufRead *.py set
+            \ tabstop=4
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+
+" au BufNewFile,BufRead *.js, *.html, *.css, *.tex set
+"             \ tabstop=2
+"             \ softtabstop=2
+"             \ shiftwidth=2
+"             \ expandtab
+
 " Custom spacing, folding, settings
-autocmd FileType python setlocal fdm=marker
-autocmd FileType tex set makeprg=pdflatex\ -synctex=1\ "%"
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2
-autocmd FileType tex setlocal nocursorline nocursorcolumn
-autocmd FileType tex match OverLength //
+autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
+autocmd FileType tex 2match OverLength //
+autocmd FileType markdown setlocal nocursorline nocursorcolumn colorcolumn=
+autocmd FileType markdown 2match OverLength //
+autocmd FileType stata 2match OverLength /\%91v.\+/
+autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
+autocmd FileType stata setlocal commentstring=*%s
+autocmd FileType sas   setlocal comments=s0:/*,m0:*,ex0:*/
+autocmd FileType text  2match OverLength //
 
-" Omnifunc
-" autocmd FileType tex set omnifunc=LatexBox_Complete
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-"------------------------------------------------
-" Testing: Plug-ins I do not currently use (but did once) {{{1
-
-" Ack: Fast search in files {{{2
-
-" Arpeggio: Chord-like mapping awesomeness {{{2
-" execute arpeggio#load()
-" Arpeggio inoremap jk <ESC>
-" Arpeggio imap jp <ESC>ma<C-Space><ESC>`aa
-" Arpeggio imap ji <S-space>
-" Arpeggio nnoremap jk :w<CR>
-
-" EasyMotion: Use leader {{{2
-" let g:EasyMotion_leader_key = '<Leader>'
-"
-" IPython: IPython integration {{{2
-" let g:ipy_completefunc = ''
-let g:ipy_perform_mappings = 0
-nmap <Leader>- <ESC>:on<CR>
-nmap  <buffer> <silent> <C-F9> <Plug>(IPython-RunFile)
-nmap  <buffer> <silent> <Leader><Space>   <Plug>(IPython-RunLine)
-vmap  <buffer> <silent> <Leader><Space>   <Plug>(IPython-RunLines)
-
-" Jedi: Jedi plugin and general python settings {{{2
-" au FileType python set makeprg=python\ %
-" autocmd FileType python setlocal completeopt-=preview
-let g:jedi#completions_command = "<C-N>"
-let g:jedi#auto_initialization = 1
-" inoremap <silent> <buffer> <C-N> <c-x><c-o>
-
-let g:jedi#popup_on_dot = 0
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#popup_select_first = 0
-" let g:jedi#completions_enabled = 0
-
-" Python Mode: Vim Python Mode {{{ "
-let g:pymode_lint_ignore = "E221,E261,E251,E302,E501,W0611"
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_rope_completion_bind = '<C-L>'
-let g:pymode_rope_autoimport = 1
-nnoremap <leader><Leader>c :PymodeLintToggle<CR>
-
-" MultipleCursors: Very cool but way slow {{{2
-
-" Syntastic: Automatic Syntax Checker {{{2
-
-" Easy toggle bc LaTeX checker sucks
-" nnoremap <leader>q :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-" let g:syntastic_python_checkers = ['python']
+" Python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__ = activate_this))
+EOF
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}
-

@@ -1,0 +1,242 @@
+priority -50
+
+global !p
+def complete(t, opts):
+	if t:
+		opts = [m[len(t):] for m in opts if m.startswith(t)]
+	if len(opts) == 1:
+		return opts[0]
+	return '(' + '|'.join(opts) + ')'
+
+def _parse_comments(s):
+	""" Parses vim's comments option to extract comment format """
+	i = iter(s.split(","))
+
+	rv = []
+	try:
+		while True:
+			# get the flags and text of a comment part
+			flags, text = next(i).split(':', 1)
+
+			if len(flags) == 0:
+				rv.append((text, text, text, ""))
+			# parse 3-part comment, but ignore those with O flag
+			# elif 's' in flags and 'O' not in flags:
+			elif flags[0] == 's' and 'O' not in flags:
+				ctriple = []
+				indent = ""
+
+				if flags[-1] in string.digits:
+					indent = " " * int(flags[-1])
+				ctriple.append(text)
+
+				flags,text = next(i).split(':', 1)
+				assert(flags[0] == 'm')
+				ctriple.append(text)
+
+				flags,text = next(i).split(':', 1)
+				assert(flags[0] == 'e')
+				ctriple.append(text)
+				ctriple.append(indent)
+
+				rv.append(ctriple)
+			# elif 'b' in flags:
+			elif flags[0] == 'b':
+				if len(text) == 1:
+					rv.insert(0, (text,text,text, ""))
+	except StopIteration:
+		return rv
+
+def _get_comment_format():
+	""" Returns a 4-element tuple representing the comment format for
+	the current file. """
+	return _parse_comments(vim.eval("&comments"))[0]
+
+
+def make_box(twidth, bwidth=None):
+	b, m, e, i = _get_comment_format()
+	bwidth_inner = bwidth - 3 - max(len(b), len(i + e)) if bwidth else twidth + 2
+	sline = b + m + bwidth_inner * m[0] + 2 * m[0]
+	nspaces = (bwidth_inner - twidth) // 2
+	mlines = i + m + " " + " " * nspaces
+	mlinee = " " + " "*(bwidth_inner - twidth - nspaces) + m
+	eline = i + m + bwidth_inner * m[0] + 2 * m[0] + e
+	return sline, mlines, mlinee, eline
+
+def foldmarker():
+	"Return a tuple of (open fold marker, close fold marker)"
+	return vim.eval("&foldmarker").split(",")
+
+def getlinechar():
+	b, m, e, i = _get_comment_format()
+	sline = b
+	eline = i + e
+	return b if sline is eline else ' ' + m
+endglobal
+
+snippet dofile "Simple do file" b
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+width = 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` `!v expand('%:t')`
+`!p
+width = int(vim.eval("&textwidth")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is not eline:
+	box = make_box(len(t[1]), width)
+	snip.rv = '\n' + ' ' + m + box[3][1:]`
+local logname `!v expand('%:r')`
+log using "\`logname'.log", replace name(\`logname')
+
+$0
+
+log close \`logname'
+endsnippet
+
+snippet doproject "Full do project" b
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Updated: `!v strftime('%c')`
+`!p snip.rv = getlinechar()` Author:  ${2:`echo $USER`}
+`!p snip.rv = getlinechar()` Purpose: ${3:${VISUAL:content}}
+`!p
+width = int(vim.eval("&textwidth")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is not eline:
+	box = make_box(len(t[1]), width)
+	snip.rv = '\n' + ' ' + m + box[3][1:]`
+version 13
+clear all
+set more off
+capture log close _all
+
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Setup
+
+local   logname  `!v expand('%:r')`
+global  maindir  = "`!v expand('%:p:h')`"
+local   mainlog  = "$maindir/code/\`logname'.log"
+* mkdir "$maindir/out"
+* mkdir "$maindir/code"
+* mkdir "$maindir/tables"
+
+cd  "$maindir"
+* log using "\`mainlog'", replace name(\`logname')
+* use "$maindir/data.dta"
+
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Do stuff
+
+$0
+
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Cleanup
+
+* save "$maindir/out/data-derived.dta", replace
+* log close \`logname'
+clear all
+
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` E-mail yourself
+
+* local message "Program '\`thisprogram'' finished running $S_DATE $S_TIME. Log is attached."
+* shell echo \`message' | mail -s "\`thisprogram' ran" -a "\`mainlog'" \`whoami\`@nber.org
+endsnippet
+
+snippet prog "Stata program" b
+cap program drop ${1:myprogram}
+program $1
+	args ${2:myargs}
+	$0
+end
+endsnippet
+
+############
+#  Stuffs  #
+############
+
+snippet lab "Insert \label{$1:$2}$0" w
+label $1`!p snip.rv=complete(t[1], ['var', 'values'])` ${2:${VISUAL:what}} "${0:label}"
+endsnippet
+
+# , parse("pchars") quotes qed(lmacname) match(lmacname) bind
+snippet gett "gettoken " b
+gettoken ${1:firstval} ${2:restvals}: ${3:allvals}
+endsnippet
+
+snippet fore "foreach lname {in|of} ..." b
+endsnippet
+
+snippet forv "forvalues lname = range" b
+endsnippet
+
+snippet imdel "import delimited" b
+import delimited using "${1:${VISUAL:data.csv}}", varn(1) case(preserve) clear$0
+endsnippet
+
+snippet imxl "import excel" b
+import excel using "${1:${VISUAL:data.xls}}", firstrow clear$0
+endsnippet
+
+snippet adohead "Ado file header" b
+*! version ${1:0.1} `!v strftime("%d%b%Y")` Mauricio Caceres, caceres@nber.org$0
+endsnippet
+
+# vim: nowrap fdm=marker ft=snippets

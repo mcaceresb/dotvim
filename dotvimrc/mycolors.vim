@@ -1,11 +1,11 @@
 " Vim color scheme
 "
-" Name:         textmate.vim
-" Maintainer:   Drew Neil <andrew.jr.neil@gmail.com>
+" Name:         mycolors.vim
+" Maintainer:   Mauricio Caceres
 " License:      public domain
 " Version:      0.1
+" Note:         This was shamelessly based on Drew Neil's textmate.vim
 
-" Boilerplate: {{{1
 set background=light
 highlight clear
 
@@ -13,106 +13,116 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "textmate"
+set background=light
+highlight clear
 
+let g:colors_name = "mycolors"
 
 " Colors: {{{1
-" TODO figure out how to not highlight TODO
-"
-" #000000
-" #3C4C72 - BLUE/GREY - cursor, rails helpers
-" #0000A2 - D.BLUE - numbers & function names
-" #1E39F6 - BLUE
-" #0066FF - L.BLUE - Comments, TODOs and folds
-" #6E79F1 - L.PURPLE - Booleans, Ruby Constants & CSS definitions
-" #318495 - BLUE/GREEN - Ruby instance/global/pseudo variables
-" #007B22 - D.GREEN - Strings, Labels and code blocks in Markdown
-" #00BC41 - L.GREEN - CSS common attributes & ruby interpolation
-" #990000 - BURGUNDY - Errors and Warnings
-" #D51015 - RED for constants, symbols, numbers
-" #E18AC7 - PINK RegularExpressions in Ruby
-" #FFCE77 - ORANGE - Incremental Search
-" #FFE6BB - L.ORANGE - Search
-" #C6DEFF - VL.BLUE Visual, Current StatusLine & AutoComplete selection
-" #808080 - Line numbers
-" #CFCFCF - VerticalSplit separator
-" #DFDFDF - Invisible Characters
-" #EFEFEF - LineNumber & Non-Current StatusLine
-" #F0F6FF - CursorLine & CursorColumn
-" #FFFFFF - WHITE
+let s:black           = '#000000'
+let s:blue_grey       = '#3C4C72'
+let s:dark_blue       = '#0000A2'
+let s:dark_purple     = '#7F00FF'
+let s:blue            = '#1E39F6'
+let s:light_blue      = '#0066FF'
+let s:light_purple    = '#6E79F1'
+let s:blue_green      = '#318495'
+let s:dark_green      = '#007B22'
+let s:light_green     = '#00BC41'
+let s:burgundy        = '#990000'
+let s:redred          = '#D51015'
+let s:pink            = '#E18AC7'
+let s:orange          = '#FFCE77'
+let s:light_orange    = '#FFE6BB'
+let s:verylight_blue  = '#C6DEFF'
+let s:grey_lines      = '#808080'
+let s:grey_vsplit     = '#CFCFCF'
+let s:grey_invisibles = '#DFDFDF'
+let s:grey_statusline = '#EFEFEF'
+let s:grey_cursorline = '#F0F6FF'
+let s:white           = '#FFFFFF'
+let s:matte_blue      = '#7EC0EE'
+let s:matte_red       = '#BE646C'
 
-" Mauricio: {{{1
-highlight   texMathZoneW    guifg=#7F00FF ctermfg=27
-highlight   texMathZoneX    guifg=#7F00FF ctermfg=27
-highlight   link texBeginEndName Normal
-highlight   texBeginEndName gui=Italic cterm=Italic
-highlight   texItalStyle    gui=Italic cterm=Italic
-highlight   texBoldStyle    gui=Bold   cterm=Bold
-highlight   texBoldItalStyle    gui=Bold,Italic cterm=Bold,Italic
-highlight   Delimiter       guifg=#7F00FF ctermfg=27
-highlight   vimNotation     guifg=#7F00FF ctermfg=27
-highlight   vimNotation     guifg=#7F00FF ctermfg=27
-highlight   Conceal         guifg=#000000 ctermfg=black
-highlight   stataLocal      guifg=#7EC0EE gui=bold
-highlight   stataGlobal     guifg=#BE646C gui=bold
-highlight   Error           term=reverse cterm=bold ctermfg=7 ctermbg=1 guifg=Red guibg=#FFFFEF gui=bold,italic
-" highlight   Conceal         gui=bold guibg=white guifg=gray92
-highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFD3D3
-highlight OverLength ctermbg=red ctermfg=white  guibg=#FFD3D3
+" GUI: {{{1
+exe 'highlight Cursor         guifg='.s:white           .' guibg='.s:blue_grey
+exe 'highlight Visual         guibg='.s:verylight_blue
+exe 'highlight CursorLine     guibg='.s:grey_cursorline
+exe 'highlight CursorColumn   guibg='.s:grey_statusline
+exe 'highlight StatusLine     guibg='.s:grey_statusline .' guifg='.s:blue_grey .' gui=italic,bold'
+exe 'highlight StatusLineNC   guibg='.s:verylight_blue  .' guifg='.s:blue_grey
+
+exe 'highlight LineNr         guibg='.s:grey_statusline .' guifg='.s:grey_lines
+exe 'highlight VertSplit      guibg='.s:grey_vsplit     .' guifg='.s:white
+exe 'highlight MatchParen     guifg='.s:blue            .' gui=bold,italic'
+exe 'highlight Pmenu          guibg='.s:grey_statusline
+exe 'highlight PmenuSel       guibg='.s:verylight_blue
+exe 'highlight Directory      guifg='.s:redred          .' gui=bold'
+exe 'highlight Folded         guibg='.s:white           .' guifg='.s:light_blue
+exe 'highlight IncSearch      guibg='.s:orange
+exe 'highlight Search         guibg='.s:light_orange
+
+" Syntax: {{{1
+exec 'highlight  Normal       guifg='.s:black        .' guibg='.s:white
+exec 'highlight  Boolean      guifg='.s:light_purple .' gui=bold'
+exec 'highlight  Character    guifg='.s:redred       .' gui=bold'
+exec 'highlight  Conditional  guifg='.s:blue         .' gui=bold'
+exec 'highlight  Constant     guifg='.s:redred       .' gui=bold'
+exec 'highlight  Define       guifg='.s:blue         .' gui=bold'
+exec 'highlight  ErrorMsg     guifg='.s:white        .' guibg='.s:burgundy
+exec 'highlight  WarningMsg   guifg='.s:white        .' guibg='.s:burgundy
+exec 'highlight  Float        guifg='.s:dark_blue
+exec 'highlight  Function     guifg='.s:dark_blue    .' gui=bold'
+exec 'highlight  Identifier   guifg='.s:blue         .' gui=bold'
+exec 'highlight  Keyword      guifg='.s:blue         .' gui=bold'
+exec 'highlight  Label        guifg='.s:dark_green
+exec 'highlight  Number       guifg='.s:dark_blue
+exec 'highlight  Operator     guifg='.s:blue         .' gui=bold'
+exec 'highlight  PreProc      guifg='.s:blue         .' gui=bold'
+exec 'highlight  Special      guifg='.s:black
+exec 'highlight  Statement    guifg='.s:blue         .' gui=bold'
+exec 'highlight  StorageClass guifg='.s:blue         .' gui=bold'
+exec 'highlight  String       guifg='.s:dark_green
+exec 'highlight  Title        guifg='.s:black        .' gui=bold'
+exec 'highlight  Todo         guifg='.s:light_blue   .' gui=inverse,bold,italic'
+exec 'highlight Delimiter     guifg='.s:dark_purple
+exec 'highlight Error         guifg='.s:redred       .' gui=bold,italic guibg=#FFFFEF'
+
+" Specifics: {{{1
+exec 'highlight stataLocal       guifg='.s:matte_blue .' gui=bold'
+exec 'highlight stataGlobal      guifg='.s:matte_red  .' gui=bold'
+exec 'highlight vimNotation      guifg='.s:dark_purple
+exec 'highlight vimGroup         guifg='.s:dark_green .' gui=bold'
+exec 'highlight vimCommentTitle  guifg='.s:blue_grey  .' gui=bold'
+exec 'highlight helpSpecial      guifg='.s:dark_purple
+exec 'highlight link             vimHiGroup           vimGroup'
+exec 'highlight markdownBold     gui=bold'
+exec 'highlight markdownItalic   gui=italic'
+exec 'highlight markdownCode     guifg='.s:dark_green
+exec 'highlight link             markdownCodeBlock    markdownCode'
+exec 'highlight texMathZoneW     guifg='.s:dark_purple
+exec 'highlight texMathZoneX     guifg='.s:dark_purple
+exec 'highlight texBeginEndName  gui=Italic'
+exec 'highlight texItalStyle     gui=Italic'
+exec 'highlight texBoldStyle     gui=Bold'
+exec 'highlight texBoldItalStyle gui=Bold,Italic'
+exec 'highlight sasMacroVar      guifg='.s:dark_purple .' gui=bold'
+exec 'highlight link texBeginEndName Normal'
+
+" Misc {{{1
+exec 'highlight BT1   guifg='.s:grey_lines  .' gui=italic'
+exec 'highlight OL1   guifg='.s:black       .' gui=bold'
+exec 'highlight OL2   guifg='.s:dark_purple .' gui=bold'
+exec 'highlight OL3   guifg='.s:dark_green  .' gui=bold'
+exec 'highlight OL4   guifg='.s:light_purple
+exec 'highlight NonText    guifg='.s:grey_invisibles .' guibg='.s:white
+exec 'highlight SpecialKey guifg='.s:grey_invisibles .' guibg='.s:white
+" highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFD3D3
+highlight Comment cterm=italic gui=italic guifg=grey50
+highlight OverLength  ctermbg=red ctermfg=white guibg=#FFD3D3
 highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3
 match ExtraWhitespace /\s\+$/
 2match OverLength /\%81v.\+/
-
-" GUI: {{{1
-hi   Cursor                         guifg=#FFFFFF   ctermfg=15    guibg=#3C4C72   ctermbg=240
-hi   Visual                         guibg=#C6DEFF   ctermbg=189
-hi   CursorLine                     guibg=#F0F6FF   ctermbg=15
-hi   CursorColumn                   guibg=#F0F6FF   ctermbg=15
-hi   LineNr                         guifg=#808080   ctermfg=244   guibg=#EFEFEF   ctermbg=7
-hi   VertSplit                      guifg=#FFFFFF   ctermfg=15    guibg=#CFCFCF   ctermbg=252   gui=NONE
-hi   MatchParen                     guifg=#1E39F6   ctermfg=27    guibg=NONE      gui=bold,italic
-hi   Pmenu          guibg=#EFEFEF   ctermbg=7
-hi   PmenuSel                       guibg=#C6DEFF   ctermbg=189
-hi   Directory                      guifg=#D51015   ctermfg=160   gui=bold
-hi   Folded                         guifg=#0066FF   ctermfg=27    guibg=#FFFFFF   ctermbg=15
-" StatusLine: {{{2
-hi   StatusLine        guifg=#000000   ctermfg=0   guibg=#C6DEFF   ctermbg=189   gui=italic
-hi   StatusLineNC      guifg=#000000   ctermfg=0   guibg=#EFEFEF   ctermbg=7     gui=NONE
-
-" Search: {{{2
-" [IncSearch is stronger than Search]
-hi   IncSearch      guifg=NONE      guibg=#FFCE77   ctermbg=222   gui=NONE
-hi   Search         guibg=#FFE6BB   ctermbg=223
-
-" Syntax: {{{1
-hi   Normal            guifg=#000000   ctermfg=0     guibg=#FFFFFF             ctermbg=15
-hi   Boolean           guifg=#6E79F1   ctermfg=69    gui=bold
-hi   Character         guifg=#D51015   ctermfg=160   gui=bold
-hi   Comment           guifg=grey36    ctermfg=27    gui=italic
-hi   Conditional       guifg=#1E39F6   ctermfg=27    gui=bold
-hi   Constant          guifg=#D51015   ctermfg=160   gui=bold
-hi   Define            guifg=#1E39F6   ctermfg=27    gui=bold
-hi   ErrorMsg          guifg=#FFFFFF   ctermfg=15    guibg=#990000             ctermbg=88
-hi   WarningMsg        guifg=#FFFFFF   ctermfg=15    guibg=#990000             ctermbg=88
-hi   Float             guifg=#0000A2   ctermfg=19
-hi   Function          guifg=#0000A2   ctermfg=19    gui=bold
-hi   Identifier        guifg=#1E39F6   ctermfg=27    gui=bold
-hi   Keyword           guifg=#1E39F6   ctermfg=27    gui=bold
-hi   Label             guifg=#007B22   ctermfg=28
-hi   Number            guifg=#0000A2   ctermfg=19
-hi   Operator          guifg=#1E39F6   ctermfg=27    gui=bold
-hi   PreProc           guifg=#1E39F6   ctermfg=27    gui=bold
-hi   Special           guifg=#000000   ctermfg=0
-hi   Statement         guifg=#1E39F6   ctermfg=27    gui=bold
-hi   StorageClass      guifg=#1E39F6   ctermfg=27    gui=bold
-hi   String            guifg=#007B22   ctermfg=28
-hi   Title             guifg=#000000   ctermfg=0     gui=bold
-hi   Todo              guifg=#0066FF   ctermfg=27    gui=inverse,bold,italic
-hi   Underlined        gui=underline
-
-" Invisible character colors
-hi   NonText         guifg=#DFDFDF   ctermfg=253   guibg=#FFFFFF   ctermbg=15
-hi   SpecialKey      guifg=#DFDFDF   ctermfg=253   guibg=#FFFFFF   ctermbg=15
 
 " Diff styles {{{1
 hi   diffAdded     guifg=#007B22   guibg=#FFFFFF   ctermfg=28    ctermbg=15
@@ -120,11 +130,11 @@ hi   diffRemoved   guifg=#D51015   guibg=#FFFFFF   ctermfg=160   ctermbg=15
 hi   diffFile      guifg=#6E79F1   guibg=#FFFFFF   ctermfg=69    ctermbg=15
 hi   diffNewFile   guifg=#6E79F1   guibg=#FFFFFF   ctermfg=69    ctermbg=15
 hi   diffLine      guifg=#000000   guibg=#FFFFFF   ctermfg=0     ctermbg=15
-
 hi   diffAdd      guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
 hi   diffChange   guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
 hi   diffText     guifg=#007B22   guibg=#FFFFFF   ctermfg=28   ctermbg=15
-hi link diffDelete diffRemoved
+hi   link diffDelete diffRemoved
+
 " Git styles {{{1
 hi   gitcommitFirstLine       guifg=#000000            guibg=#FFFFFF            ctermfg=0     ctermbg=15
 hi   gitcommitSelectedType    guifg=#007B22            guibg=#FFFFFF            ctermfg=28    ctermbg=15
@@ -166,6 +176,7 @@ hi erubyRailsMethod  guifg=#3C4C72 ctermfg=240 gui=bold
 
 " XML: {{{1
 hi link xmlEndTag xmlTag
+
 " HTML: {{{1
 hi   htmlTag                         guifg=#1E39F6   ctermfg=27
 hi   link              htmlEndTag    htmlTag
@@ -188,13 +199,6 @@ hi   javaScriptType               guifg=#318495   ctermfg=66    gui=none
 hi   javaScriptArgument           guifg=#318495   ctermfg=66    gui=italic
 hi   javaScriptRegexpString       guifg=#E18AC7   ctermfg=176   gui=NONE
 hi   javaScriptSpecial            guifg=#00BC41   ctermfg=35    gui=NONE
-" NOTE: Syntax Highlighting for javascript doesn't match the
-" TextMate version very accurately, because the javascript
-" syntax file does not create matches for some items. In
-" particular:
-" * javaScriptArgument - e.g. function(argument)
-" * javaScriptFuncName for object literal style functions - e.g.: 
-"     myFunction: function() { ... }
 
 " YAML: {{{1
 hi   yamlAnchor              guifg=#318495   ctermfg=66
@@ -225,24 +229,6 @@ hi   cssColor                                    guifg=#D51015   ctermfg=160   g
 hi   cssValueLength                              guifg=#0000A2   ctermfg=19
 hi   cssImportant                                guifg=#1E39F6   ctermfg=27    gui=bold
 
-" Vimscript: {{{1
-hi   vimGroup                          guifg=#007B22   ctermfg=28    gui=bold
-hi   link              vimHiGroup      vimGroup
-hi   vimCommentTitle                   guifg=#3C4C72   ctermfg=240   gui=bold
-hi   helpSpecial       guifg=#6E79F1   ctermfg=69
-
-" Markdown: {{{1
-hi   markdownBold     gui=bold
-hi   markdownItalic   gui=italic
-hi   markdownCode                         guifg=#007B22   ctermfg=28
-hi   link             markdownCodeBlock   markdownCode
-
-" Outliner: {{{1
-hi   BT1   guifg=#808080   ctermfg=244   gui=italic
-hi   OL1   guifg=#000000   ctermfg=0     gui=bold
-hi   OL2   guifg=#0000A2   ctermfg=19    gui=bold
-hi   OL3   guifg=#007B22   ctermfg=28    gui=bold
-hi   OL4   guifg=#6E79F1   ctermfg=69    gui=NONE
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}

@@ -5,19 +5,6 @@
 " Updated: Wed 03 Jun 2015 01:54:02 AM EDT
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 
-" Conceal Mappings: Toggle conceal level {{{1
-nnoremap <Leader>h :call ConcealLevelToggle()<CR>
-inoremap <Leader><Leader>h <ESC>:call ConcealLevelToggle()<CR>a
-function! ConcealLevelToggle()
-    if &conceallevel == 0
-        setl conceallevel=2
-        echo "Conceal blocks displayed as characters"
-    else
-        setl conceallevel=0
-        echo "Conceal blocks displayed raw"
-    endif
-endfunction
-
 " Greek Letters: Conceal Greek alphabet {{{1
 syntax match texStatement '\\Alpha'    contained conceal cchar=Α
 syntax match texStatement '\\alpha'    contained conceal cchar=α
