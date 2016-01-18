@@ -90,13 +90,6 @@ nnoremap <Leader>m :make<CR>
 " Capitalize first letters
 vnoremap <Leader>a gu:s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 
-" Remove whitespace
-nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
-
-" Grammar abbreviations
-iabbrev teh the
-iabbrev nad and
-
 " More undo
 inoremap <A-z> <Esc>ua
 inoremap <A-u> <C-g>u<C-u>
@@ -127,16 +120,12 @@ cnoremap w!! w !sudo tee > /dev/null %
 nnoremap <A-g> :diffget<CR>]c
 nnoremap <A-p> :diffput<CR>]c
 
-" Precision rounding
-nnoremap <leader>ro :%s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
-vnoremap <leader>ro :s/\d\+\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
-
 " List files, change/insert current file's directory
 nnoremap <F4> i<C-R>=expand('%:p:h')<CR><ESC>
 inoremap <F4> <C-R>=expand('%:p:h')<CR>
 
 " Efficiently open and source vimrc
-nnoremap <leader>el :tabedit $HOME/Documents/projects/code/latex-preamble<CR>
+nnoremap <leader>el :tabedit $HOME/Documents/code/latex-preamble<CR>
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>rv :source $MYVIMRC<CR>
 
@@ -158,7 +147,7 @@ nnoremap <Leader>- :on<CR>
 
 " Toggle Spell, highlight, smart indent, list
 nnoremap <leader>s :set spell!<CR>
-nmap <leader><CR> :noh<CR>cxc2
+nmap <silent> <leader><CR> :noh<CR>cxc
 set pastetoggle=<F5>
 
 " Modelines: {{{1

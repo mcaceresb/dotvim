@@ -408,6 +408,13 @@ snippet progress "Track progress" b
 `!v strftime("%a %b %d %Y")` 07:00,
 endsnippet
 
+snippet prolog "Project log entry" b
+**Event: $1**
+Date: `date`
+Note: $2
+	$0
+endsnippet
+
 snippet projectlog "Project Log" b
 Project Info
 ============
@@ -423,7 +430,7 @@ History
 =======
 
 Event: $3
-Date: `!v strftime("%c")`
+Date: `date`
 Note: $4
 	$0
 endsnippet

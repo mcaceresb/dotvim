@@ -67,48 +67,56 @@ let g:startify_bookmarks = [
 let g:startify_session_persistence = 1
 
 " Tabular: Nice alignment features {{{2
-vnoremap <leader><leader>t :Tabularize /&<CR>
-nnoremap <leader><leader>t :Tabularize /&<CR>
+vnoremap <leader>at :Tabularize /&<CR>
+nnoremap <leader>at :Tabularize /&<CR>
 
-vnoremap <leader><leader># :Tabularize /#/l1r1<CR>
-vnoremap <leader><leader>% :Tabularize /%/l1r1<CR>
-vnoremap <leader><leader>& :Tabularize /&/l1r1<CR>
-vnoremap <leader><leader>* :Tabularize /*/l1r1<CR>
-vnoremap <leader><leader>= :Tabularize /=/l1r1<CR>
-vnoremap <leader><leader>, :Tabularize /,/l1r1<CR>
-vnoremap <leader><leader>" :Tabularize /"/l1r1<CR>
-vnoremap <leader><leader>: :Tabularize /:/l1r1<CR>
-vnoremap <leader><leader>$ :Tabularize /$/l1r1<CR>
+vnoremap <leader>a# :Tabularize /#/l1r1<CR>
+vnoremap <leader>a% :Tabularize /%/l1r1<CR>
+vnoremap <leader>a& :Tabularize /&/l1r1<CR>
+vnoremap <leader>a* :Tabularize /*/l1r1<CR>
+vnoremap <leader>a= :Tabularize /=/l1r1<CR>
+vnoremap <leader>a- :Tabularize /-/l1r1<CR>
+vnoremap <leader>a, :Tabularize /,/l1r1<CR>
+vnoremap <leader>a" :Tabularize /"/l1r1<CR>
+vnoremap <leader>a: :Tabularize /:/l1r1<CR>
+vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
+vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
 
-nnoremap <leader><leader># :Tabularize /#/l1r1<CR>
-nnoremap <leader><leader>% :Tabularize /%/l1r1<CR>
-nnoremap <leader><leader>& :Tabularize /&/l1r1<CR>
-nnoremap <leader><leader>* :Tabularize /*/l1r1<CR>
-nnoremap <leader><leader>= :Tabularize /=/l1r1<CR>
-nnoremap <leader><leader>, :Tabularize /,/l1r1<CR>
-nnoremap <leader><leader>" :Tabularize /"/l1r1<CR>
-nnoremap <leader><leader>: :Tabularize /:/l1r1<CR>
-nnoremap <leader><leader>$ :Tabularize /$/l1r1<CR>
+nnoremap <leader>a# :Tabularize /#/l1r1<CR>
+nnoremap <leader>a% :Tabularize /%/l1r1<CR>
+nnoremap <leader>a& :Tabularize /&/l1r1<CR>
+nnoremap <leader>a* :Tabularize /*/l1r1<CR>
+nnoremap <leader>a= :Tabularize /=/l1r1<CR>
+nnoremap <leader>a- :Tabularize /-/l1r1<CR>
+nnoremap <leader>a, :Tabularize /,/l1r1<CR>
+nnoremap <leader>a" :Tabularize /"/l1r1<CR>
+nnoremap <leader>a: :Tabularize /:/l1r1<CR>
+nnoremap <leader>a$ :Tabularize /$/l1r1<CR>
+nnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
 
 vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
 vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
 vnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
 vnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
 vnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+vnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
 vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
 vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
 vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
 vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
 
 nnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
 nnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
 nnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
 nnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
 nnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+nnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
 nnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
 nnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
 nnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
 nnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+nnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2
@@ -129,6 +137,23 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_filetype_blacklist = {
+            \ 'tagbar' : 1,
+            \ 'qf' : 1,
+            \ 'unite' : 1,
+            \ 'vimwiki' : 1,
+            \ 'pandoc' : 1,
+            \ 'infolog' : 1,
+            \ }
+
+" Zeavim: Zeal integration for vim {{{
+
+" let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'
+" nnoremap gz :!zeal --query "<cword>"&<CR><CR>
+let g:zv_disable_mapping = 1
+nmap gz <Plug>Zeavim
+vmap gz <Plug>ZVVisSelection
+nmap gZ <Plug>ZVKeyDocset
 
 " SimplyFold: Simple folding for Python {{{2
 
@@ -148,7 +173,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,E501,W293'
+let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,W293'
+let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_python_python_exec = ' /usr/bin/python3'
 
 " EasyMotion: Vim Motions on Steroids: {{{2
@@ -192,6 +218,19 @@ let g:Tex_ViewRule_pdf='okular'
 "             \'LaTeX Font Warning'."\n".
 "             \'Text page %.%# contains only floats.'
 
+" Markdown: {{{2
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+" Preview: Preview various file types in browser {{{2
+
+let g:PreviewBrowsers = 'google-chrome-unstable,chromium-browser,firefox,opera,epiphany,safari'
+nmap <Leader>pp  :Preview<CR>
+nmap <Leader>pm :PreviewMarkdown<CR>
+nmap <Leader>pt :PreviewTextile<CR>
+nmap <Leader>pr :PreviewRdoc<CR>
+nmap <Leader>ph :PreviewHtml<CR>
+
 " FileType Options: Specific file-specific options {{{2
 
 " Double-Check that we're in PEP8 format
@@ -210,6 +249,7 @@ au BufNewFile,BufRead *.py set
 "             \ expandtab
 
 " Custom spacing, folding, settings
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2
 autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType tex 2match OverLength //
@@ -218,7 +258,6 @@ autocmd FileType markdown 2match OverLength //
 autocmd FileType stata 2match OverLength /\%91v.\+/
 autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
 autocmd FileType stata setlocal commentstring=*%s
-autocmd FileType julia NeoCompleteLock
 autocmd FileType sas   setlocal comments=s0:/*,m0:*,ex0:*/
 autocmd FileType text  2match OverLength //
 

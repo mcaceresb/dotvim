@@ -7,6 +7,18 @@
 
 " Function Mappings: {{{1
 "------------------------------------------------
+"
+" Precision rounding
+" nnoremap <leader>ro :%s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+" vnoremap <leader>ro :s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
+nnoremap <leader>ro :call Rounding("%")<CR>
+vnoremap <leader>ro :call Rounding("")<CR>
+
+" Preserve mappings (run a command and preserve history/cursor)
+" nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
+nmap <silent> <Leader>rs :call Preserve("%s/\\s\\+$//e")<CR>
+nmap <silent> <Leader>r= :call Preserve("normal gg=G")<CR>
+" autocmd BufWritePre *.py,*.js :call Preserve("%s/\\s\\+$//e")
 
 " Toggle OverLength match
 nnoremap <leader><leader><CR> :call OverLengthToggle()<CR>
@@ -81,6 +93,77 @@ endfunction
 
 " General Functions: {{{1
 "------------------------------------------------
+
+" Make Short Log: Make short log from long log {{{2
+command! MakeShortLog call MakeShortLog()
+function! MakeShortLog() range
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+
+    execute 'normal! /History (Short)'
+    execute 'normal! }jV}kc``````qaqmm'
+    execute 'g/Event:.*\_.Date:.*$/normal! v/^Date$"Ay'
+    execute 'normal! `m0"aPV}k'
+    execute 'normal! :s/Date://ggv'
+    execute 'normal! :g/^ /AdjustDategv'
+    execute 'normal! :g/Event: /move+1gv'
+    execute 'normal! :s/\vEvent: //ggvok'
+    execute 'normal! :g/^\[/joingv'
+    execute 'normal! :s/\] \*\*/] /ggv'
+    execute 'normal! :s/\*\*\s*$//g'
+
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+command! AdjustDate call AdjustDate()
+function! AdjustDate()
+let g:mline = split(getline('.'))
+python << EOF
+from dateutil import parser
+import datetime
+import vim
+
+try:
+    result = parser.parse(' '.join(vim.eval("g:mline")))
+    vim.command("let g:result = '" + result.strftime("[%Y-%m-%d]") + "'")
+except:
+    vim.command("let g:result = '[Unknown DT]'")
+EOF
+execute "normal! ddk"
+put =g:result
+endfunction
+
+" Rounding: Precision rounding of floats {{{2
+function! Rounding(selection) range
+    let g:rounding = 1 * input('Round to how many decimals? ')
+    if g:rounding < 0
+        echo "Negative rounding not implemented at this time"
+        return
+    endif
+    if a:selection == ""
+        let g:selection = a:firstline . "," . a:lastline
+    else
+        let g:selection = a:selection
+    endif
+    execute g:selection . "s/\\d*\\.\\d\\+/" .
+                \ "\\=printf('%." . g:rounding . "f', str2float(submatch(0)))/g"
+endfunction
+
+" Preserve: Execute a command while preserving history and cursor position {{{2
+command! -nargs=* Preserve call Preserve("<args>")
+function! Preserve(command)
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
 " OverLength Toggle: Toggle OverLength highlighting {{{2
 function! OverLengthToggle()
@@ -191,7 +274,7 @@ function! SummarizeTabs()
 endfunction
 
 " WordNet: Look up word in word net {{{2
-" Based on https://github.com/timcharper/wordnet.vim/blob/master/plugin/wordnet.vim
+" https://github.com/timcharper/wordnet.vim/blob/master/plugin/wordnet.vim
 function! WordNetBrowse (word,args)
     let getsynsn =  ' | xargs -d= | grep -i \>'
     let allsynsn = system('wordnet ' . a:word . ' ' .a:args . getsynsn)
