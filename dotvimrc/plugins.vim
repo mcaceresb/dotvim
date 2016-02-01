@@ -82,17 +82,17 @@ vnoremap <leader>a: :Tabularize /:/l1r1<CR>
 vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
 vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
 
-nnoremap <leader>a# :Tabularize /#/l1r1<CR>
-nnoremap <leader>a% :Tabularize /%/l1r1<CR>
-nnoremap <leader>a& :Tabularize /&/l1r1<CR>
-nnoremap <leader>a* :Tabularize /*/l1r1<CR>
-nnoremap <leader>a= :Tabularize /=/l1r1<CR>
-nnoremap <leader>a- :Tabularize /-/l1r1<CR>
-nnoremap <leader>a, :Tabularize /,/l1r1<CR>
-nnoremap <leader>a" :Tabularize /"/l1r1<CR>
-nnoremap <leader>a: :Tabularize /:/l1r1<CR>
-nnoremap <leader>a$ :Tabularize /$/l1r1<CR>
-nnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
+nnoremap <leader>a# mm:Tabularize /#/l1r1<CR>`m
+nnoremap <leader>a% mm:Tabularize /%/l1r1<CR>`m
+nnoremap <leader>a& mm:Tabularize /&/l1r1<CR>`m
+nnoremap <leader>a* mm:Tabularize /*/l1r1<CR>`m
+nnoremap <leader>a= mm:Tabularize /=/l1r1<CR>`m
+nnoremap <leader>a- mm:Tabularize /-/l1r1<CR>`m
+nnoremap <leader>a, mm:Tabularize /,/l1r1<CR>`m
+nnoremap <leader>a" mm:Tabularize /"/l1r1<CR>`m
+nnoremap <leader>a: mm:Tabularize /:/l1r1<CR>`m
+nnoremap <leader>a$ mm:Tabularize /$/l1r1<CR>`m
+nnoremap <leader>a/ mm:Tabularize /\/\/\+/l1r1<CR>`m
 
 vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
 vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
@@ -106,23 +106,39 @@ vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
 vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
 vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
 
-nnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
-nnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
-nnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
-nnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
-nnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
-nnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
-nnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
-nnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
-nnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
-nnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
-nnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
+nnoremap <leader>z# mm:Tabularize /#\zs/l0r1<CR>`m
+nnoremap <leader>z% mm:Tabularize /%\zs/l0r1<CR>`m
+nnoremap <leader>z& mm:Tabularize /&\zs/l0r1<CR>`m
+nnoremap <leader>z* mm:Tabularize /*\zs/l0r1<CR>`m
+nnoremap <leader>z= mm:Tabularize /=\zs/l0r1<CR>`m
+nnoremap <leader>z- mm:Tabularize /-\zs/l0r1<CR>`m
+nnoremap <leader>z, mm:Tabularize /,\zs/l0r1<CR>`m
+nnoremap <leader>z" mm:Tabularize /"\zs/l0r1<CR>`m
+nnoremap <leader>z: mm:Tabularize /:\zs/l0r1<CR>`m
+nnoremap <leader>z$ mm:Tabularize /$\zs/l0r1<CR>`m
+nnoremap <leader>z/ mm:Tabularize /\/\/\+\zs/l0r1<CR>`m
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger = "<s-space>"
 let g:ultisnips_python_style = "google"
 let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
+
+" IndentLines: Indentation Guides on Demand {{{
+
+let g:indentLine_myToggle = 0
+let g:indentLine_enabled  = 0
+let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_char = '┋'
+let g:indentLine_char = '¦'
+
+let g:indent_guides_color_change_percent = 50
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size  = 1
+let g:indent_guides_auto_colors = 0
+" let g:indent_guides_soft_pattern = ' '
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#EDEDED
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#F1F1F1
 
 " YouCompleteMe: Language and Auto-Completion {{{2
 

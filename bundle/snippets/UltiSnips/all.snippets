@@ -439,6 +439,39 @@ endsnippet
 #  Misc  #
 ##########
 
+snippet stuffs "temporary stuffs" b
+% Citation: $0
+
+Relevance:
+
+Notes:
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+Conclusions:
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+Critique:
+\begin{enumerate}
+  \item
+\end{enumerate}
+endsnippet
+
+snippet () "Braces (...)" i
+(${1:${VISUAL}})$0
+endsnippet
+
+snippet [] "Brackets [...]" i
+[${1:${VISUAL}}]$0
+endsnippet
+
+snippet {} "Curly {...}" i
+{${1:${VISUAL}}}$0
+endsnippet
+
 snippet infojson "Info JSON template" b
 {
     "project": "",
@@ -525,37 +558,42 @@ snippet rct "Temp for RCTs" b
 },
 endsnippet
 
-snippet stuffs "temporary stuffs" b
-% Citation: $0
-
-Relevance:
-
-Notes:
-\begin{enumerate}
-  \item
-\end{enumerate}
-
-Conclusions:
-\begin{enumerate}
-  \item
-\end{enumerate}
-
-Critique:
-\begin{enumerate}
-  \item
-\end{enumerate}
-endsnippet
-
-snippet () "Braces (...)" i
-(${1:${VISUAL}})$0
-endsnippet
-
-snippet [] "Brackets [...]" i
-[${1:${VISUAL}}]$0
-endsnippet
-
-snippet {} "Curly {...}" i
-{${1:${VISUAL}}}$0
+snippet flat "Fields for flat RCT file" b
+{
+	, year                ,	year
+	, study_source        , study_source
+	, study_id            , study_id
+	, study_line          , study_line
+	, study_gscholar      , study_gscholar
+	, study_horizon       , study_horizon
+	, study_tags          , study_tags
+	, study_settings      , study_settings
+	, study_population    , study_population
+	, study_which         , study_which
+	, treatment_horizon   , treatment_horizon
+	, treatment_arm       , treatment_arm
+	, treatment_names     , treatment_names
+	, treatment_compare   , treatment_compare
+	, incentive_frequency , incentive_frequency
+	, incentive_caveats   , incentive_caveats
+	, incentive_for       , incentive_for
+	, incentive_total     , incentive_total
+	, incentive_earned    , incentive_earned
+	, outcome_primary     , outcome_primary
+	, outcome_name        , outcome_name
+	, outcome_size        , outcome_size
+	, outcome_control     , outcome_control
+	, outcome_pval        , outcome_pval
+	, outcome_which       , outcome_which
+	, outcome_diff        , outcome_diff
+	, outcome_pvald       , outcome_pvald
+	, itt                 , itt
+	, n_randomized        , n_randomized
+	, n_results           , n_results
+	, n_treat             , n_treat
+	, n_treatr            , n_treatr
+	, notes               , notes
+}
 endsnippet
 
 # vim:ft=snippets:

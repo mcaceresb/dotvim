@@ -65,7 +65,10 @@ Plugin 'scrooloose/syntastic',      {'name' : 'syntastic'}
 Plugin 'nvie/vim-flake8',           {'name' : 'flake8'}
 Plugin 'tmhedberg/SimpylFold',      {'name' : 'simpylfold'}
 Plugin 'KabbAmine/zeavim.vim',      {'name' : 'zeavim'}
-Plugin 'vim-scripts/indentpython.vim', {'name' : 'indentpython'}
+Plugin 'Yggdroot/indentLine',       {'name' : 'indentline'}
+Plugin 'nathanaelkane/vim-indent-guides', {'name' : 'indentguide'}
+Plugin 'vim-scripts/indentpython.vim',    {'name' : 'indentpython'}
+
 " Plugin 'xolox/vim-shell',           {'name' : 'shell'}
 " Plugin 'Shougo/vimshell.vim',       {'name' : 'vimshell'}
 " Plugin 'Shougo/vimproc.vim',        {'name' : 'vimproc', 'build' : {'linux' : 'make'}}

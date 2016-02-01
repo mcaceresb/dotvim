@@ -167,6 +167,22 @@ ${3:${VISUAL}}
 %$1$2;$0
 endsnippet
 
+snippet wdir "Working directory" w
+%put %sysfunc(getoption(work));
+endsnippet
+
+snippet escape "Try to end any unclosed statement" w
+*/;
+*;
+%mend;
+run;
+quit;
+);
+*";
+*';
+%put hi;
+endsnippet
+
 ##################
 #  PROC snipets  #
 ##################
