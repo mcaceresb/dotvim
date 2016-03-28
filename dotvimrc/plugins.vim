@@ -79,8 +79,10 @@ vnoremap <leader>a- :Tabularize /-/l1r1<CR>
 vnoremap <leader>a, :Tabularize /,/l1r1<CR>
 vnoremap <leader>a" :Tabularize /"/l1r1<CR>
 vnoremap <leader>a: :Tabularize /:/l1r1<CR>
+vnoremap <leader>a; :Tabularize /;/l1r1<CR>
 vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
 vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
+vnoremap <leader>a\ :Tabularize /\\\\\+/l1r1<CR>
 
 nnoremap <leader>a# mm:Tabularize /#/l1r1<CR>`m
 nnoremap <leader>a% mm:Tabularize /%/l1r1<CR>`m
@@ -91,8 +93,10 @@ nnoremap <leader>a- mm:Tabularize /-/l1r1<CR>`m
 nnoremap <leader>a, mm:Tabularize /,/l1r1<CR>`m
 nnoremap <leader>a" mm:Tabularize /"/l1r1<CR>`m
 nnoremap <leader>a: mm:Tabularize /:/l1r1<CR>`m
+nnoremap <leader>a; mm:Tabularize /;/l1r1<CR>`m
 nnoremap <leader>a$ mm:Tabularize /$/l1r1<CR>`m
 nnoremap <leader>a/ mm:Tabularize /\/\/\+/l1r1<CR>`m
+nnoremap <leader>a\ mm:Tabularize /\\\\\+/l1r1<CR>`m
 
 vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
 vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
@@ -103,8 +107,10 @@ vnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
 vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
 vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
 vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+vnoremap <leader>z; :Tabularize /;\zs/l0r1<CR>
 vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
 vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\\\\\+\zs/l0r1<CR>
 
 nnoremap <leader>z# mm:Tabularize /#\zs/l0r1<CR>`m
 nnoremap <leader>z% mm:Tabularize /%\zs/l0r1<CR>`m
@@ -115,8 +121,10 @@ nnoremap <leader>z- mm:Tabularize /-\zs/l0r1<CR>`m
 nnoremap <leader>z, mm:Tabularize /,\zs/l0r1<CR>`m
 nnoremap <leader>z" mm:Tabularize /"\zs/l0r1<CR>`m
 nnoremap <leader>z: mm:Tabularize /:\zs/l0r1<CR>`m
+nnoremap <leader>z; mm:Tabularize /;\zs/l0r1<CR>`m
 nnoremap <leader>z$ mm:Tabularize /$\zs/l0r1<CR>`m
 nnoremap <leader>z/ mm:Tabularize /\/\/\+\zs/l0r1<CR>`m
+nnoremap <leader>z\ mm:Tabularize /\\\\\+\zs/l0r1<CR>`m
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2

@@ -28,8 +28,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Essential: 'Core' functionality; my most used {{{2
+" Plugin 'tpope/vim-speeddating',     {'name' : 'speeddating'}
 Plugin 'tpope/vim-repeat',          {'name' : 'repeat'}
-Plugin 'tpope/vim-speeddating',     {'name' : 'speeddating'}
 Plugin 'tpope/vim-surround',        {'name' : 'surround'}
 Plugin 'tpope/vim-markdown',        {'name' : 'markdown'}
 Plugin 'tommcdo/vim-exchange',      {'name' : 'exchange'}
@@ -40,9 +40,10 @@ Plugin 'SirVer/ultisnips',          {'name' : 'ultisnips'}
 Plugin 'mbbill/undotree',           {'name' : 'undotree'}
 Plugin 'scrooloose/nerdtree',       {'name' : 'nerdtree'}
 Plugin 'mhinz/vim-startify',        {'name' : 'startify'}
-Plugin 'bling/vim-airline',         {'name' : 'airline'}
 Plugin 'honza/vim-snippets',        {'name' : 'snippets'}
 Plugin 'kien/ctrlp.vim',            {'name' : 'ctrlp'}
+Plugin 'vim-airline/vim-airline',   {'name' : 'airline'}
+Plugin 'vim-airline/vim-airline-themes', {'name' : 'airline-themes'}
 
 " Harmless: Oft useful but used scarcely {{{2
 Plugin 'tpope/vim-abolish',         {'name' : 'abolish'}
@@ -153,7 +154,7 @@ endif
 
 " Use par for hard-wrapping text (requires par)
 if executable('par')
-    set formatprg=par\ -w78req
+    set formatprg=par\ -w72req
 endif
 
 " Aesthetics: Personally preferred aesthetics {{{2

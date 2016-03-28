@@ -13,6 +13,8 @@
 " vnoremap <leader>ro :s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
 nnoremap <leader>ro :call Rounding("%")<CR>
 vnoremap <leader>ro :call Rounding("")<CR>
+nnoremap <leader>rc :%s/\v(\d)((\d\d\d)+\d@!)@=/\1,/g<CR>
+vnoremap <leader>rc :s/\v(\d)((\d\d\d)+\d@!)@=/\1,/g<CR>
 
 " Preserve mappings (run a command and preserve history/cursor)
 " nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
