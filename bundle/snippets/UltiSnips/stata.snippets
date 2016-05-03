@@ -145,10 +145,16 @@ else:
 `!p snip.rv = getlinechar()` Setup
 
 local  progname `!v expand('%:r')`
+local  paux		ran [Automated Message]
 local  logname  `!v expand('%:r')`
 global maindir  `!v expand('%:p:h')`
+global outdir   $maindir/out
 local  mainlog  $maindir/code/\`logname'.log
 * log using "\`mainlog'", replace name(\`logname')
+
+shell mkdir -p $outdir/fig
+shell mkdir -p $outdir/tables
+shell mkdir -p $outdir/data
 
 cd  "$maindir"
 adopath + $maindir/lib/
@@ -185,7 +191,7 @@ else:
 di "End: $S_TIME $S_DATE"
 local end_time "$S_TIME $S_DATE"
 local message = "\`progname' finished running\n\nStart: \`start_time'\nEnd: \`end_time'"
-shell echo -e "\`message'" | mail -s "\`progname' ran" -a "\`mainlog'" \`whoami\`@nber.org
+shell echo -e "\`message'" | mail -s "\`progname' \`paux'" -a "\`mainlog'" \`whoami\`@nber.org
 clear all
 endsnippet
 

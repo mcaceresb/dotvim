@@ -129,15 +129,21 @@ options
 
 %let maindir = /disk/agedisk2/medicare.work/doyle-DUA18266/caceres;
 %let bulkdir = /disk/agebulk1/medicare.work/doyle-DUA18266/caceres;
+%let outdir  = &maindir/out.;
+
+systask command "mkdir -p &outdir./fig"    wait;
+systask command "mkdir -p &outdir./tables" wait;
+systask command "mkdir -p &outdir./data"   wait;
 
 libname bulk "&bulkdir." access=readonly;
 libname main "&maindir"  access=readonly;
 $0
 
 %let prog  = `!v expand('%:r')`;
+%let paux  = ran [Automated Message];
 %let etime = %sysfunc(putn(%sysfunc(datetime()), datetime.));
 %let msg   = &prog. finished running\n\nStart: &stime.\nEnd: &etime.;
-%sysexec echo -e "&msg." | mail -s "&prog. ran" &sysuserid.@nber.org;
+%sysexec echo -e "&msg." | mail -s "&prog. &paux." &sysuserid.@nber.org;
 endsnippet
 
 snippet sasoptions "basic sas options" w
