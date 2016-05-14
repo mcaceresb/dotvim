@@ -295,6 +295,7 @@ autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType tex 2match OverLength //
 autocmd FileType markdown setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType markdown 2match OverLength //
+autocmd FileType markdown set shell=/bin/sh
 autocmd FileType stata 2match OverLength /\%91v.\+/
 autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
 autocmd FileType stata setlocal commentstring=*%s

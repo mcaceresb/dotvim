@@ -287,7 +287,7 @@ function! Tex_ViewLaTeX()
 
 		else
 
-			let execString = s:viewer.' $*.'.s:target
+			let execString = s:viewer.' "$*.'.s:target.'"'
 
 		endif
 
@@ -348,16 +348,16 @@ function! Tex_ForwardSearchLaTeX()
 	let l:origdir = fnameescape(getcwd())
 
 	let mainfnameRoot = fnameescape(fnamemodify(Tex_GetMainFileName(), ':t:r'))
-	let mainfnameFull = fnameescape(Tex_GetMainFileName(':p:r'))
-	let target_file = mainfnameFull . "." . s:target
-	let sourcefile = fnameescape(expand('%'))
-	let sourcefileFull = fnameescape(expand('%:p'))
+	let mainfnameFull = Tex_GetMainFileName(':p:r')
+	let target_file = shellescape(mainfnameFull . "." . s:target)
+	let sourcefile = shellescape(expand('%'))
+	let sourcefileFull = shellescape(expand('%:p'))
 	let linenr = line('.')
 	" cd to the location of the file to avoid problems with directory name
 	" containing spaces.
 	call Tex_CD(Tex_GetMainFileName(':p:h'))
 
-	" inverse search tips taken from Dimitri Antoniou's tip and Benji Fisher's
+	" inverse ag search tips taken from Dimitri Antoniou's tip and Benji Fisher's
 	" tips on vim.sf.net (vim.sf.net tip #225)
 	let execString = 'silent! !'
 	if (has('win32') && (viewer =~? '^ *yap\( \|$\)'))

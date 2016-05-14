@@ -20,6 +20,9 @@
 " Startup: Load plug-ins {{{1
 " ---------------------------
 
+" Fish: Using fish messes up vim? Fix it here {{{2
+set shell=/bin/bash
+
 " Start: Start Vundle {{{2
 filetype off
 set nocompatible
@@ -118,9 +121,6 @@ set cryptmethod=blowfish2
 set backspace=indent,eol,start
 set winaltkeys=no
 set splitright
-
-" Fish: Using fish messes up vim? Fix it here {{{2
-" set shell=/bin/sh
 
 " Preferences: Some personal tweaks {{{2
 
