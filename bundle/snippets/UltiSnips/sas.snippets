@@ -110,6 +110,7 @@ else:
 	box = make_box(len(t[1]), width)
 	snip.rv = ' ' + box[3]`
 
+%let stime = %sysfunc(putn(%sysfunc(datetime()), datetime.));
 dm 'clear log output'; * ods listing;
 
 options
@@ -123,15 +124,38 @@ options
 	nonumber     /* Don't print page numbers in SAS log      */
 	nodate       /* Don't print SAS date atop each log page  */
 ;
-%let sqlopts=feedback stimer noprint _method;
-%let sqlopts=feedback stimer noprint;
+%let sqlopts = feedback stimer noprint _method;
+%let sqlopts = feedback stimer noprint;
 
-%let maindir=/disk/agedisk2/medicare.work/doyle-DUA18266/caceres;
-%let bulkdir=/disk/agebulk1/medicare.work/doyle-DUA18266/caceres;
+%let maindir = /disk/agedisk2/medicare.work/doyle-DUA18266/caceres;
+%let bulkdir = /disk/agebulk1/medicare.work/doyle-DUA18266/caceres;
+%let outdir  = &maindir/out.;
 
-libname bulk "&maindir." access=readonly;
-libname main "&bulkdir"  access=readonly;
+systask command "mkdir -p &outdir./fig"    wait;
+systask command "mkdir -p &outdir./tables" wait;
+systask command "mkdir -p &outdir./data"   wait;
+
+libname bulk "&bulkdir." access = readonly;
+libname main "&maindir"  access = readonly;
 $0
+
+%macro sendMail(stime);
+	%let prog  = `!v expand('%:r')`;
+	%if &syserr. ne 0 %then %do;
+		%let paux = ran with errors [Automated Message];
+		%let err  = ERROR: %bquote(&SYSERRORTEXT);
+		%let warn = WARNING: %bquote(&SYSWARNINGTEXT);
+	%end;
+	%else %do;
+		%let paux = ran [Automated Message];
+		%let err  = ;
+		%let warn = ;
+	%end;
+	%let etime = %sysfunc(putn(%sysfunc(datetime()), datetime.));
+	%let msg   = &prog. finished running\n&err.\n&warn.\nStart: &stime.\nEnd: &etime.;
+	%sysexec echo -e "&msg." | mail -s "&prog. &paux." &sysuserid.@nber.org;
+%mend sendMail;
+%sendMail;
 endsnippet
 
 snippet sasoptions "basic sas options" w
@@ -167,9 +191,43 @@ ${3:${VISUAL}}
 %$1$2;$0
 endsnippet
 
+snippet wdir "Working directory" w
+%put %sysfunc(getoption(work));
+endsnippet
+
+snippet escape "Try to end any unclosed statement" w
+*/;
+*;
+%mend;
+run;
+quit;
+);
+*";
+*';
+%put hi;
+endsnippet
+
 ##################
 #  PROC snipets  #
 ##################
+
+snippet dhash "Hash merge" b
+proc sort data = $3;
+	by $5 $6;
+
+data ${1:data_out};
+	if _N_ = 1 then do;
+		if 0 then set ${3:data_hash};
+		declare hash ${4:hash_short}h(dataset: "$3", ordered: "a");
+		$4h.definekey("${5:var1}", "${6:var2}");
+		$4h.definedata(all: "Y");
+		$4h.definedone();
+	end;
+	set ${2:data_base};
+	if $4h.find() = 0 then output;
+	/* rc = $4h.find(); */
+run;
+endsnippet
 
 snippet pcomp "PROC COMPARE" b
 proc sort data = ${1:data_base}; by ${3:_all_};

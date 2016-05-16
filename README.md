@@ -16,13 +16,16 @@ mkdir ~/.vim/undo/
 cp $DOTVIM/fonts/* ~/.fonts/
 ln -s $DOTVIM/dotvimrc/vimrc ~/.vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim -g ~/.vimrc
+:PluginInstall<CR>
+<A-F4>
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer --omnisharp-completer --tern-completer
 ```
 
-You should edit the path `$HOME/Documents/projects/code/dotvim` here *and* in `./vimrc` if you copied this repository to a different directory (used for dictionaries, thesaurus, source). Then start `vim` and `NeoBundle` should install all the packages. Once they have all installed, run
+You should edit the path `$HOME/Documents/projects/code/dotvim` here *and* in `./vimrc` if you copied this repository to a different directory (used for dictionaries, thesaurus, source). Once all packages have installed, run
 ```bash
-cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/bundle/snippets/snippets/
+cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/bundle/snippets/snippets/ -sf
 cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/bundle/snippets/UltiSnips/ -sf
 cp $DOTVIM/colors/* ~/.vim/bundle/colorschemes/colors/ -sf
 ```
@@ -43,30 +46,26 @@ sudo npm -g install instant-markdown-d
 * `./session` is just for show.
 * `./undo` is just for show.
 
-## TODO
-
-* Edit rplugin/common_global.vim to add `--profile white` to `konsole`
-* Vim in `konsole`, not just `vim -g`
-
 ## MIT License
 
 Personal vim distribution
 Copyright © 2016 CausalMind
 
 Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
 
 The above copyright notice and this permission notice shall be included
 in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

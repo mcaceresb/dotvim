@@ -9,13 +9,12 @@
 "------------------------------------------------
 "
 " Precision rounding
-" nnoremap <leader>ro :%s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
-" vnoremap <leader>ro :s/\d*\.\d\+/\=printf('%.2f',str2float(submatch(0)))/g
 nnoremap <leader>ro :call Rounding("%")<CR>
 vnoremap <leader>ro :call Rounding("")<CR>
+nnoremap <leader>rc :%s/\v(\d)((\d\d\d)+\d@!)@=/\1,/g<CR>
+vnoremap <leader>rc :s/\v(\d)((\d\d\d)+\d@!)@=/\1,/g<CR>
 
 " Preserve mappings (run a command and preserve history/cursor)
-" nmap <Leader>rs mm:%s/\s*$//g<CR>`m<ESC>cxc:noh<CR>
 nmap <silent> <Leader>rs :call Preserve("%s/\\s\\+$//e")<CR>
 nmap <silent> <Leader>r= :call Preserve("normal gg=G")<CR>
 " autocmd BufWritePre *.py,*.js :call Preserve("%s/\\s\\+$//e")

@@ -115,6 +115,7 @@ else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
 `!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Created: `!v strftime('%c')`
 `!p snip.rv = getlinechar()` Updated: `!v strftime('%c')`
 `!p snip.rv = getlinechar()` Author:  ${2:`echo $USER`}
 `!p snip.rv = getlinechar()` Purpose: ${3:${VISUAL:content}}
@@ -143,16 +144,22 @@ else:
 	snip.rv = box[0]`
 `!p snip.rv = getlinechar()` Setup
 
-local   logname  `!v expand('%:r')`
-global  maindir  = "`!v expand('%:p:h')`"
-local   mainlog  = "$maindir/code/\`logname'.log"
-* mkdir "$maindir/out"
-* mkdir "$maindir/code"
-* mkdir "$maindir/tables"
+local  progname `!v expand('%:r')`
+local  paux		ran [Automated Message]
+local  logname  `!v expand('%:r')`
+global maindir  `!v expand('%:p:h')`
+global outdir   $maindir/out
+local  mainlog  $maindir/code/\`logname'.log
+* log using "\`mainlog'", replace name(\`logname')
+
+shell mkdir -p $outdir/fig
+shell mkdir -p $outdir/tables
+shell mkdir -p $outdir/data
 
 cd  "$maindir"
-* log using "\`mainlog'", replace name(\`logname')
-* use "$maindir/data.dta"
+adopath + $maindir/lib/
+local  start_time "$S_TIME $S_DATE"
+di "Start: \`start_time'"
 
 `!p
 width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
@@ -180,24 +187,12 @@ else:
 	snip.rv = box[0]`
 `!p snip.rv = getlinechar()` Cleanup
 
-* save "$maindir/out/data-derived.dta", replace
 * log close \`logname'
+di "End: $S_TIME $S_DATE"
+local end_time "$S_TIME $S_DATE"
+local message = "\`progname' finished running\n\nStart: \`start_time'\nEnd: \`end_time'"
+shell echo -e "\`message'" | mail -s "\`progname' \`paux'" -a "\`mainlog'" \`whoami\`@nber.org
 clear all
-
-`!p
-width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
-b, m, e, i = _get_comment_format()
-sline = b
-eline = i + e
-if sline is eline:
-	snip.rv = sline + ' ' + (width - 2) * '-'
-else:
-	box = make_box(len(t[1]), width)
-	snip.rv = box[0]`
-`!p snip.rv = getlinechar()` E-mail yourself
-
-* local message "Program '\`thisprogram'' finished running $S_DATE $S_TIME. Log is attached."
-* shell echo \`message' | mail -s "\`thisprogram' ran" -a "\`mainlog'" \`whoami\`@nber.org
 endsnippet
 
 snippet prog "Stata program" b
@@ -237,6 +232,11 @@ endsnippet
 
 snippet adohead "Ado file header" b
 *! version ${1:0.1} `!v strftime("%d%b%Y")` Mauricio Caceres, caceres@nber.org$0
+endsnippet
+
+snippet dosyntax "Basic syntax setup for do file" b
+local 0: subinstr local 0 ";" ","
+syntax, ${1:required} [${2:optional}]
 endsnippet
 
 # vim: nowrap fdm=marker ft=snippets

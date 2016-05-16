@@ -79,20 +79,24 @@ vnoremap <leader>a- :Tabularize /-/l1r1<CR>
 vnoremap <leader>a, :Tabularize /,/l1r1<CR>
 vnoremap <leader>a" :Tabularize /"/l1r1<CR>
 vnoremap <leader>a: :Tabularize /:/l1r1<CR>
+vnoremap <leader>a; :Tabularize /;/l1r1<CR>
 vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
 vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
+vnoremap <leader>a\ :Tabularize /\\\\\+/l1r1<CR>
 
-nnoremap <leader>a# :Tabularize /#/l1r1<CR>
-nnoremap <leader>a% :Tabularize /%/l1r1<CR>
-nnoremap <leader>a& :Tabularize /&/l1r1<CR>
-nnoremap <leader>a* :Tabularize /*/l1r1<CR>
-nnoremap <leader>a= :Tabularize /=/l1r1<CR>
-nnoremap <leader>a- :Tabularize /-/l1r1<CR>
-nnoremap <leader>a, :Tabularize /,/l1r1<CR>
-nnoremap <leader>a" :Tabularize /"/l1r1<CR>
-nnoremap <leader>a: :Tabularize /:/l1r1<CR>
-nnoremap <leader>a$ :Tabularize /$/l1r1<CR>
-nnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
+nnoremap <leader>a# mm:Tabularize /#/l1r1<CR>`m
+nnoremap <leader>a% mm:Tabularize /%/l1r1<CR>`m
+nnoremap <leader>a& mm:Tabularize /&/l1r1<CR>`m
+nnoremap <leader>a* mm:Tabularize /*/l1r1<CR>`m
+nnoremap <leader>a= mm:Tabularize /=/l1r1<CR>`m
+nnoremap <leader>a- mm:Tabularize /-/l1r1<CR>`m
+nnoremap <leader>a, mm:Tabularize /,/l1r1<CR>`m
+nnoremap <leader>a" mm:Tabularize /"/l1r1<CR>`m
+nnoremap <leader>a: mm:Tabularize /:/l1r1<CR>`m
+nnoremap <leader>a; mm:Tabularize /;/l1r1<CR>`m
+nnoremap <leader>a$ mm:Tabularize /$/l1r1<CR>`m
+nnoremap <leader>a/ mm:Tabularize /\/\/\+/l1r1<CR>`m
+nnoremap <leader>a\ mm:Tabularize /\\\\\+/l1r1<CR>`m
 
 vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
 vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
@@ -103,20 +107,24 @@ vnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
 vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
 vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
 vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+vnoremap <leader>z; :Tabularize /;\zs/l0r1<CR>
 vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
 vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\\\\\+\zs/l0r1<CR>
 
-nnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
-nnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
-nnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
-nnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
-nnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
-nnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
-nnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
-nnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
-nnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
-nnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
-nnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
+nnoremap <leader>z# mm:Tabularize /#\zs/l0r1<CR>`m
+nnoremap <leader>z% mm:Tabularize /%\zs/l0r1<CR>`m
+nnoremap <leader>z& mm:Tabularize /&\zs/l0r1<CR>`m
+nnoremap <leader>z* mm:Tabularize /*\zs/l0r1<CR>`m
+nnoremap <leader>z= mm:Tabularize /=\zs/l0r1<CR>`m
+nnoremap <leader>z- mm:Tabularize /-\zs/l0r1<CR>`m
+nnoremap <leader>z, mm:Tabularize /,\zs/l0r1<CR>`m
+nnoremap <leader>z" mm:Tabularize /"\zs/l0r1<CR>`m
+nnoremap <leader>z: mm:Tabularize /:\zs/l0r1<CR>`m
+nnoremap <leader>z; mm:Tabularize /;\zs/l0r1<CR>`m
+nnoremap <leader>z$ mm:Tabularize /$\zs/l0r1<CR>`m
+nnoremap <leader>z/ mm:Tabularize /\/\/\+\zs/l0r1<CR>`m
+nnoremap <leader>z\ mm:Tabularize /\\\\\+\zs/l0r1<CR>`m
 
 " UltiSnips: Fairly cool snippet plugin {{{2
 let g:UltiSnipsUsePythonVersion = 2
@@ -124,19 +132,50 @@ let g:UltiSnipsExpandTrigger = "<s-space>"
 let g:ultisnips_python_style = "google"
 let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 
+" IndentLines: Indentation Guides on Demand {{{
+
+let g:indentLine_myToggle = 0
+let g:indentLine_enabled  = 0
+let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_char = '┋'
+let g:indentLine_char = '¦'
+
+let g:indent_guides_color_change_percent = 50
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size  = 1
+let g:indent_guides_auto_colors = 0
+" let g:indent_guides_soft_pattern = ' '
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#EDEDED
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#F1F1F1
+
 " YouCompleteMe: Language and Auto-Completion {{{2
 
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:ycm_min_num_of_chars_for_completion = 2
 " let g:ycm_min_num_identifier_candidate_chars = 0
 " let g:ycm_auto_trigger = 1
-" let g:ycm_path_to_python_interpreter = ''
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_semantic_triggers =  {
+            \   'c' : ['->', '.'],
+            \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+            \             're!\[.*\]\s'],
+            \   'ocaml' : ['.', '#'],
+            \   'cpp,objcpp' : ['->', '.', '::'],
+            \   'perl' : ['->'],
+            \   'php' : ['->', '::'],
+            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+            \   'ruby' : ['.', '::'],
+            \   'lua' : ['.', ':'],
+            \   'erlang' : [':'],
+            \  'tex'  : ['\ref{',
+            \            're!\\(foot)?cite\w*(\[.*\])?{'],
+            \ }
 let g:ycm_filetype_blacklist = {
             \ 'tagbar' : 1,
             \ 'qf' : 1,
@@ -175,7 +214,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,W293'
 let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_python_exec = ' /usr/bin/python3'
+" let g:syntastic_python_python_exec = '/usr/bin/python3'
 
 " EasyMotion: Vim Motions on Steroids: {{{2
 
@@ -191,6 +230,7 @@ let g:vimrplugin_maxdeparse = 10000
 
 " LaTeX: Custom LaTeX Options {{{2
 
+set iskeyword+=:
 nnoremap <leader>ok :LLPStartPreview<CR>
 nnoremap <leader>lx :!xelatex -synctex=1 -shell-escape %<CR>
 nnoremap <leader>lw :!pdflatex -synctex=1 "%"<CR>
@@ -255,6 +295,7 @@ autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType tex 2match OverLength //
 autocmd FileType markdown setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType markdown 2match OverLength //
+autocmd FileType markdown set shell=/bin/sh
 autocmd FileType stata 2match OverLength /\%91v.\+/
 autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
 autocmd FileType stata setlocal commentstring=*%s
