@@ -55,6 +55,9 @@ cnoremap w!! w !sudo tee > /dev/null %
 
 " Useful: Favorite semi-custom mappings {{{1
 
+" Close all folds except current one
+nnoremap z0 zMzvzz
+
 " Get quicker macro replay
 nnoremap <F12> @q
 

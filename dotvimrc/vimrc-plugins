@@ -33,6 +33,14 @@ Plug 'haya14busa/incsearch-fuzzy.vim', {'as' : 'incsearch-fuzzy'}
 
 " Recommended: Frequently used, but not necessarily 'core' {{{1
 
+Plug 'kana/vim-textobj-user',       {'as' : 'textobj'}
+Plug 'reedes/vim-litecorrect',      {'as' : 'litecorrect'}
+Plug 'reedes/vim-textobj-sentence', {'as' : 'textobj-sentence'}
+Plug 'reedes/vim-textobj-quote',    {'as' : 'textobj-quote'}
+Plug 'reedes/vim-lexical',          {'as' : 'lexical'}
+Plug 'reedes/vim-pencil',           {'as' : 'pencil'}
+Plug 'reedes/vim-wordy',            {'as' : 'wordy'}
+
 Plug 'reedes/vim-colors-pencil',  {'as' : 'colors-pencil'}
 Plug 'majutsushi/tagbar',         {'as' : 'tagbar'}
 Plug 'airblade/vim-gitgutter',    {'as' : 'gitgutter'}
@@ -57,8 +65,10 @@ Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
 Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
 Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
 Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
-" let g:bundle_path = "/home/mauricio/Documents/code/dotvim/plugged/"
-" Plug g:bundle_path . 'latex-suite-abridged', {'for' : 'tex'}
+
+let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
+Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
+Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
 
@@ -72,7 +82,9 @@ Plug 'ctrlpvim/ctrlp.vim',         {'as' : 'ctrlp'}
 Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
 Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
+Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
 
+" Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
 " Plug 'junegunn/fzf.vim',          {'as' : 'fzf.vim'}
 " Plug 'jmcantrell/vim-virtualenv', {'as' : 'virtualenv'}
 " Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}

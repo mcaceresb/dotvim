@@ -1,9 +1,9 @@
 " ----------------------------------------------------------------------------
-" Program: vimrc-functions
+" Program: wordnet.vim
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 " Created: Wed Jun  3 14:07:41 EDT 2015
-" Updated: Sat May 14 17:55:24 EDT 2016
-" Purpose: Mappings to functions or longer snippets
+" Updated: Mon May 16 02:16:08 EDT 2016
+" Purpose: Based on timcharper/wordnet.vim
 
 " WordNet word lookup
 command! -nargs=+ Wn call WordNetOverviews("<args>")

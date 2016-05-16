@@ -2,7 +2,7 @@
 " Program: vimrc-plugins-config
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 " Created: Sat May 14 17:55:24 EDT 2016
-" Updated: Sat May 14 17:55:24 EDT 2016
+" Updated: Mon May 16 02:16:14 EDT 2016
 " Purpose: Configure vim plugins
 
 " Airline: Awesome status indicator {{{1
@@ -17,13 +17,14 @@ let g:airline_symbols.paste      = '∥'
 let g:airline_symbols.readonly   = ''
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.maxlinenr  = ''
+let g:airline_symbols.branch     = '⎇ '
 
 " let g:airline_theme = 'solarized'
 " let g:airline_theme = 'sol'
+" let g:airline_theme = 'pencil'
 " let g:airline_left_sep  = '▶'
 " let g:airline_right_sep = '◀'
 " let g:airline_symbols.spell  = 'Ꞩ'
-" let g:airline_symbols.branch = '⎇ '
 
 " Characterize: Unicode information of current character {{{1
 
@@ -89,8 +90,8 @@ highlight Flashy term=bold ctermbg=0 guibg=#B6D6FD
 " CtrlP: Fast file navitation {{{2
 
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -i --nocolor -g ""'
 endif
 
 let g:ctrlp_follow_symlinks = 1
@@ -120,10 +121,12 @@ function! ToggleIndentLines()
         silent exec "IndentLinesToggle"
         echo "Showing tab markers"
         let g:indentLine_myToggle = 1
+        set conceallevel=2
     else
         silen exec "IndentLinesToggle"
         echo "Hiding tab markers"
         let g:indentLine_myToggle = 0
+        set conceallevel=0
     endif
 endfunction
 
@@ -156,8 +159,8 @@ let Tex_FoldedEnvironments=",frame,flashcard,tacomment,theorem,proof,definition"
 " Markdown: {{{1
 
 let g:markdown_fenced_languages = [
-            \ 'css', 'bash=sh', 'html', 'javascript', 'python',
-            \ 'r', 'SAS=sas', 'sas', 'sh', 'sql', 'Stata=stata', 'stata'
+            \ 'bash=sh', 'sh', 'javascript', 'python', 'sql',
+            \ 'r', 'SAS=sas', 'sas', 'Stata=stata', 'stata'
             \ ]
 
 " NERDTree: Nice file explorer for Vim {{{1
@@ -339,6 +342,66 @@ let g:ycm_semantic_triggers =  {
             \ }
 let g:ycm_semantic_triggers.tex =
             \ ['\ref{', 're!\\(foot)?cite\w*(\[.*\])?{']
+
+" Writing: Various writing-related plug-ins {{{1
+
+" Lexical: Various spell, thesaurus, and dictionary options {{{2
+
+let g:lexical#thesaurus = ['~/Documents/code/dotvim/spell/moby-thesaurus',]
+let g:lexical#dictionary = ['~/Documents/code/dotvim/spell/moby-single-words',]
+let g:lexical#spellfile = ['~/.vim/spell/en.utf-8.add',]
+let g:lexical#spelllang = ['en_us',]
+let g:lexical#spell_key = '<leader>lu'
+let g:lexical#thesaurus_key = '<leader>lt'
+let g:lexical#dictionary_key = '<leader>ld'
+
+" Online Thesaurus: Query thesaurus.com for meaning and synonyms {{{2
+
+nnoremap <leader>lo :OnlineThesaurusCurrentWord<CR>
+
+" Pencil: Tweaks to make writing prose nicer {{{2
+
+let g:pencil#wrapModeDefault = 'soft'
+let g:pencil#conceallevel = 0
+
+" Quote: Curly quote support {{{2
+
+let g:textobj#quote#educate = 0
+let g:textobj#quote#matchit = 1  
+
+" Wordy: Lightweight writing style assistant {{{2
+
+nnoremap <silent> K :NextWordy<CR>
+
+" Initialize for text files only {{{2
+
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd
+              \   call pencil#init()
+              \ | call lexical#init()
+              \ | call litecorrect#init()
+              \ | call textobj#quote#init()
+              \ | call textobj#sentence#init()
+  autocmd FileType tex
+              \   call pencil#init()
+              \ | call lexical#init()
+              \ | call litecorrect#init()
+              \ | call textobj#quote#init()
+              \ | call textobj#sentence#init()
+  autocmd FileType textile
+              \   call pencil#init()
+              \ | call lexical#init()
+              \ | call litecorrect#init()
+              \ | call textobj#quote#init()
+              \ | call textobj#sentence#init()
+  autocmd FileType text
+              \   call pencil#init({ 'spell': 0 })
+              \ | call lexical#init()
+              \ | call litecorrect#init()
+              \ | call textobj#quote#init()
+              \ | call textobj#sentence#init()
+augroup END
 
 " Zeavim: Zeal integration for vim {{{1
 

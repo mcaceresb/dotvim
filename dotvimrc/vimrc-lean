@@ -58,10 +58,12 @@ let mapleader = ","        " Leader is comma
 let maplocalleader = "\\"  " Local leader is backslash
 set breakindent            " Soft wrap respecting visual indentation
 set colorcolumn=           " Don't highlight any columns
+set conceallevel=0         " Don't conceal any characters
 set cryptmethod=blowfish2  " Encryption method when saving with :X
 set cursorline             " Highlight the line the cursor is on
 set expandtab              " Insert spaces for tabs, like a sane person
 set guioptions=acer        " Minimal GUI
+set infercase              " Smart case in insert-mode completion
 set linebreak              " Break long lines at 'breakat'
 set nolist                 " 'linebreak' won't work with nolist
 set shiftwidth=4           " Ibid, but to auto-indent
