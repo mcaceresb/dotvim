@@ -1,0 +1,150 @@
+" ----------------------------------------------------------------------------
+" Program: vimrc-lean
+" Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+" Created: Thu Jun  4 03:16:32 EDT 2015
+" Updated: Sat May 14 15:34:05 EDT 2016
+" Purpose: Preferred Vim options
+
+" Essential: Options to make Vim behave more sanely {{{1
+
+set autochdir         " Change directory to file in buffer
+set autoindent        " Copy last line's indent
+set autoread          " Automatically re-read file on change
+set display+=lastline " Display as much text as possible in last line
+set formatoptions+=j  " Delete comment char when joining lines
+set hlsearch          " Highlight search pattern
+set ignorecase        " Ignore case of letters in pattern search
+set incsearch         " Search incrementally as you type
+set laststatus=2      " Last window always has a status line
+set lazyredraw        " Don't redraw screen while executing macros
+set noswapfile        " Don't use swap files
+set nrformats-=octal  " Remove octal from number formats
+set number            " Show line numbers in left margin
+set ruler             " Show line and column numbers in status line
+set scrolloff=2       " Vertical scroll lines offset
+set showcmd           " Show selection size in visual mode
+set sidescrolloff=4   " Horizontal scroll columns offset
+set smartcase         " Override ignorecase when upper letter is typed
+set smarttab          " <Tab> (<BS>) inserts (removes) spaces w/shiftwidth
+set splitright        " vsplit splits right
+set wildchar=<Tab>    " Invoke wildmenu completion using <Tab>
+set wildmenu          " Enhanced command-line completion
+set winaltkeys=no     " Allow using alt keys for vim mappings
+set backspace=indent,eol,start " Backspace over indent, line start, eol
+
+" Prefer UTF-8
+if &encoding ==# 'latin1' && has('gui_running')
+    set encoding=utf-8 ambiwidth=double
+endif
+
+" More history
+if &history < 1024
+    set history=1024
+endif
+
+" More tab pages
+if &tabpagemax < 42
+    set tabpagemax=42
+endif
+
+" So vim doesn't acts up if you're using fish
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
+
+" Preferences: Some personal tweaks {{{1
+
+let mapleader = ","        " Leader is comma
+let maplocalleader = "\\"  " Local leader is backslash
+set breakindent            " Soft wrap respecting visual indentation
+set colorcolumn=           " Don't highlight any columns
+set cryptmethod=blowfish2  " Encryption method when saving with :X
+set cursorline             " Highlight the line the cursor is on
+set expandtab              " Insert spaces for tabs, like a sane person
+set guioptions=acer        " Minimal GUI
+set linebreak              " Break long lines at 'breakat'
+set nolist                 " 'linebreak' won't work with nolist
+set shiftwidth=4           " Ibid, but to auto-indent
+set showbreak=\ \          " Prepend to start of soft-wrapped line
+set softtabstop=4          " Ibid, but while editing (e.g. <Tab>, <BS>)
+set spell                  " Spelling support
+set tabstop=4              " Spaces a tab counts for, visually
+set wrap                   " Soft-wrap text
+" set listchars=tab:»\ ,extends:>,precedes:<,nbsp:+  " ,eol:¬,trail:·,
+
+" Remember more undo
+if &undoreload < 8192
+    set undoreload=8192
+endif
+if &undolevels < 1024
+    set undolevels=1024
+endif
+if has("persistent_undo")
+    set undodir=$HOME/.vim/undo
+    set undofile
+endif
+
+" Use par for hard-wrapping text (requires par)
+if executable('par')
+    set formatprg=par\ -w72req
+endif
+
+" Adequately toggle soft-wrap and no soft-wrap
+command! -nargs=* Wrap set wrap linebreak nolist
+command! -nargs=* Nowrap set nowrap nolinebreak
+
+" FileType Customization: Some file-type-specific settings {{{1
+
+" Double-Check that we're in PEP8 format in python
+autocmd BufNewFile,BufRead *.py set
+            \ tabstop=4
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+
+" Custom spacing, folding, etc. for various file types
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
+autocmd FileType tex 2match OverLength //
+autocmd FileType tex setlocal ts=2 et sw=2 sts=2
+autocmd FileType markdown setlocal nocursorline nocursorcolumn colorcolumn=
+autocmd FileType markdown 2match OverLength //
+autocmd FileType stata 2match OverLength /\%91v.\+/
+autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
+autocmd FileType stata setlocal commentstring=*%s
+autocmd FileType sas   setlocal comments=s0:/*,m0:*,ex0:*/
+autocmd FileType text  2match OverLength //
+
+" Colors: Some hard-coded color modifications I like {{{1
+
+" Display style for misspelled words
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=red gui=undercurl
+
+" Change grayness of comments of the fly (e.g. :Setgray 42)
+command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
+highlight Comment cterm=italic
+
+" If necessary, make comments light gray italic
+" highlight Comment gui=italic guifg=grey50
+
+" Highlight extra white space and lines that are too long
+exec 'highlight OverLength      ctermbg=red guibg=#FFD3D3'
+exec 'highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3'
+match ExtraWhitespace /\s\+$/
+2match OverLength /\%80v.\+/
+
+" File Type highlighting
+exec 'highlight link texBeginEndName Normal'
+exec 'highlight link texRefZone Normal'
+exec 'highlight link sasMacroVar sasFunction'
+exec 'highlight markdownCode guifg=#10A778'
+exec 'highlight sasMacroVar  guifg=#0000FF gui=bold ctermfg=Blue'
+exec 'highlight stataLocal   guifg=#7ab4db gui=bold'
+exec 'highlight stataGlobal  guifg=#BE646C gui=bold'
+
+" Modelines: {{{1
+" vim: nowrap fdm=marker
+" }}}

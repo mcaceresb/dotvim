@@ -1,0 +1,352 @@
+" ----------------------------------------------------------------------------
+" Program: vimrc-plugins-config
+" Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+" Created: Sat May 14 17:55:24 EDT 2016
+" Updated: Sat May 14 17:55:24 EDT 2016
+" Purpose: Configure vim plugins
+
+" Airline: Awesome status indicator {{{1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_powerline_fonts    = 1
+let g:airline_symbols.linenr     = '¶'
+let g:airline_symbols.notexists  = '∄'
+let g:airline_symbols.paste      = '∥'
+let g:airline_symbols.readonly   = ''
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.maxlinenr  = ''
+
+" let g:airline_theme = 'solarized'
+" let g:airline_theme = 'sol'
+" let g:airline_left_sep  = '▶'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.spell  = 'Ꞩ'
+" let g:airline_symbols.branch = '⎇ '
+
+" Characterize: Unicode information of current character {{{1
+
+nmap ,ga <Plug>(characterize)
+
+" Color Pencil: Interesting Color scheme. Needs more bold {{{1
+
+let g:pencil_spell_undercurl    = 1
+let g:pencil_gutter_color       = 1
+let g:pencil_neutral_code_bg    = 1
+let g:pencil_neutral_headings   = 1
+let g:pencil_higher_contrast_ui = 0
+let g:pencil_bolder             = 1
+colorscheme pencil
+set background=light
+
+" EasyAlign: {{{1
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" EasyMotion: Vim Motions on Steroids: {{{1
+
+map <space> <Plug>(easymotion-prefix)
+map <space><space> <Plug>(easymotion-s2)
+" map <space>/ <Plug>(easymotion-sn)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+
+" GitGutter: Git file changes visualization {{{1
+
+let g:gitgutter_enabled = 0
+let g:gitgutter_signs = 0
+let g:gitgutter_highlight_lines = 0
+
+nnoremap <F3> :call ToggleAllGitGutter()<CR>
+function! ToggleAllGitGutter()
+    silent exec "GitGutterToggle"
+    silent exec "GitGutterSignsToggle"
+    silent exec "GitGutterLineHighlightsToggle"
+    if g:gitgutter_highlight_lines == 1
+        echo "Showing git differences"
+    else
+        echo "Hiding git differences"
+    endif
+endfunction
+
+" Yanks: Improved yank functionality {{{1
+
+" Flashy: Highlight yanked area {{{2
+
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+let g:operator#flashy#flash_time = 150
+highlight Flashy term=bold ctermbg=0 guibg=#B6D6FD
+
+" FuzzyNavigation: Fuzzy navigation settings {{{1
+" This fold is to configure any fuzzy navigation plug-in:
+"   - fzf, fuzzy file finder
+"   - CtrlP, fuzzy navigation
+"   - Unite, fuzzy anything finder/switcher/etc.
+
+" CtrlP: Fast file navitation {{{2
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+let g:ctrlp_follow_symlinks = 1
+nnoremap <C-g> :CtrlPBuffer<CR>
+
+" IncSearch: Improved incremental search highlighting {{{1
+
+map z/  <Plug>(incsearch-fuzzyspell-/)
+map z?  <Plug>(incsearch-fuzzyspell-?)
+map zg/ <Plug>(incsearch-fuzzyspell-stay)
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" IndentLine: Indentation markers {{{1
+
+let g:indentLine_myToggle = 0
+let g:indentLine_enabled  = 0
+let g:indentLine_color_gui = '#d6d6d6'
+let g:indentLine_char = '¦'
+let g:indentLine_char = '┋'
+
+nnoremap <F2> :call ToggleIndentLines()<CR>
+function! ToggleIndentLines()
+    if g:indentLine_myToggle == 0
+        silent exec "IndentLinesToggle"
+        echo "Showing tab markers"
+        let g:indentLine_myToggle = 1
+    else
+        silen exec "IndentLinesToggle"
+        echo "Hiding tab markers"
+        let g:indentLine_myToggle = 0
+    endif
+endfunction
+
+" Try IndentGuides if it ever bothers you or conflicts w/conceal stuff
+" let g:indent_guides_color_change_percent = 50
+" let g:indent_guides_start_level = 1
+" let g:indent_guides_guide_size  = 1
+" let g:indent_guides_auto_colors = 0
+" let g:indent_guides_soft_pattern = ' '
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#EDEDED
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#F1F1F1
+
+" LaTeX: Custom LaTeX Options {{{1
+
+" General latex mappings
+set iskeyword+=:
+au FileType tex nnoremap <buffer> <leader>lx :!xelatex -synctex=1 -shell-escape %<CR>
+au FileType tex nnoremap <buffer> <leader>lw :!pdflatex -synctex=1 "%"<CR>
+au FileType tex nnoremap <buffer> <leader>lb :!pdflatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!pdflatex -synctex=1 "%"<CR>:!pdflatex -synctex=1 "%"<CR>
+au FileType tex nnoremap <buffer> <leader>lq :!xelatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!xelatex -synctex=1 "%"<CR>:!xelatex -synctex=1 "%"<CR>
+
+" latex-suite options
+let g:Tex_Leader=','
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_CompileRule_pdf='pdflatex -shell-escape -synctex=1 "$*"'
+let g:Tex_ViewRule_pdf='okular'
+let Tex_FoldedEnvironments=",frame,flashcard,tacomment,theorem,proof,definition"
+
+" Markdown: {{{1
+
+let g:markdown_fenced_languages = [
+            \ 'css', 'bash=sh', 'html', 'javascript', 'python',
+            \ 'r', 'SAS=sas', 'sas', 'sh', 'sql', 'Stata=stata', 'stata'
+            \ ]
+
+" NERDTree: Nice file explorer for Vim {{{1
+
+nnoremap <F10> :NERDTreeToggle<CR>
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "→",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" R: Vim R plug-in {{{1
+
+let r_syntax_folding = 1
+let vimrplugin_term = "konsole"
+
+" Syntastic: Syntax Checking {{{1
+
+map <F8> :SyntasticToggleMode<CR>
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_tex_checkers = ['']
+let g:syntastic_python_flake8_post_args = '--ignore=E221,E251,E302,W293'
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+
+" SimplyFold: Simple folding for Python {{{1
+
+let g:SimpylFold_docstring_preview = 1
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+" Preview: Preview various file types in browser {{{1
+
+let g:PreviewBrowsers = 'google-chrome-unstable,firefox,chromium-browser'
+nmap <Leader>pp :Preview<CR>
+nmap <Leader>pm :PreviewMarkdown<CR>
+nmap <Leader>pt :PreviewTextile<CR>
+nmap <Leader>pr :PreviewRdoc<CR>
+nmap <Leader>ph :PreviewHtml<CR>
+
+" Startify: Nice start screen {{{1
+
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_list_order = [
+            \ ['    My most recently used files:'],
+            \ 'files',
+            \ ['    My most recently used files in the current directory:'],
+            \ 'dir',
+            \ ['    Bookmarks:'],
+            \ 'bookmarks',
+            \ ['    Sessions:'],
+            \ 'sessions',
+            \ ]
+let g:startify_bookmarks = [
+            \ '~/.vim',
+            \ '$projects'
+            \]
+let g:startify_session_persistence = 1
+
+" Tabular: Nice alignment features {{{1
+
+vnoremap <leader>at :Tabularize /&<CR>
+nnoremap <leader>at :Tabularize /&<CR>
+
+vnoremap <leader>a# :Tabularize /#/l1r1<CR>
+vnoremap <leader>a% :Tabularize /%/l1r1<CR>
+vnoremap <leader>a& :Tabularize /&/l1r1<CR>
+vnoremap <leader>a* :Tabularize /*/l1r1<CR>
+vnoremap <leader>a= :Tabularize /=/l1r1<CR>
+vnoremap <leader>a- :Tabularize /-/l1r1<CR>
+vnoremap <leader>a, :Tabularize /,/l1r1<CR>
+vnoremap <leader>a" :Tabularize /"/l1r1<CR>
+vnoremap <leader>a: :Tabularize /:/l1r1<CR>
+vnoremap <leader>a; :Tabularize /;/l1r1<CR>
+vnoremap <leader>a$ :Tabularize /$/l1r1<CR>
+vnoremap <leader>a/ :Tabularize /\/\/\+/l1r1<CR>
+vnoremap <leader>a\ :Tabularize /\\\\\+/l1r1<CR>
+
+nnoremap <leader>a# mm:Tabularize /#/l1r1<CR>`m
+nnoremap <leader>a% mm:Tabularize /%/l1r1<CR>`m
+nnoremap <leader>a& mm:Tabularize /&/l1r1<CR>`m
+nnoremap <leader>a* mm:Tabularize /*/l1r1<CR>`m
+nnoremap <leader>a= mm:Tabularize /=/l1r1<CR>`m
+nnoremap <leader>a- mm:Tabularize /-/l1r1<CR>`m
+nnoremap <leader>a, mm:Tabularize /,/l1r1<CR>`m
+nnoremap <leader>a" mm:Tabularize /"/l1r1<CR>`m
+nnoremap <leader>a: mm:Tabularize /:/l1r1<CR>`m
+nnoremap <leader>a; mm:Tabularize /;/l1r1<CR>`m
+nnoremap <leader>a$ mm:Tabularize /$/l1r1<CR>`m
+nnoremap <leader>a/ mm:Tabularize /\/\/\+/l1r1<CR>`m
+nnoremap <leader>a\ mm:Tabularize /\\\\\+/l1r1<CR>`m
+
+vnoremap <leader>z# :Tabularize /#\zs/l0r1<CR>
+vnoremap <leader>z% :Tabularize /%\zs/l0r1<CR>
+vnoremap <leader>z& :Tabularize /&\zs/l0r1<CR>
+vnoremap <leader>z* :Tabularize /*\zs/l0r1<CR>
+vnoremap <leader>z= :Tabularize /=\zs/l0r1<CR>
+vnoremap <leader>z- :Tabularize /-\zs/l0r1<CR>
+vnoremap <leader>z, :Tabularize /,\zs/l0r1<CR>
+vnoremap <leader>z" :Tabularize /"\zs/l0r1<CR>
+vnoremap <leader>z: :Tabularize /:\zs/l0r1<CR>
+vnoremap <leader>z; :Tabularize /;\zs/l0r1<CR>
+vnoremap <leader>z$ :Tabularize /$\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\/\/\+\zs/l0r1<CR>
+vnoremap <leader>z/ :Tabularize /\\\\\+\zs/l0r1<CR>
+
+nnoremap <leader>z# mm:Tabularize /#\zs/l0r1<CR>`m
+nnoremap <leader>z% mm:Tabularize /%\zs/l0r1<CR>`m
+nnoremap <leader>z& mm:Tabularize /&\zs/l0r1<CR>`m
+nnoremap <leader>z* mm:Tabularize /*\zs/l0r1<CR>`m
+nnoremap <leader>z= mm:Tabularize /=\zs/l0r1<CR>`m
+nnoremap <leader>z- mm:Tabularize /-\zs/l0r1<CR>`m
+nnoremap <leader>z, mm:Tabularize /,\zs/l0r1<CR>`m
+nnoremap <leader>z" mm:Tabularize /"\zs/l0r1<CR>`m
+nnoremap <leader>z: mm:Tabularize /:\zs/l0r1<CR>`m
+nnoremap <leader>z; mm:Tabularize /;\zs/l0r1<CR>`m
+nnoremap <leader>z$ mm:Tabularize /$\zs/l0r1<CR>`m
+nnoremap <leader>z/ mm:Tabularize /\/\/\+\zs/l0r1<CR>`m
+nnoremap <leader>z\ mm:Tabularize /\\\\\+\zs/l0r1<CR>`m
+
+" Tagbar: Document outline using Ctags {{{1
+
+nnoremap <F9> :TagbarToggle<CR>
+
+" UltiSnips: Fairly amazing snippet plugin {{{1
+
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger    = "<s-space>"
+let g:ultisnips_python_style    = "google"
+let g:UltiSnipsSnippetsDir      = "~/.vim/plugged/snippets/UltiSnips"
+
+" Undo: Visualize undo history {{{1
+
+nnoremap <F11> :UndotreeToggle<CR>
+
+" YouCompleteMe: Language and Auto-Completion {{{1
+
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_filetype_blacklist = {
+            \ 'tagbar' : 1,
+            \ 'qf' : 1,
+            \ 'unite' : 1,
+            \ 'vimwiki' : 1,
+            \ 'pandoc' : 1,
+            \ 'infolog' : 1,
+            \ }
+let g:ycm_semantic_triggers =  {
+            \   'c' : ['->', '.'],
+            \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+            \             're!\[.*\]\s'],
+            \   'ocaml' : ['.', '#'],
+            \   'cpp,objcpp' : ['->', '.', '::'],
+            \   'perl' : ['->'],
+            \   'php' : ['->', '::'],
+            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+            \   'ruby' : ['.', '::'],
+            \   'lua' : ['.', ':'],
+            \   'erlang' : [':'],
+            \ }
+let g:ycm_semantic_triggers.tex =
+            \ ['\ref{', 're!\\(foot)?cite\w*(\[.*\])?{']
+
+" Zeavim: Zeal integration for vim {{{1
+
+let g:zv_disable_mapping = 1
+nmap gz <Plug>Zeavim
+vmap gz <Plug>ZVVisSelection
+nmap gZ <Plug>ZVKeyDocset
+
+" Modelines: {{{1
+" vim: nowrap fdm=marker
+" }}}

@@ -3,34 +3,48 @@ dotvim
 
 My personal Vim distribution.
 
-## Quickstart
+## Install
 
-I use [Bundle](https://github.com/VundleVim/Vundle.vim) and a *ton* of plug-ins. All the packages will install automatically once Vim starts. Do this to get started:
+I use [Plug](https://github.com/junegunn/vim-plug) and a *ton* of plug-ins. Run `:PlugInstall` once in vim to download everything. To get started:
+
 ```bash
 export DOTVIM=$HOME/Documents/code/dotvim
 mkdir ~/.vim/
-mkdir ~/.vim/bundle/
 mkdir ~/.vim/session/
 mkdir ~/.vim/spell/
 mkdir ~/.vim/undo/
-cp $DOTVIM/fonts/* ~/.fonts/
+
 ln -s $DOTVIM/dotvimrc/vimrc ~/.vimrc
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 vim -g ~/.vimrc
-:PluginInstall<CR>
-<A-F4>
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --clang-completer --omnisharp-completer --tern-completer
+:PlugInstall<CR>
+:q
 ```
 
-You should edit the path `$HOME/Documents/projects/code/dotvim` here *and* in `./vimrc` if you copied this repository to a different directory (used for dictionaries, thesaurus, source). Once all packages have installed, run
+_**WARNING:**_ Change the directories from which files are sourced in `dotvimrc/vimrc` to wherever they actually are.
+
+## Extras
+
+I keep some nice monospaced fonts in this repo, but I would much recommend cloning this repository of [powerline-patched fonts](https://github.com/powerline/fonts/) (which provides some nice symbols to use with [airline](http://github.com/vim-airline/vim-airline) and [powerline](https://github.com/powerline/powerline)).
+
 ```bash
-cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/bundle/snippets/snippets/ -sf
-cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/bundle/snippets/UltiSnips/ -sf
-cp $DOTVIM/colors/* ~/.vim/bundle/colorschemes/colors/ -sf
+git clone https://github.com/powerline/fonts powerline-fonts
+ln -s ~/.fonts/powerline-fonts powerline-fonts
+ln -s ~/.fonts/custom-fonts $DOTVIM/fonts
 ```
 
-Why? Because I'm lazy and I can't be bothered to figure out how to fork these projects for only a handful of files. Lastly, to get `vim-instant-markdown` to work you also need to do
+I also keep some useful snippets in this repo (I am a bit lazy to clean them up and create a pull request, but I find them handy):
+
+```bash
+cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/plugged/snippets/snippets/ -sf
+cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/plugged/snippets/UltiSnips/ -sf
+```
+
+Last, I keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently trying out (and mostly enjoying) [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil). With some minor tweaks (see `$DOTVIM/colors/pencil.vim`) it looks really nice to me.
+
+Last, to get [vim-instant-markdown](https://github.com/suan/vim-instant-markdown/issues) to work you also need to do
 ```bash
 sudo apt-get install xdg-utils npm
 sudo npm -g install instant-markdown-d
@@ -46,26 +60,14 @@ sudo npm -g install instant-markdown-d
 * `./session` is just for show.
 * `./undo` is just for show.
 
-## MIT License
+My vimrc is split into a few parts
 
-Personal vim distribution
-Copyright © 2016 CausalMind
+* `vimrc-plugins`, which is a list of plug-ins to install via `Plug`
+* `vimrc-plugins-config`, which defines various plug-in related functions and mappings.
+* `vimrc-lean`, defines some options I like. It also aims to be a stand-alone vimrc, as it just defines a number of settings and options, no mappings or plugins.
+* `vimrc-mappings`, has all my basic mappings.
+* `vimrc-functions`, has a few more complex mappings (that require custom functions).
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+## License
 
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT
