@@ -95,10 +95,10 @@ exec 'highlight vimNotation      guifg='.s:dark_purple
 exec 'highlight vimGroup         guifg='.s:dark_green .' gui=bold'
 exec 'highlight vimCommentTitle  guifg='.s:blue_grey  .' gui=bold'
 exec 'highlight helpSpecial      guifg='.s:dark_purple
-exec 'highlight link             vimHiGroup           vimGroup'
 exec 'highlight markdownBold     gui=bold'
 exec 'highlight markdownItalic   gui=italic'
 exec 'highlight markdownCode     guifg='.s:dark_green
+exec 'highlight link             vimHiGroup           vimGroup'
 exec 'highlight link             markdownCodeBlock    markdownCode'
 exec 'highlight texMathZoneW     guifg='.s:dark_purple
 exec 'highlight texMathZoneX     guifg='.s:dark_purple
@@ -107,7 +107,6 @@ exec 'highlight texItalStyle     gui=Italic'
 exec 'highlight texBoldStyle     gui=Bold'
 exec 'highlight texBoldItalStyle gui=Bold,Italic'
 exec 'highlight sasMacroVar      guifg='.s:dark_purple .' gui=bold'
-exec 'highlight link texBeginEndName Normal'
 
 " Misc {{{1
 exec 'highlight BT1   guifg='.s:grey_lines  .' gui=italic'
@@ -117,12 +116,6 @@ exec 'highlight OL3   guifg='.s:dark_green  .' gui=bold'
 exec 'highlight OL4   guifg='.s:light_purple
 exec 'highlight NonText    guifg='.s:grey_invisibles .' guibg='.s:white
 exec 'highlight SpecialKey guifg='.s:grey_invisibles .' guibg='.s:white
-" highlight ColorColumn ctermbg=red ctermfg=white guibg=#FFD3D3
-highlight Comment cterm=italic gui=italic guifg=grey50
-highlight OverLength ctermbg=red ctermfg=white guibg=#FFD3D3
-highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3
-match ExtraWhitespace /\s\+$/
-2match OverLength /\%80v.\+/
 
 " Diff styles {{{1
 hi   diffAdded     guifg=#007B22   guibg=#FFFFFF   ctermfg=28    ctermbg=15
