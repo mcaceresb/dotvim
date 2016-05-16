@@ -1,0 +1,103 @@
+" ----------------------------------------------------------------------------
+" Program: vimrc-plugins
+" Author:  Mauricio Caceres <caceres@nber.org>
+" Created: Sat May 14 17:55:24 EDT 2016
+" Updated: Sat May 14 17:55:24 EDT 2016
+" Purpose: Load all vim plugins
+
+call plug#begin()
+
+" Essential: Should be 'core' functionality, IMO {{{1
+
+Plug 'tpope/vim-fugitive',             {'as' : 'fugitive'}
+Plug 'tpope/vim-speeddating',          {'as' : 'speeddating'}
+Plug 'tpope/vim-unimpaired',           {'as' : 'unimpaired'}
+Plug 'tpope/vim-repeat',               {'as' : 'repeat'}
+Plug 'tpope/vim-surround',             {'as' : 'surround'}
+Plug 'salsifis/vim-transpose',         {'as' : 'transpose'}
+Plug 'tommcdo/vim-exchange',           {'as' : 'exchange'}
+Plug 'SirVer/ultisnips',               {'as' : 'ultisnips'}
+Plug 'mbbill/undotree',                {'as' : 'undotree'}
+Plug 'mhinz/vim-startify',             {'as' : 'startify'}
+Plug 'honza/vim-snippets',             {'as' : 'snippets'}
+Plug 'tomtom/tcomment_vim',            {'as' : 'tcomment'}
+Plug 'Valloric/YouCompleteMe',         {'do' : 'python2 ./install.py'}
+Plug 'vim-airline/vim-airline',        {'as' : 'airline'}
+Plug 'scrooloose/nerdtree',            {'as' : 'nerdtree'}
+Plug 'Xuyuanp/nerdtree-git-plugin',    {'as' : 'nerdtree-git'}
+Plug 'vim-airline/vim-airline-themes', {'as' : 'airline-themes'}
+Plug 'kana/vim-operator-user',         {'as' : 'opetator'}
+Plug 'haya14busa/vim-operator-flashy', {'as' : 'operator-flashy'}
+Plug 'haya14busa/incsearch.vim',       {'as' : 'incsearch'}
+Plug 'haya14busa/incsearch-fuzzy.vim', {'as' : 'incsearch-fuzzy'}
+
+" Recommended: Frequently used, but not necessarily 'core' {{{1
+
+Plug 'kana/vim-textobj-user',       {'as' : 'textobj'}
+Plug 'reedes/vim-litecorrect',      {'as' : 'litecorrect'}
+Plug 'reedes/vim-textobj-sentence', {'as' : 'textobj-sentence'}
+Plug 'reedes/vim-textobj-quote',    {'as' : 'textobj-quote'}
+Plug 'reedes/vim-lexical',          {'as' : 'lexical'}
+Plug 'reedes/vim-pencil',           {'as' : 'pencil'}
+Plug 'reedes/vim-wordy',            {'as' : 'wordy'}
+
+Plug 'reedes/vim-colors-pencil',  {'as' : 'colors-pencil'}
+Plug 'majutsushi/tagbar',         {'as' : 'tagbar'}
+Plug 'airblade/vim-gitgutter',    {'as' : 'gitgutter'}
+Plug 'scrooloose/syntastic',      {'as' : 'syntastic'}
+Plug 'tpope/vim-abolish',         {'as' : 'abolish'}
+Plug 'Raimondi/delimitMate',      {'as' : 'delimate'}
+Plug 'lilydjwg/colorizer',        {'as' : 'colorizer'}
+
+" Language Support: Language-specific {{{1
+
+Plug 'chrisbra/csv.vim',          {'as' : 'csv'}
+Plug 'greyblake/vim-preview',     {'as' : 'preview'}
+Plug 'JuliaLang/julia-vim',       {'as' : 'julia'}
+Plug 'tpope/vim-jdaddy',          {'as' : 'jaddy',      'for' : 'json'}
+Plug 'tpope/vim-markdown',        {'as' : 'markdown',   'for' : 'markdown'}
+Plug 'suan/vim-instant-markdown', {'as' : 'instant-md', 'for' : 'markdown'}
+Plug 'nvie/vim-flake8',           {'as' : 'flake8',     'for' : 'python'}
+Plug 'tmhedberg/SimpylFold',      {'as' : 'simpylfold', 'for' : 'python'}
+Plug 'jpitblado/vim-stata',       {'as' : 'stata',      'for' : 'stata'}
+Plug 'jpitblado/vim-smcl',        {'as' : 'smcl',       'for' : 'smcl'}
+Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
+Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
+Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
+Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
+
+let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
+Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
+Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
+
+" Testing: Plug-ins that I'm not all-in on yet {{{1
+
+Plug 'Yggdroot/indentLine',        {'as' : 'indentline'}
+Plug 'junegunn/vim-easy-align',    {'as' : 'easyalign'}
+Plug 'godlygeek/tabular',          {'as' : 'tabular'}
+Plug 'tpope/vim-characterize',     {'as' : 'characterize'}
+Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
+Plug 'easymotion/vim-easymotion',  {'as' : 'easymotion'}
+Plug 'ctrlpvim/ctrlp.vim',         {'as' : 'ctrlp'}
+Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
+Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
+Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
+
+" Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
+" Plug 'junegunn/fzf.vim',          {'as' : 'fzf.vim'}
+" Plug 'jmcantrell/vim-virtualenv', {'as' : 'virtualenv'}
+" Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
+" Plug 'ervandew/screen',           {'as' : 'screen'}
+" Plug 'xolox/vim-shell',           {'as' : 'shell'}
+" Plug 'Shougo/vimshell.vim',       {'as' : 'vimshell'}
+" Plug 'Shougo/vimproc.vim',        {'as' : 'vimproc', 'do' : 'make'}
+" Plug 'haya14busa/vim-asterisk',          {'as' : 'asterisk'}
+" Plug 'nathanaelkane/vim-indent-guides',  {'as' : 'indentguide'}
+" Plug 'mattly/vim-markdown-enhancements', {'as' : 'enhancements-md'}
+
+call plug#end()
+
+" Modelines: {{{1
+" vim: nowrap fdm=marker
+" }}}

@@ -1,212 +1,65 @@
 " ----------------------------------------------------------------------------
-" Project: dotvim
 " Program: vimrc
-" Purpose: Vim settings
-" Version: 0.4.0
-" Updated: Thu Dec 17 11:58:52 EST 2015
 " Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
-" Inputs:
-"       ~/.vim/undo
-"       ~/.vim/spell
-"       ~/.vim/session
-"       ~/.vim/bundle
-"       ~/Documents/code/dotvim/dotvimrc/mappings.vim
-"       ~/Documents/code/dotvim/dotvimrc/abbreviations.vim
-"       ~/Documents/code/dotvim/dotvimrc/fonts.vim
-"       ~/Documents/code/dotvim/dotvimrc/functions.vim
-"       ~/Documents/code/dotvim/dotvimrc/plugins.vim
-"       ~/Documents/code/dotvim/colors/mycolors.vim
+" Created: Thu Jun  4 03:16:32 EDT 2015
+" Updated: Sat May 14 15:34:05 EDT 2016
+" Purpose: Preferred Vim Settings (full)
 
-" Startup: Load plug-ins {{{1
-" ---------------------------
+" Startup: Source plugins, enable filetype and syntax
 
-" Fish: Using fish messes up vim? Fix it here {{{2
-set shell=/bin/bash
-
-" Start: Start Vundle {{{2
-filetype off
-set nocompatible
-set runtimepath^=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Essential: 'Core' functionality; my most used {{{2
-NeoBundle 'tpope/vim-speeddating',     {'name' : 'speeddating'}
-NeoBundle 'tpope/vim-repeat',          {'name' : 'repeat'}
-NeoBundle 'tpope/vim-surround',        {'name' : 'surround'}
-NeoBundle 'tpope/vim-markdown',        {'name' : 'markdown'}
-NeoBundle 'tommcdo/vim-exchange',      {'name' : 'exchange'}
-NeoBundle 'godlygeek/tabular',         {'name' : 'tabular'}
-NeoBundle 'salsifis/vim-transpose',    {'name' : 'transpose'}
-NeoBundle 'tomtom/tcomment_vim',       {'name' : 'tcomment'}
-NeoBundle 'SirVer/ultisnips',          {'name' : 'ultisnips'}
-NeoBundle 'mbbill/undotree',           {'name' : 'undotree'}
-NeoBundle 'scrooloose/nerdtree',       {'name' : 'nerdtree'}
-NeoBundle 'mhinz/vim-startify',        {'name' : 'startify'}
-NeoBundle 'honza/vim-snippets',        {'name' : 'snippets'}
-NeoBundle 'kien/ctrlp.vim',            {'name' : 'ctrlp'}
-NeoBundle 'vim-airline/vim-airline',   {'name' : 'airline'}
-NeoBundle 'vim-airline/vim-airline-themes', {'name' : 'airline-themes'}
-
-" Harmless: Oft useful but used scarcely {{{2
-NeoBundle 'tpope/vim-abolish',         {'name' : 'abolish'}
-NeoBundle 'tpope/vim-unimpaired',      {'name' : 'unimpaired'}
-NeoBundle 'tpope/vim-characterize',    {'name' : 'characterize'}
-NeoBundle 'tpope/vim-fugitive',        {'name' : 'fugitive'}
-NeoBundle 'airblade/vim-gitgutter',    {'name' : 'gitgutter'}
-NeoBundle 'gregsexton/gitv',           {'name' : 'gitv'}
-NeoBundle 'ervandew/screen',           {'name' : 'screen'}
-NeoBundle 'flazz/vim-colorschemes',    {'name' : 'colorschemes'}
-NeoBundle 'lilydjwg/colorizer',        {'name' : 'colorizer'}
-
-" Testing: Plug-ins that I'm not all-in on yet {{{2
-
-" Complex/conflicting to some degree
-NeoBundle 'Raimondi/delimitMate',      {'name' : 'delimate'}
-NeoBundle 'easymotion/vim-easymotion', {'name' : 'easymotion'}
-NeoBundle 'Valloric/YouCompleteMe',    {'name' : 'YouCompleteMe'}
-NeoBundle 'scrooloose/syntastic',      {'name' : 'syntastic'}
-NeoBundle 'nvie/vim-flake8',           {'name' : 'flake8'}
-NeoBundle 'tmhedberg/SimpylFold',      {'name' : 'simpylfold'}
-NeoBundle 'KabbAmine/zeavim.vim',      {'name' : 'zeavim'}
-NeoBundle 'Yggdroot/indentLine',       {'name' : 'indentline'}
-NeoBundle 'nathanaelkane/vim-indent-guides', {'name' : 'indentguide'}
-NeoBundle 'vim-scripts/indentpython.vim',    {'name' : 'indentpython'}
-
-" NeoBundle 'xolox/vim-shell',           {'name' : 'shell'}
-" NeoBundle 'Shougo/vimshell.vim',       {'name' : 'vimshell'}
-" NeoBundle 'Shougo/vimproc.vim',        {'name' : 'vimproc', 'build' : {'linux' : 'make'}}
-
-" Language support
-NeoBundle 'jpitblado/vim-stata',       {'name' : 'stata'}
-NeoBundle 'jpitblado/vim-smcl',        {'name' : 'smcl'}
-NeoBundle 'JuliaLang/julia-vim',       {'name' : 'julia'}
-NeoBundle 'jcfaria/Vim-R-plugin',      {'name' : 'rplugin'}
-NeoBundle 'adimit/prolog.vim',         {'name' : 'prolog'}
-NeoBundle 'greyblake/vim-preview',     {'name' : 'preview'}
-NeoBundle 'LaTeX-Box-Team/LaTeX-Box',  {'name' : 'latex-box'}
-NeoBundle 'dag/vim-fish',              {'name' : 'fish'}
-NeoBundle 'suan/vim-instant-markdown', {'name' : 'instant-markdown'}
-
-let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
-NeoBundle g:bundle_path . 'latex-suite-abridged', {'type' : 'nosync'}
-
-" Unite (LOOKS veritably amazing but seems really slow)
-" NeoBundle 'Shougo/neocomplete.vim',           {'name' : 'neocomplete'}
-" NeoBundle 'Shougo/unite.vim',                 {'name' : 'unite'}
-" NeoBundle 'Shougo/neomru.vim',                {'autoload' : {'unite_sources' : 'file_mru'}}
-" NeoBundle 'osyo-manga/unite-airline_themes',  {'autoload' : {'unite_sources' : 'airline_themes'}}
-" NeoBundle 'ujihisa/unite-colorscheme',        {'autoload' : {'unite_sources' : 'colorscheme'}}
-" NeoBundle 'tsukkee/unite-tag',                {'autoload' : {'unite_sources' : ['tag', 'tag/file']}}
-" NeoBundle 'Shougo/unite-outline',             {'autoload' : {'unite_sources' : 'outline'}}
-" NeoBundle 'Shougo/unite-help',                {'autoload' : {'unite_sources' : 'help'}}
-" NeoBundle 'Shougo/junkfile.vim',              {'autoload' : {'commands' : 'JunkfileOpen', 'unite_sources' : ['junkfile',  'junkfile/new']}}
-
-" End: End Vundle {{{2
-call neobundle#end()
 filetype plugin indent on
 syntax enable
-NeoBundleCheck
 
-" Options: Vim options I like {{{1
-" --------------------------------
+source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins
+source $HOME/Documents/code/dotvim//dotvimrc/vimrc-plugins-config
 
-" Essential: Some options to make Vim behave more sanely {{{2
+" Source Files: options, mappings, fonts, etc.
 
-set autoindent lazyredraw ruler showcmd number
-set ignorecase smartcase smarttab
-set autochdir autoread noswapfile
-set wildmenu wildchar=<Tab>
-set cryptmethod=blowfish2
-set backspace=indent,eol,start
-set winaltkeys=no
-set splitright
+source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean
+source $HOME/Documents/code/dotvim/dotvimrc/vimrc-mappings
+source $HOME/Documents/code/dotvim/dotvimrc/vimrc-functions
 
-" Preferences: Some personal tweaks {{{2
+" Fonts: Various font options
 
-" Map leaders
-let maplocalleader = "\\"
-let mapleader = ","
-
-" Remove octal from number formats
-set nrformats-=octal
-
-" Set up completion and dictionary
-" set complete=.,w,b,u,t,i,d,k/home/mauricio/.vim/spell/en.utf-8.add
-
-" Make sure we are doing utf8
-if &encoding ==# 'latin1' && has('gui_running')
-    set encoding=utf-8 ambiwidth=double
+" Server only
+if has("gui_running")
+    if has("gui_gtk2")
+        set guifont=Monospace\ 11
+    elseif has("gui_win32")
+        set guifont=Consolas:h11:cANSI
+    endif
 endif
 
-" Remember more history
-if &undoreload < 10000
-    set undoreload=10000
-endif
-if &undolevels < 1024
-    set undolevels=1024
-endif
-if &history < 1024
-    set history=1024
-endif
-if &tabpagemax < 42
-    set tabpagemax=42
-endif
+" Pick your fave
+set guifont=Anonymice\ Powerline\ 10
+set guifont=Cousine\ for\ Powerline\ 10
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+set guifont=Fira\ Mono\ for\ Powerline\ 10
+set guifont=Liberation\ Mono\ for\ Powerline\ 10
+set guifont=Meslo\ for\ Powerline\ 10
+set guifont=Monofur\ for\ Powerline\ 10
+set guifont=Roboto\ Mono\ for\ Powerline\ 10
+set guifont=Symbol\ Neu\ for\ Powerline\ 10
+set guifont=Hack\ 10
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+set guifont=Inconsolata\ for\ Powerline\ 11
+set guifont=Inconsolata-dz\ for\ Powerline\ 10
+set guifont=Inconsolata-g\ for\ Powerline\ 10
 
-" Use persistent undo
-if has("persistent_undo")
-    set undodir=$HOME/.vim/undo
-    set undofile
-endif
+" Python with virtualenv support
+" py << EOF
+" import os
+" import sys
+" if 'VIRTUAL_ENV' in os.environ:
+"     project_base_dir = os.environ['VIRTUAL_ENV']
+"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"     execfile(activate_this, dict(__file__ = activate_this))
+" EOF
 
-" Use par for hard-wrapping text (requires par)
-if executable('par')
-    set formatprg=par\ -w72req
-endif
-
-" Aesthetics: Personally preferred aesthetics {{{2
-
-" Always show status line
-" Cursor 4 lines off scrolling
-" Minimal GUI
-set laststatus=2 scrolloff=2 guioptions=aegtr
-
-" Set all tabs to 4 characters, expand tabs to spaces
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-
-" Highlight search words
-" Incremental search highlights
-" Highlight current line
-" Highlight textwidth column
-set incsearch hlsearch cursorline colorcolumn=
-
-" Set spelling, undercurl words not in dictionary
-set spell
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=red gui=undercurl
-
-" Set soft wrap and soft-wrap toggle
-" Set soft wrap hanging line character
-set showbreak=\ \ 
-set listchars=tab:▸\ ,eol:¬
-nmap <leader><leader>l :set list!<CR>
-set wrap linebreak nolist breakindent
-command! -nargs=* Wrap set wrap linebreak nolist
-command! -nargs=* Nowrap set nowrap nolinebreak
-
-" Change grayness of comments of the fly, set it to 42
-command! -nargs=1 Setgray hi Comment cterm=italic gui=italic guifg=grey<args>
-
-" Source Files: mappings, fonts, options, etc. {{{1
-"--------------------------------------------------
-
-source $HOME/Documents/code/dotvim/dotvimrc/mappings.vim
-source $HOME/Documents/code/dotvim/dotvimrc/abbreviations.vim
-source $HOME/Documents/code/dotvim/dotvimrc/functions.vim
-source $HOME/Documents/code/dotvim/colors/mycolors.vim
-source $HOME/Documents/code/dotvim/dotvimrc/fonts.vim
-source $HOME/Documents/code/dotvim/dotvimrc/plugins.vim
-
-" Modelines: Fold this file {{{1
-" vim: nowrap fdm=marker
-" }}}
+" iabbrev teh the
+" iabbrev nad and
