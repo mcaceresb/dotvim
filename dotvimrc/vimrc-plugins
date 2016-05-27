@@ -26,31 +26,36 @@ Plug 'vim-airline/vim-airline',        {'as' : 'airline'}
 Plug 'scrooloose/nerdtree',            {'as' : 'nerdtree'}
 Plug 'Xuyuanp/nerdtree-git-plugin',    {'as' : 'nerdtree-git'}
 Plug 'vim-airline/vim-airline-themes', {'as' : 'airline-themes'}
-Plug 'kana/vim-operator-user',         {'as' : 'opetator'}
-Plug 'haya14busa/vim-operator-flashy', {'as' : 'operator-flashy'}
 Plug 'haya14busa/incsearch.vim',       {'as' : 'incsearch'}
 Plug 'haya14busa/incsearch-fuzzy.vim', {'as' : 'incsearch-fuzzy'}
 
 " Recommended: Frequently used, but not necessarily 'core' {{{1
 
-Plug 'kana/vim-textobj-user',       {'as' : 'textobj'}
-Plug 'reedes/vim-litecorrect',      {'as' : 'litecorrect'}
-Plug 'reedes/vim-textobj-sentence', {'as' : 'textobj-sentence'}
-Plug 'reedes/vim-textobj-quote',    {'as' : 'textobj-quote'}
-Plug 'reedes/vim-lexical',          {'as' : 'lexical'}
-Plug 'reedes/vim-pencil',           {'as' : 'pencil'}
-Plug 'reedes/vim-wordy',            {'as' : 'wordy'}
+Plug 'kana/vim-textobj-user',          {'as' : 'textobj'}
+Plug 'reedes/vim-litecorrect',         {'as' : 'litecorrect'}
+Plug 'reedes/vim-textobj-sentence',    {'as' : 'textobj-sentence'}
+Plug 'reedes/vim-textobj-quote',       {'as' : 'textobj-quote'}
+Plug 'reedes/vim-pencil',              {'as' : 'pencil'}
+Plug 'reedes/vim-lexical',             {'as' : 'lexical'}
+Plug 'reedes/vim-wordy',               {'as' : 'wordy'}
+Plug 'reedes/vim-colors-pencil',       {'as' : 'colors-pencil'}
 
-Plug 'reedes/vim-colors-pencil',  {'as' : 'colors-pencil'}
-Plug 'majutsushi/tagbar',         {'as' : 'tagbar'}
-Plug 'airblade/vim-gitgutter',    {'as' : 'gitgutter'}
-Plug 'scrooloose/syntastic',      {'as' : 'syntastic'}
-Plug 'tpope/vim-abolish',         {'as' : 'abolish'}
-Plug 'Raimondi/delimitMate',      {'as' : 'delimate'}
-Plug 'lilydjwg/colorizer',        {'as' : 'colorizer'}
+Plug 'junegunn/vim-easy-align',        {'as' : 'easyalign'}
+Plug 'easymotion/vim-easymotion',      {'as' : 'easymotion'}
+Plug 'ctrlpvim/ctrlp.vim',             {'as' : 'ctrlp'}
+Plug 'Raimondi/delimitMate',           {'as' : 'delimate'}
+Plug 'tpope/vim-abolish',              {'as' : 'abolish'}
+Plug 'airblade/vim-gitgutter',         {'as' : 'gitgutter'}
+Plug 'scrooloose/syntastic',           {'as' : 'syntastic'}
+Plug 'majutsushi/tagbar',              {'as' : 'tagbar'}
+Plug 'kana/vim-operator-user',         {'as' : 'opetator'}
+Plug 'haya14busa/vim-operator-flashy', {'as' : 'operator-flashy'}
+Plug 'lilydjwg/colorizer',             {'as' : 'colorizer'}
 
 " Language Support: Language-specific {{{1
 
+" Plug 'hachibeedi/vim-vbnet',      {'as' : 'vbnet'}
+Plug 'vim-scripts/vbnet.vim',     {'as' : 'vbnet'}
 Plug 'chrisbra/csv.vim',          {'as' : 'csv'}
 Plug 'greyblake/vim-preview',     {'as' : 'preview'}
 Plug 'JuliaLang/julia-vim',       {'as' : 'julia'}
@@ -72,13 +77,11 @@ Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
 
+Plug 'jmcantrell/vim-virtualenv',  {'as' : 'virtualenv'}
 Plug 'Yggdroot/indentLine',        {'as' : 'indentline'}
-Plug 'junegunn/vim-easy-align',    {'as' : 'easyalign'}
 Plug 'godlygeek/tabular',          {'as' : 'tabular'}
 Plug 'tpope/vim-characterize',     {'as' : 'characterize'}
 Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
-Plug 'easymotion/vim-easymotion',  {'as' : 'easymotion'}
-Plug 'ctrlpvim/ctrlp.vim',         {'as' : 'ctrlp'}
 Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
 Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}

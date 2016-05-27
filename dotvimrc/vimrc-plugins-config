@@ -45,6 +45,44 @@ set background=light
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters = {
+            \   '/': {
+            \     'pattern':         '//\+\|/\*\|\*/',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \   '\': {
+            \     'pattern':         '\\+',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \   '>': {
+            \     'pattern':       '-\?>\|>>\|=>',
+            \     'left_margin':   1,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \   '<': {
+            \     'pattern':       '-\?<\|<<\|<=',
+            \     'left_margin':   1,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \   ';': {
+            \     'pattern':       ';',
+            \     'left_margin':   0,
+            \     'right_margin':  1,
+            \     'stick_to_left': 1,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \  '%': {
+            \     'pattern':         '%\+',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \ }
 
 " EasyMotion: Vim Motions on Steroids: {{{1
 
@@ -78,7 +116,7 @@ endfunction
 
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
-let g:operator#flashy#flash_time = 150
+let g:operator#flashy#flash_time = 250
 highlight Flashy term=bold ctermbg=0 guibg=#B6D6FD
 
 " FuzzyNavigation: Fuzzy navigation settings {{{1
@@ -357,7 +395,8 @@ let g:lexical#dictionary_key = '<leader>ld'
 
 " Online Thesaurus: Query thesaurus.com for meaning and synonyms {{{2
 
-nnoremap <leader>lo :OnlineThesaurusCurrentWord<CR>
+let g:online_thesaurus_map_keys = 0
+noremap <leader>lo :OnlineThesaurusCurrentWord<CR>
 
 " Pencil: Tweaks to make writing prose nicer {{{2
 

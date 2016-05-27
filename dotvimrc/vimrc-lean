@@ -54,8 +54,6 @@ endif
 
 " Preferences: Some personal tweaks {{{1
 
-let mapleader = ","        " Leader is comma
-let maplocalleader = "\\"  " Local leader is backslash
 set breakindent            " Soft wrap respecting visual indentation
 set colorcolumn=           " Don't highlight any columns
 set conceallevel=0         " Don't conceal any characters
@@ -72,7 +70,11 @@ set softtabstop=4          " Ibid, but while editing (e.g. <Tab>, <BS>)
 set spell                  " Spelling support
 set tabstop=4              " Spaces a tab counts for, visually
 set wrap                   " Soft-wrap text
-" set listchars=tab:»\ ,extends:>,precedes:<,nbsp:+  " ,eol:¬,trail:·,
+
+" Set listchars
+" tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+" extends:>,precedes:<,nbsp:+,trail:·,
+set listchars=tab:»\ ,eol:¬ 
 
 " Remember more undo
 if &undoreload < 8192

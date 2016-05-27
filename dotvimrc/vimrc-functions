@@ -123,7 +123,7 @@ endfunction
 
 function! OverLengthToggle()
     if exists('g:myoverlength_toggle')
-        2match OverLength /\%81v.\+/
+        2match OverLength /\%80v.\+/
         unlet g:myoverlength_toggle
     else
         2match OverLength //

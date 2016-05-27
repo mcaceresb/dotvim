@@ -93,11 +93,11 @@ if sline is eline:
 else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
-`!p snip.rv = getlinechar()` Program: ${2:`!v expand('%:t')`}
-`!p snip.rv = getlinechar()` Author:  ${3:`echo $USER`} <caceres@nber.org>
-`!p snip.rv = getlinechar()` Created: ${4:`date`}
+`!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Author:  Mauricio Caceres <caceres@nber.org>
+`!p snip.rv = getlinechar()` Created: `date`
 `!p snip.rv = getlinechar()` Updated: `date`
-`!p snip.rv = getlinechar()` Purpose: $5
+`!p snip.rv = getlinechar()` Purpose: ${2:${VISUAL:content}}
 `!p
 if not snip.c:
 	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
@@ -110,9 +110,7 @@ else:
 	box = make_box(len(t[1]), width)
 	snip.rv = ' ' + box[3]`
 
-%let stime = %sysfunc(putn(%sysfunc(datetime()), datetime.));
 dm 'clear log output'; * ods listing;
-
 options
 	errors = 20  /* Maximum number of prints of repeat errors    */
 	compress = binary /* Compress data using binary compression */
@@ -137,7 +135,24 @@ systask command "mkdir -p &outdir./data"   wait;
 
 libname bulk "&bulkdir." access = readonly;
 libname main "&maindir"  access = readonly;
-$0
+
+%macro main;
+	%let stime = %sysfunc(putn(%sysfunc(datetime()), datetime.));
+
+	/* Program goes here */$0
+
+	%sendMail(&stime.);
+%mend main;
+
+/**********************************************************************
+ *             Program wrappers, include statements, etc.             *
+ **********************************************************************/
+
+/* Programs to run from %main */
+
+/**********************************************************************
+ *                             Send email                             *
+ **********************************************************************/
 
 %macro sendMail(stime);
 	%let prog  = `!v expand('%:r')`;
@@ -155,7 +170,12 @@ $0
 	%let msg   = &prog. finished running\n&err.\n&warn.\nStart: &stime.\nEnd: &etime.;
 	%sysexec echo -e "&msg." | mail -s "&prog. &paux." &sysuserid.@nber.org;
 %mend sendMail;
-%sendMail;
+
+/**********************************************************************
+ *                           Run the things                           *
+ **********************************************************************/
+
+%main;
 endsnippet
 
 snippet sasoptions "basic sas options" w
