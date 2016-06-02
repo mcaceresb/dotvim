@@ -85,6 +85,7 @@ snippet sasproject "SAS Project Template" b
 `!p
 if not snip.c:
 	width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+width = 71
 b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
@@ -245,7 +246,7 @@ data ${1:data_out};
 	end;
 	set ${2:data_base};
 	if $4h.find() = 0 then output;
-	/* rc = $4h.find(); */
+	/* if $4h.find() ne 0 then call missing(vars of $3); */
 run;
 endsnippet
 
