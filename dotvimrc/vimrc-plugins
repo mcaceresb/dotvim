@@ -72,10 +72,17 @@ Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
 Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
 
 let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
+Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}
 Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
 Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
+
+" Plug 'hsitz/VimOrganizer',         {'as' : 'organizer'}
+Plug 'jceb/vim-orgmode',           {'as' : 'orgmode'}
+Plug 'vim-scripts/utl.vim',        {'as' : 'utl'}
+Plug 'vim-scripts/calendar.vim',   {'as' : 'cal'}
+Plug 'itchyny/calendar.vim',       {'as' : 'calendar'}
 
 Plug 'jmcantrell/vim-virtualenv',  {'as' : 'virtualenv'}
 Plug 'Yggdroot/indentLine',        {'as' : 'indentline'}

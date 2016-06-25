@@ -119,7 +119,7 @@ noremap <A-Delete> :tabclose<CR>
 nnoremap <leader>s :set spell!<CR>
 nmap <silent> <leader><CR> :noh<CR>cxc
 nmap <leader><leader>l :set list!<CR>
-set pastetoggle=<F5>
+set pastetoggle=<F6>
 
 " Vim quickly enlarge or reduce font
 nnoremap <C-Up> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)+1)', '')<CR> :echo &guifont<CR>
@@ -141,12 +141,6 @@ noremap <A-left> <C-w><
 noremap <A-right> <C-w>>
 noremap <A-up> <C-w>-
 noremap <A-down> <C-w>+
-
-" Navigate Splits
-nnoremap gh <C-w>h
-nnoremap gj <C-w>j
-nnoremap gk <C-w>k
-nnoremap gl <C-w>l
 
 " Vimdiff get and put diff
 nnoremap <A-g> :diffget<CR>]c

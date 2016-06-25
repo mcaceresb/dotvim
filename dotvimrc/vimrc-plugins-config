@@ -26,6 +26,11 @@ let g:airline_symbols.branch     = '⎇ '
 " let g:airline_right_sep = '◀'
 " let g:airline_symbols.spell  = 'Ꞩ'
 
+" Calendar: You can edit a calendar from Vim for some reason {{{1
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 " Characterize: Unicode information of current character {{{1
 
 nmap ,ga <Plug>(characterize)
@@ -52,7 +57,7 @@ let g:easy_align_delimiters = {
             \     'ignore_groups':   ['!Comment']
             \   },
             \   '\': {
-            \     'pattern':         '\\+',
+            \     'pattern':         '\\\\\+',
             \     'delimiter_align': 'l',
             \     'ignore_groups':   ['!Comment']
             \   },
@@ -216,6 +221,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+" Vim OrgMode: An implementation of Emacs' Org mode in Vim {{{1
+
 " R: Vim R plug-in {{{1
 
 let r_syntax_folding = 1
@@ -343,6 +350,16 @@ let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger    = "<s-space>"
 let g:ultisnips_python_style    = "google"
 let g:UltiSnipsSnippetsDir      = "~/.vim/plugged/snippets/UltiSnips"
+
+" Utl: Universal text (hyper) linking {{{1
+
+nnoremap <F5> :Utl<CR>
+vnoremap <F5> :Utl openLink visual<CR>
+let g:utl_cfg_hdl_mt_application_pdf    = ':silent !okular "%p" &'
+let g:utl_cfg_hdl_mt_application_msword = ':silent !wps "%p" &'
+let g:utl_cfg_hdl_mt_application_excel  = ':silent !wt "%p" &'
+let g:utl_cfg_hdl_mt_image_jpeg         = ':silent !gwenview "%p" &'
+let g:utl_cfg_hdl_scm_http              = ':silent !google-chrome-unstable %u &'
 
 " Undo: Visualize undo history {{{1
 

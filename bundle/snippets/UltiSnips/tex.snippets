@@ -296,6 +296,26 @@ snippet < "< Less than sign" w
 \le $0
 endsnippet
 
+snippet $hat "Wide overhat" w
+$\widehat{${1:${VISUAL}}}$0
+endsnippet
+
+snippet $til "Wide overtilde" w
+$\widetilde{${1:${VISUAL}}}$0
+endsnippet
+
+snippet $over "Wide overline" w
+$\overline{${1:${VISUAL}}}$0
+endsnippet
+
+snippet line "Wide overline" w
+$\overline{${1:${VISUAL}}}$0
+endsnippet
+
+snippet $bar "Bar" w
+$\bar{${1:${VISUAL}}}$0
+endsnippet
+
 snippet hat "Wide overhat" w
 \widehat{${1:${VISUAL}}}$0
 endsnippet
@@ -423,6 +443,15 @@ snippet longtable "Longtable" b
 
   & \\
 \end{longtable}
+endsnippet
+
+snippet appref "Appendix reference" w
+\hyperref[sec:$1]{Appendix $2}$0
+endsnippet
+
+snippet bibapa "Bibliography" b
+\bibliographystyle{apalike}
+\bibliography{$1}$0
 endsnippet
 
 # vim: nowrap fdm=marker ft=snippets

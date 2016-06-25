@@ -68,6 +68,7 @@ set shiftwidth=4           " Ibid, but to auto-indent
 set showbreak=\ \          " Prepend to start of soft-wrapped line
 set softtabstop=4          " Ibid, but while editing (e.g. <Tab>, <BS>)
 set spell                  " Spelling support
+set splitbelow             " Open splits on bottom half of current buffer
 set tabstop=4              " Spaces a tab counts for, visually
 set wrap                   " Soft-wrap text
 
@@ -99,6 +100,17 @@ command! -nargs=* Nowrap set nowrap nolinebreak
 
 " FileType Customization: Some file-type-specific settings {{{1
 
+" Override some vim-orgmode annoyances
+autocmd BufNewFile,BufRead *.org set
+            \ tabstop=2
+            \ softtabstop=2
+            \ shiftwidth=2
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+            \ nowrap
+            \ nolinebreak
+
 " Double-Check that we're in PEP8 format in python
 autocmd BufNewFile,BufRead *.py set
             \ tabstop=4
@@ -110,6 +122,7 @@ autocmd BufNewFile,BufRead *.py set
 
 " Custom spacing, folding, etc. for various file types
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+autocmd FileType org 2match OverLength //
 autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType tex 2match OverLength //
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2

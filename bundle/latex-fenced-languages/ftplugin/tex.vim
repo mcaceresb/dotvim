@@ -23,10 +23,11 @@ unlet! g:TeX_fenced_str
 
 " Arbitrary list of languages if none specified
 if !exists("g:TeX_fenced_languages")
-    let g:TeX_fenced_languages = [
-                \ 'bash=sh', 'sh', 'diff', 'html', 'javascript', 'python',
-                \ 'r', 'SAS=sas', 'sas', 'sql', 'Stata=stata', 'stata',
-                \ ]
+    " let g:TeX_fenced_languages = [
+    "             \ 'bash=sh', 'sh', 'diff', 'html', 'javascript', 'python',
+    "             \ 'r', 'SAS=sas', 'sas', 'sql', 'Stata=stata', 'stata',
+    "             \ ]
+    let g:TeX_fenced_languages = ['sh', 'SAS=sas', 'sas', 'Stata=stata', 'stata']
 endif
 
 " Include them in the syntax definition
