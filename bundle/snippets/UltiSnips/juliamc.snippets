@@ -1,0 +1,55 @@
+snippet jlproject "Julia project template" b
+#!/usr/bin/env julia
+
+# ---------------------------------------------------------------------
+# Program: ${1:`!v expand('%:t')`}
+# Created: `date`
+# Updated: `date`
+# Author:  Mauricio Caceres <caceres@nber.org>
+# Purpose: ${2:${VISUAL:content}}
+
+maindir = "`!v expand('%:p:h')`";
+progmsg = "`!v expand('%:r')`";
+logname = "`!v expand('%:r')`";
+outdir  = "\$(maindir)/out";
+datadir = "\$(maindir)/data";
+
+# ---------------------------------------------------------------------
+# Startup
+
+mainlog = redirect_stdout(open("\$(maindir)/code/\$(logname).log", "w"));
+versioninfo();
+cd(maindir);
+println("\n", join(["-" for i in 1:72]));
+println("\$(progmsg) starting \$(now())");
+
+try mkdir("\$(outdir)/fig")    end;
+try mkdir("\$(outdir)/tables") end;
+try mkdir("\$(outdir)/data")   end;
+
+# ---------------------------------------------------------------------
+# Run the things
+
+include(joinpath(maindir, "code/aux.jl"));
+include(joinpath(maindir, "code/get.jl"));
+
+@everywhere using aux
+@everywhere using get
+${0}
+progstat, progmsg =
+try
+	get.main(datadir, maintab);
+	"\$(progmsg) [Automated Message]", "Everything seems to be OK."
+catch
+	"ERROR: \$(progmsg) [Automated Message]", "Something went wrong! Sadness."
+end;
+
+# ---------------------------------------------------------------------
+# Cleanup
+
+println("\n", join(["-" for i in 1:72]));
+println("Done at \$(now())");
+println(progstat);
+close(mainlog);
+run(\`\$(joinpath(maindir, "code/mail.sh")) "\$(progmsg)"\`);
+endsnippet
