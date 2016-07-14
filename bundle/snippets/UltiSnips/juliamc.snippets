@@ -8,48 +8,62 @@ snippet jlproject "Julia project template" b
 # Author:  Mauricio Caceres <caceres@nber.org>
 # Purpose: ${2:${VISUAL:content}}
 
-maindir = "`!v expand('%:p:h')`";
-progmsg = "`!v expand('%:r')`";
-logname = "`!v expand('%:r')`";
-outdir  = "\$(maindir)/out";
-datadir = "\$(maindir)/data";
+maindir  = "`!v expand('%:p:h')`";
+progmsg  = "`!v expand('%:r')`";
+mailprog = "\$maindir/code/`!v expand('%:r')`_99mail.sh"
+logfile  = "\$maindir/code/`!v expand('%:r')`.log"
+outdir   = "\$maindir/out";
+datadir  = "\$maindir/data";
 
 # ---------------------------------------------------------------------
 # Startup
 
-mainlog = redirect_stdout(open("\$(maindir)/code/\$(logname).log", "w"));
-versioninfo();
-cd(maindir);
-println("\n", join(["-" for i in 1:72]));
-println("\$(progmsg) starting \$(now())");
+isinteractive()? nothing: redirect_stdout(open(logfile, "w"))
+versioninfo()
+println("\n", repeat("-", 72),
+		"\n", "\$(Dates.format(now(), "HH:MM e u d, yyyy"))",
+		"\n",
+		"\n", "\$progmsg")
 
-try mkdir("\$(outdir)/fig")    end;
-try mkdir("\$(outdir)/tables") end;
-try mkdir("\$(outdir)/data")   end;
+try mkdir("\$outdir/fig")    end
+try mkdir("\$outdir/tables") end
+try mkdir("\$outdir/data")   end
+
+datafile = joinpath(datadir, "data.jld")
+outfile  = joinpath(outdir,  "data/out.jld")
+outtab   = joinpath(outdir,  "tables/tables.txt")
 
 # ---------------------------------------------------------------------
 # Run the things
 
-include(joinpath(maindir, "code/aux.jl"));
-include(joinpath(maindir, "code/get.jl"));
+include(joinpath(maindir, "code/aux.jl"))
+include(joinpath(maindir, "code/get.jl"))
 
-@everywhere using aux
-@everywhere using get
+@everywhere using Aux
+@everywhere using Get
+
 ${0}
 progstat, progmsg =
 try
-	get.main(datadir, maintab);
-	"\$(progmsg) [Automated Message]", "Everything seems to be OK."
+	Get.main(datadir, maintab);
+	"\$progmsg ran [Automated Message]", "Cue the cherubs!"
 catch
-	"ERROR: \$(progmsg) [Automated Message]", "Something went wrong! Sadness."
-end;
+	"ERROR: \$progmsg", sprint(showerror, err, catch_backtrace())
+end
 
 # ---------------------------------------------------------------------
 # Cleanup
 
-println("\n", join(["-" for i in 1:72]));
-println("Done at \$(now())");
-println(progstat);
-close(mainlog);
-run(\`\$(joinpath(maindir, "code/mail.sh")) "\$(progmsg)"\`);
+println("\n", repeat("-", 72),
+		"\n", "\$(Dates.format(now(), "HH:MM e u d, yyyy"))",
+		"\n",
+		"\n", "\$progstat")
+
+run(`$mailprog "\$progmsg"`)
+endsnippet
+
+snippet mod "module" b
+@everywhere module ${1:${VISUAL:ModuleName}}
+	${2:using ${3:RequiredModules}}$0
+end
 endsnippet

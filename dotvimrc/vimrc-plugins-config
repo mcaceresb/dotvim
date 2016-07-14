@@ -182,6 +182,10 @@ endfunction
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#EDEDED
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#F1F1F1
 
+" Julia: Support for Julia Language {{{1
+
+let g:latex_to_unicode_auto = 1
+
 " LaTeX: Custom LaTeX Options {{{1
 
 " General latex mappings

@@ -1,0 +1,86 @@
+snippet jlproject "Julia project template" b
+#!/usr/bin/env python
+
+# ---------------------------------------------------------------------
+# Program: ${1:`!v expand('%:t')`}
+# Created: `date`
+# Updated: `date`
+# Author:  Mauricio Caceres <caceres@nber.org>
+# Purpose: ${2:${VISUAL:content}}
+
+from __future__ import print_function
+from traceback import format_exc
+import datetime
+import sys
+import os
+
+def main():
+
+	# Startup
+	# -------
+
+	maindir  = "`!v expand('%:p:h')`/";
+	progmsg  = "`!v expand('%:r')`/";
+	mailprog = maindir + "code/`!v expand('%:r')`_99mail.sh"
+	logfile  = maindir + "code/`!v expand('%:r')`.log"
+	outdir   = maindir + "out"
+	datadir  = maindir + "data"
+
+	sys.stdout = Logger(logfile)
+	print(sys.version)
+	print(os.linesep.join(os.uname()))
+
+	datestr = datetime.datetime.today().strftime("%H:%M %a %b %d, %Y")
+	print(os.linesep.join(['-' * 72, datestr, '', progmsg]))
+
+	mkpath(os.path.join(outdir, "fig"))
+	mkpath(os.path.join(outdir, "tables"))
+	mkpath(os.path.join(outdir, "data"))
+
+	outtab   = os.path.join(outdir, "tables/tables.txt")
+	datafile = os.path.join(datadir, "data.h5")
+	outfile  = os.path.join(outdir,  "data/data.h5")
+
+	# Run the things!
+	# ---------------
+
+	import get
+	try:
+		get.main(datadir, "data.h5")
+		progmsg  = progmsg + " ran [Automated Message]"
+		progstat = "Cue the cherubs!"
+	except:
+		progmsg  = "ERROR: " + progmsg
+		progstat = format_exc()
+
+	# Exit messages
+	# -------------
+
+	datestr = datetime.datetime.today().strftime("%H:%M %a %b %d, %Y")
+	print(os.linesep.join(['-' * 72, datestr, '', progstat, '', progmsg]))
+	os.system('{} "{}"'.format(mailprog, progmsg))
+
+class Logger():
+	def __init__(self, logfile = os.path.splitext(__file__)[0] + '.log'):
+		self.terminal = sys.stdout
+		self.log = open(logfile, 'w')
+
+	def write(self, message):
+		self.terminal.write(message)
+		self.log.write(message)
+
+def mkpath(mdir, warn_exists = False):
+	try:
+		os.makedirs(mdir)
+	except OSError:
+		if not os.path.isdir(mdir):
+			raise
+		elif warn_exists:
+			print("WARNING: '{}' exists!".format(mdir))
+
+# ---------------------------------------------------------------------
+# Run the things
+
+if __name__ == "__main__":
+	main()
+endsnippet

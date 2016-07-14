@@ -161,6 +161,7 @@ exec 'highlight markdownCode guifg=#10A778'
 exec 'highlight sasMacroVar  guifg=#0000FF gui=bold ctermfg=Blue'
 exec 'highlight stataLocal   guifg=#7ab4db gui=bold'
 exec 'highlight stataGlobal  guifg=#BE646C gui=bold'
+exec 'highlight link juliaStringVarsPla Normal'
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker
