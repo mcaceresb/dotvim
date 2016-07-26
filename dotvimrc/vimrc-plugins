@@ -70,6 +70,7 @@ Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
 Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
 Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
 Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
+Plug 'xuhdev/vim-latex-live-preview',  {'as' : 'latex-preview',  'for' : 'tex'}
 
 let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
 Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}

@@ -11,7 +11,20 @@ priority -60
 ##############
 
 global !p
-import string, vim
+import string, vim, random, math
+
+def gen_random(low, high):
+	return low + (high - low) * random.random()
+
+def gen_line(ltype):
+	if ltype == 'interval':
+		i1 = gen_random(40, 60)
+		i2 = gen_random(5, 20)
+	elif ltype == 'last':
+		i1 = gen_random(40, 60)
+		i2 = gen_random(20, 40)
+
+	return '%.0f, %.0f' % (i1, i2)
 
 """ Maps a filetype to comment format used for boxes.
 Automatically filled during usage"""
@@ -209,10 +222,6 @@ b, m, e, i = _get_comment_format()
 sline = b
 eline = i + e
 snip.rv = '' if eline is sline else eline`
-endsnippet
-
-snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
-`date`$0
 endsnippet
 
 snippet nowa "Current datetime, YYYY.MM.DD HH:MM:SS" w
@@ -601,6 +610,76 @@ snippet flat "Fields for flat RCT file" b
 	, notes               , notes
 	, cites               , cites
 }
+endsnippet
+
+snippet startwork "Log work for ofl project" b
+{
+	"schedule": {
+		"interval 1": [`!p snip.rv = gen_line('interval')`],
+		"interval 2": [`!p snip.rv = gen_line('interval')`],
+		"interval 3": [`!p snip.rv = gen_line('last')`],
+		"interval 4": [`!p snip.rv = gen_line('interval')`],
+		"interval 5": [`!p snip.rv = gen_line('interval')`],
+		"interval 6": [`!p snip.rv = gen_line('last')`],
+		"interval 7": [`!p snip.rv = gen_line('interval')`],
+		"interval 8": [`!p snip.rv = gen_line('interval')`],
+		"interval 9": [`!p snip.rv = gen_line('last')`]
+	},
+	"log": {
+	$0
+	}
+}
+endsnippet
+
+snippet logwork "Log work for ofl project" b
+"`date`": {
+	"end": "",
+	"rating": $0,
+	"done": ["", ""]
+}
+endsnippet
+
+###################
+#  Tmp 2016-07-19 #
+###################
+
+snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
+`date`$0
+endsnippet
+
+snippet sarah "Description" b
+Sarah:
+> $0
+endsnippet
+
+snippet joe "Description" b
+Joe:
+> $0
+endsnippet
+
+snippet saraha "Description" b
+Sarah A:
+> $0
+endsnippet
+
+snippet laura "Description" b
+Laura:
+> $0
+endsnippet
+
+snippet si "Description" b
+Sihang:
+> $0
+endsnippet
+
+snippet dir "Description" b
+Director:
+> $0
+endsnippet
+
+snippet pat "Description" b
+Patrick:
+> $0
 endsnippet
 
 # vim:ft=snippets:

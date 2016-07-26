@@ -196,6 +196,7 @@ au FileType tex nnoremap <buffer> <leader>lb :!pdflatex -synctex=1 "%"<CR>:!bibt
 au FileType tex nnoremap <buffer> <leader>lq :!xelatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!xelatex -synctex=1 "%"<CR>:!xelatex -synctex=1 "%"<CR>
 
 " latex-suite options
+let g:livepreview_previewer = 'okular'
 let g:Tex_Leader=','
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
