@@ -58,7 +58,7 @@ set breakindent            " Soft wrap respecting visual indentation
 set colorcolumn=           " Don't highlight any columns
 set conceallevel=0         " Don't conceal any characters
 set cryptmethod=blowfish2  " Encryption method when saving with :X
-set cursorline             " Highlight the line the cursor is on
+set nocursorline           " Highlight the line the cursor is on
 set expandtab              " Insert spaces for tabs, like a sane person
 set guioptions=acer        " Minimal GUI
 set infercase              " Smart case in insert-mode completion
@@ -139,10 +139,6 @@ autocmd FileType text  2match OverLength //
 " Display style for misspelled words
 hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red gui=undercurl
-
-" Change grayness of comments of the fly (e.g. :Setgray 42)
-command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
-highlight Comment cterm=italic
 
 " Highlight extra white space and lines that are too long
 exec 'highlight OverLength      ctermbg=red guibg=#FFD3D3'

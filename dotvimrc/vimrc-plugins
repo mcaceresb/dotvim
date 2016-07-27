@@ -5,6 +5,8 @@
 " Updated: Sat May 14 17:55:24 EDT 2016
 " Purpose: Load all vim plugins
 
+" Plug 'Valloric/YouCompleteMe',         {'do' : 'python2 ./install.py'}
+
 call plug#begin()
 
 " Essential: Should be 'core' functionality, IMO {{{1
@@ -21,7 +23,6 @@ Plug 'mbbill/undotree',                {'as' : 'undotree'}
 Plug 'mhinz/vim-startify',             {'as' : 'startify'}
 Plug 'honza/vim-snippets',             {'as' : 'snippets'}
 Plug 'tomtom/tcomment_vim',            {'as' : 'tcomment'}
-Plug 'Valloric/YouCompleteMe',         {'do' : 'python2 ./install.py'}
 Plug 'vim-airline/vim-airline',        {'as' : 'airline'}
 Plug 'scrooloose/nerdtree',            {'as' : 'nerdtree'}
 Plug 'Xuyuanp/nerdtree-git-plugin',    {'as' : 'nerdtree-git'}
@@ -55,57 +56,28 @@ Plug 'godlygeek/tabular',              {'as' : 'tabular'}
 
 " Language Support: Language-specific {{{1
 
-" Plug 'hachibeedi/vim-vbnet',      {'as' : 'vbnet'}
-Plug 'vim-scripts/vbnet.vim',     {'as' : 'vbnet'}
 Plug 'chrisbra/csv.vim',          {'as' : 'csv'}
 Plug 'greyblake/vim-preview',     {'as' : 'preview'}
 Plug 'JuliaLang/julia-vim',       {'as' : 'julia'}
 Plug 'tpope/vim-jdaddy',          {'as' : 'jaddy',      'for' : 'json'}
 Plug 'tpope/vim-markdown',        {'as' : 'markdown',   'for' : 'markdown'}
-Plug 'suan/vim-instant-markdown', {'as' : 'instant-md', 'for' : 'markdown'}
 Plug 'nvie/vim-flake8',           {'as' : 'flake8',     'for' : 'python'}
 Plug 'tmhedberg/SimpylFold',      {'as' : 'simpylfold', 'for' : 'python'}
 Plug 'jpitblado/vim-stata',       {'as' : 'stata',      'for' : 'stata'}
 Plug 'jpitblado/vim-smcl',        {'as' : 'smcl',       'for' : 'smcl'}
-Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
-Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
-Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
 Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
-Plug 'xuhdev/vim-latex-live-preview',  {'as' : 'latex-preview',  'for' : 'tex'}
 
-let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
+let g:bundle_path = "/bbkinghome/caceres/dotvim/bundle/"
 Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}
 Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
 Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
 
-" Plug 'hsitz/VimOrganizer',         {'as' : 'organizer'}
-Plug 'jceb/vim-orgmode',           {'as' : 'orgmode'}
-Plug 'vim-scripts/utl.vim',        {'as' : 'utl'}
-Plug 'vim-scripts/calendar.vim',   {'as' : 'cal'}
-Plug 'itchyny/calendar.vim',       {'as' : 'calendar'}
-
-Plug 'jmcantrell/vim-virtualenv',  {'as' : 'virtualenv'}
-Plug 'tpope/vim-characterize',     {'as' : 'characterize'}
-Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
-Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
-Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
-Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
-
-" Plug 'reedes/vim-wordy',          {'as' : 'wordy'}
-" Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
-" Plug 'junegunn/fzf.vim',          {'as' : 'fzf.vim'}
-" Plug 'jmcantrell/vim-virtualenv', {'as' : 'virtualenv'}
-" Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
-" Plug 'ervandew/screen',           {'as' : 'screen'}
-" Plug 'xolox/vim-shell',           {'as' : 'shell'}
-" Plug 'Shougo/vimshell.vim',       {'as' : 'vimshell'}
-" Plug 'Shougo/vimproc.vim',        {'as' : 'vimproc', 'do' : 'make'}
-" Plug 'haya14busa/vim-asterisk',          {'as' : 'asterisk'}
-" Plug 'nathanaelkane/vim-indent-guides',  {'as' : 'indentguide'}
-" Plug 'mattly/vim-markdown-enhancements', {'as' : 'enhancements-md'}
+Plug 'gregsexton/gitv', {'as' : 'fugitive-gitv'}
+Plug 'junegunn/gv.vim', {'as' : 'fugitive-gv'}
+Plug 'altercation/vim-colors-solarized', {'as' : 'solarized'}
+Plug 'vim-utils/vim-alt-mappings',       {'as' : 'alt-mappings'}
 
 call plug#end()
 

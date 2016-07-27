@@ -8,7 +8,7 @@ My personal Vim distribution.
 I use [Plug](https://github.com/junegunn/vim-plug) and a *ton* of plug-ins. Run `:PlugInstall` once in vim to download everything. To get started:
 
 ```bash
-export DOTVIM=$HOME/Documents/code/dotvim
+export DOTVIM=$HOME/dotvim
 mkdir ~/.vim/
 mkdir ~/.vim/session/
 mkdir ~/.vim/spell/
@@ -42,13 +42,9 @@ cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/plugged/snippets/snippets/ -sf
 cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/plugged/snippets/UltiSnips/ -sf
 ```
 
-Last, I keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently trying out (and mostly enjoying) [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil). With some minor tweaks (see `$DOTVIM/colors/pencil.vim`) it looks really nice to me.
+I also keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently trying out (and mostly enjoying) [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil). With some minor tweaks (see `$DOTVIM/colors/pencil.vim`) it looks really nice to me.
 
-Last, to get [vim-instant-markdown](https://github.com/suan/vim-instant-markdown/issues) to work you also need to do
-```bash
-sudo apt-get install xdg-utils npm
-sudo npm -g install instant-markdown-d
-```
+Last, some things are not too smooth over SSH if you're not using GVim. I I use the [vim-alt-mapppings](https://github.com/vim-utils/vim-alt-mappings) plugin for alt key mappings, for instance. I also set vim to use a 256 color terminal, which is unnecessary in GVim.
 
 ## Structure
 
@@ -56,9 +52,6 @@ sudo npm -g install instant-markdown-d
 * `./colors` has some colorschemes I actually use.
 * `./dotvimrc` has my vimrc and related files.
 * `./fonts` has some monospaced fonts I like.
-* `./spell` has dictionaries (e.g. from [Moby](http://icon.shef.ac.uk/Moby/) and [WordNet](http://wordnet.princeton.edu/), csv thesaurus, and user-defined words).
-* `./session` is just for show.
-* `./undo` is just for show.
 
 My vimrc is split into a few parts
 

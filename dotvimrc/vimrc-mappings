@@ -136,12 +136,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " Thesaurus look-up
 nnoremap <C-Space> hEa<C-x><C-t>
 
-" Resize split windows
-noremap <A-left> <C-w><
-noremap <A-right> <C-w>>
-noremap <A-up> <C-w>-
-noremap <A-down> <C-w>+
-
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}
