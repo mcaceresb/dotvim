@@ -142,10 +142,6 @@ noremap <A-right> <C-w>>
 noremap <A-up> <C-w>-
 noremap <A-down> <C-w>+
 
-" Vimdiff get and put diff
-nnoremap <A-g> :diffget<CR>]c
-nnoremap <A-p> :diffput<CR>]c
-
 " Modelines: {{{1
 " vim: nowrap fdm=marker
 " }}}

@@ -37,7 +37,6 @@ Plug 'reedes/vim-textobj-sentence',    {'as' : 'textobj-sentence'}
 Plug 'reedes/vim-textobj-quote',       {'as' : 'textobj-quote'}
 Plug 'reedes/vim-pencil',              {'as' : 'pencil'}
 Plug 'reedes/vim-lexical',             {'as' : 'lexical'}
-Plug 'reedes/vim-wordy',               {'as' : 'wordy'}
 Plug 'reedes/vim-colors-pencil',       {'as' : 'colors-pencil'}
 
 Plug 'junegunn/vim-easy-align',        {'as' : 'easyalign'}
@@ -51,6 +50,8 @@ Plug 'majutsushi/tagbar',              {'as' : 'tagbar'}
 Plug 'kana/vim-operator-user',         {'as' : 'opetator'}
 Plug 'haya14busa/vim-operator-flashy', {'as' : 'operator-flashy'}
 Plug 'lilydjwg/colorizer',             {'as' : 'colorizer'}
+Plug 'Yggdroot/indentLine',            {'as' : 'indentline'}
+Plug 'godlygeek/tabular',              {'as' : 'tabular'}
 
 " Language Support: Language-specific {{{1
 
@@ -86,8 +87,6 @@ Plug 'vim-scripts/calendar.vim',   {'as' : 'cal'}
 Plug 'itchyny/calendar.vim',       {'as' : 'calendar'}
 
 Plug 'jmcantrell/vim-virtualenv',  {'as' : 'virtualenv'}
-Plug 'Yggdroot/indentLine',        {'as' : 'indentline'}
-Plug 'godlygeek/tabular',          {'as' : 'tabular'}
 Plug 'tpope/vim-characterize',     {'as' : 'characterize'}
 Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
 Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
@@ -95,6 +94,7 @@ Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
 Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
 Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
 
+" Plug 'reedes/vim-wordy',          {'as' : 'wordy'}
 " Plug 'flazz/vim-colorschemes',    {'as' : 'colorschemes'}
 " Plug 'junegunn/fzf.vim',          {'as' : 'fzf.vim'}
 " Plug 'jmcantrell/vim-virtualenv', {'as' : 'virtualenv'}
