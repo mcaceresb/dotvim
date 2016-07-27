@@ -54,8 +54,6 @@ endif
 
 " Preferences: Some personal tweaks {{{1
 
-let mapleader = ","        " Leader is comma
-let maplocalleader = "\\"  " Local leader is backslash
 set breakindent            " Soft wrap respecting visual indentation
 set colorcolumn=           " Don't highlight any columns
 set conceallevel=0         " Don't conceal any characters
@@ -70,9 +68,14 @@ set shiftwidth=4           " Ibid, but to auto-indent
 set showbreak=\ \          " Prepend to start of soft-wrapped line
 set softtabstop=4          " Ibid, but while editing (e.g. <Tab>, <BS>)
 set spell                  " Spelling support
+set splitbelow             " Open splits on bottom half of current buffer
 set tabstop=4              " Spaces a tab counts for, visually
 set wrap                   " Soft-wrap text
-" set listchars=tab:»\ ,extends:>,precedes:<,nbsp:+  " ,eol:¬,trail:·,
+
+" Set listchars
+" tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+" extends:>,precedes:<,nbsp:+,trail:·,
+set listchars=tab:»\ ,eol:¬ 
 
 " Remember more undo
 if &undoreload < 8192
@@ -97,6 +100,17 @@ command! -nargs=* Nowrap set nowrap nolinebreak
 
 " FileType Customization: Some file-type-specific settings {{{1
 
+" Override some vim-orgmode annoyances
+autocmd BufNewFile,BufRead *.org set
+            \ tabstop=2
+            \ softtabstop=2
+            \ shiftwidth=2
+            \ expandtab
+            \ autoindent
+            \ fileformat=unix
+            \ nowrap
+            \ nolinebreak
+
 " Double-Check that we're in PEP8 format in python
 autocmd BufNewFile,BufRead *.py set
             \ tabstop=4
@@ -108,6 +122,7 @@ autocmd BufNewFile,BufRead *.py set
 
 " Custom spacing, folding, etc. for various file types
 autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+autocmd FileType org 2match OverLength //
 autocmd FileType tex setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType tex 2match OverLength //
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2
@@ -129,9 +144,6 @@ hi SpellBad cterm=underline ctermfg=red gui=undercurl
 command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
 highlight Comment cterm=italic
 
-" If necessary, make comments light gray italic
-" highlight Comment gui=italic guifg=grey50
-
 " Highlight extra white space and lines that are too long
 exec 'highlight OverLength      ctermbg=red guibg=#FFD3D3'
 exec 'highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3'
@@ -146,6 +158,7 @@ exec 'highlight markdownCode guifg=#10A778'
 exec 'highlight sasMacroVar  guifg=#0000FF gui=bold ctermfg=Blue'
 exec 'highlight stataLocal   guifg=#7ab4db gui=bold'
 exec 'highlight stataGlobal  guifg=#BE646C gui=bold'
+exec 'highlight link juliaStringVarsPla Normal'
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker

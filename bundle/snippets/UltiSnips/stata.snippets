@@ -115,10 +115,10 @@ else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
 `!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
-`!p snip.rv = getlinechar()` Created: `!v strftime('%c')`
-`!p snip.rv = getlinechar()` Updated: `!v strftime('%c')`
-`!p snip.rv = getlinechar()` Author:  ${2:`echo $USER`}
-`!p snip.rv = getlinechar()` Purpose: ${3:${VISUAL:content}}
+`!p snip.rv = getlinechar()` Created: `date`
+`!p snip.rv = getlinechar()` Updated: `date`
+`!p snip.rv = getlinechar()` Author:  Mauricio Caceres <caceres@nber.org>
+`!p snip.rv = getlinechar()` Purpose: ${2:${VISUAL:content}}
 `!p
 width = int(vim.eval("&textwidth")) or 71
 b, m, e, i = _get_comment_format()
@@ -130,6 +130,7 @@ if sline is not eline:
 version 13
 clear all
 set more off
+set varabbrev off
 capture log close _all
 
 `!p
@@ -191,7 +192,7 @@ else:
 di "End: $S_TIME $S_DATE"
 local end_time "$S_TIME $S_DATE"
 local message = "\`progname' finished running\n\nStart: \`start_time'\nEnd: \`end_time'"
-shell echo -e "\`message'" | mail -s "\`progname' \`paux'" -a "\`mainlog'" \`whoami\`@nber.org
+shell echo -e "\`message'" | mail -s "\`progname' \`paux'" \`whoami\`@nber.org
 clear all
 endsnippet
 

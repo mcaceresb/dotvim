@@ -123,7 +123,7 @@ endfunction
 
 function! OverLengthToggle()
     if exists('g:myoverlength_toggle')
-        2match OverLength /\%81v.\+/
+        2match OverLength /\%80v.\+/
         unlet g:myoverlength_toggle
     else
         2match OverLength //
@@ -231,6 +231,36 @@ function! TextEnableCodeSnip(filetype, start, end, textSnipHl) abort
 endfunction
 hi link Snip SpecialComment
 
+" Align Special: Custom alignment functions for life project {{{2
+
+command! AlignSpecial call AlignSpecial()
+function! AlignSpecial() range
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    execute 'normal! gg/^------mm'
+    execute 'normal! $G$ypgvhA jyT|f|pF|`m'
+    execute 'normal! Gf|h"ax`m'
+    execute 'normal! VG:Tabularize/|/c0'
+    execute 'normal! `mP'
+    execute 'normal! VG:s/\v(^\s*-+\|[-]*[^-\|]*\|.*$)/\=substitute(submatch(1), " ", "-", "g")/g'
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+command! AlignOnly call AlignOnly()
+function! AlignOnly() range
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    execute 'normal! gg/^------mm'
+    execute 'normal! Gf|h"ax`m'
+    execute 'normal! VG:Tabularize/|/c0'
+    execute 'normal! `mP'
+    execute 'normal! VG:s/\v(^\s*-+\|[-]*[^-\|]*\|.*$)/\=substitute(submatch(1), " ", "-", "g")/g'
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker

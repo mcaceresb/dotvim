@@ -26,6 +26,11 @@ let g:airline_symbols.branch     = '⎇ '
 " let g:airline_right_sep = '◀'
 " let g:airline_symbols.spell  = 'Ꞩ'
 
+" Calendar: You can edit a calendar from Vim for some reason {{{1
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 " Characterize: Unicode information of current character {{{1
 
 nmap ,ga <Plug>(characterize)
@@ -45,6 +50,44 @@ set background=light
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters = {
+            \   '/': {
+            \     'pattern':         '//\+\|/\*\|\*/',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \   '\': {
+            \     'pattern':         '\\\\\+',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \   '>': {
+            \     'pattern':       '-\?>\|>>\|=>',
+            \     'left_margin':   1,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \   '<': {
+            \     'pattern':       '-\?<\|<<\|<=',
+            \     'left_margin':   1,
+            \     'right_margin':  1,
+            \     'stick_to_left': 0,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \   ';': {
+            \     'pattern':       ';',
+            \     'left_margin':   0,
+            \     'right_margin':  1,
+            \     'stick_to_left': 1,
+            \     'ignore_groups': ['!Comment']
+            \   },
+            \  '%': {
+            \     'pattern':         '%\+',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment']
+            \   },
+            \ }
 
 " EasyMotion: Vim Motions on Steroids: {{{1
 
@@ -78,7 +121,7 @@ endfunction
 
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
-let g:operator#flashy#flash_time = 150
+let g:operator#flashy#flash_time = 250
 highlight Flashy term=bold ctermbg=0 guibg=#B6D6FD
 
 " FuzzyNavigation: Fuzzy navigation settings {{{1
@@ -139,6 +182,10 @@ endfunction
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#EDEDED
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#F1F1F1
 
+" Julia: Support for Julia Language {{{1
+
+let g:latex_to_unicode_auto = 1
+
 " LaTeX: Custom LaTeX Options {{{1
 
 " General latex mappings
@@ -149,6 +196,7 @@ au FileType tex nnoremap <buffer> <leader>lb :!pdflatex -synctex=1 "%"<CR>:!bibt
 au FileType tex nnoremap <buffer> <leader>lq :!xelatex -synctex=1 "%"<CR>:!bibtex %:r.aux<CR>:!xelatex -synctex=1 "%"<CR>:!xelatex -synctex=1 "%"<CR>
 
 " latex-suite options
+let g:livepreview_previewer = 'okular'
 let g:Tex_Leader=','
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
@@ -177,6 +225,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+
+" Vim OrgMode: An implementation of Emacs' Org mode in Vim {{{1
 
 " R: Vim R plug-in {{{1
 
@@ -306,6 +356,16 @@ let g:UltiSnipsExpandTrigger    = "<s-space>"
 let g:ultisnips_python_style    = "google"
 let g:UltiSnipsSnippetsDir      = "~/.vim/plugged/snippets/UltiSnips"
 
+" Utl: Universal text (hyper) linking {{{1
+
+nnoremap <F5> :Utl<CR>
+vnoremap <F5> :Utl openLink visual<CR>
+let g:utl_cfg_hdl_mt_application_pdf    = ':silent !okular "%p" &'
+let g:utl_cfg_hdl_mt_application_msword = ':silent !wps "%p" &'
+let g:utl_cfg_hdl_mt_application_excel  = ':silent !wt "%p" &'
+let g:utl_cfg_hdl_mt_image_jpeg         = ':silent !gwenview "%p" &'
+let g:utl_cfg_hdl_scm_http              = ':silent !google-chrome-unstable %u &'
+
 " Undo: Visualize undo history {{{1
 
 nnoremap <F11> :UndotreeToggle<CR>
@@ -357,7 +417,8 @@ let g:lexical#dictionary_key = '<leader>ld'
 
 " Online Thesaurus: Query thesaurus.com for meaning and synonyms {{{2
 
-nnoremap <leader>lo :OnlineThesaurusCurrentWord<CR>
+let g:online_thesaurus_map_keys = 0
+noremap <leader>lo :OnlineThesaurusCurrentWord<CR>
 
 " Pencil: Tweaks to make writing prose nicer {{{2
 
