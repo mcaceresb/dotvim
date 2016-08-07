@@ -26,11 +26,6 @@ let g:airline_symbols.branch     = '⎇ '
 " let g:airline_right_sep = '◀'
 " let g:airline_symbols.spell  = 'Ꞩ'
 
-" Calendar: You can edit a calendar from Vim for some reason {{{1
-
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 " Characterize: Unicode information of current character {{{1
 
 nmap ,ga <Plug>(characterize)
@@ -430,10 +425,6 @@ let g:pencil#conceallevel = 0
 
 let g:textobj#quote#educate = 0
 let g:textobj#quote#matchit = 1  
-
-" Wordy: Lightweight writing style assistant {{{2
-
-nnoremap <silent> K :NextWordy<CR>
 
 " Initialize for text files only {{{2
 
