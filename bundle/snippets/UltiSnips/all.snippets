@@ -394,33 +394,6 @@ else:
 $0
 endsnippet
 
-snippet progress "Track progress" b
-`!v strftime("%a %b %d %Y")` 08:00,
-`!v strftime("%a %b %d %Y")` 09:00,
-`!v strftime("%a %b %d %Y")` 10:00,
-`!v strftime("%a %b %d %Y")` 11:00,
-`!v strftime("%a %b %d %Y")` 12:00,
-`!v strftime("%a %b %d %Y")` 13:00,
-`!v strftime("%a %b %d %Y")` 14:00,
-`!v strftime("%a %b %d %Y")` 15:00,
-`!v strftime("%a %b %d %Y")` 16:00,
-`!v strftime("%a %b %d %Y")` 17:00,
-`!v strftime("%a %b %d %Y")` 18:00,
-`!v strftime("%a %b %d %Y")` 19:00,
-`!v strftime("%a %b %d %Y")` 20:00,
-`!v strftime("%a %b %d %Y")` 21:00,
-`!v strftime("%a %b %d %Y")` 22:00,
-`!v strftime("%a %b %d %Y")` 23:00,
-`!v strftime("%a %b %d %Y")` 00:00,
-`!v strftime("%a %b %d %Y")` 01:00,
-`!v strftime("%a %b %d %Y")` 02:00,
-`!v strftime("%a %b %d %Y")` 03:00,
-`!v strftime("%a %b %d %Y")` 04:00,
-`!v strftime("%a %b %d %Y")` 05:00,
-`!v strftime("%a %b %d %Y")` 06:00,
-`!v strftime("%a %b %d %Y")` 07:00,
-endsnippet
-
 snippet prolog "Project log entry" b
 **Event: $1**
 Date: `date`
@@ -452,27 +425,6 @@ endsnippet
 #  Misc  #
 ##########
 
-snippet stuffs "temporary stuffs" b
-% Citation: $0
-
-Relevance:
-
-Notes:
-\begin{enumerate}
-  \item
-\end{enumerate}
-
-Conclusions:
-\begin{enumerate}
-  \item
-\end{enumerate}
-
-Critique:
-\begin{enumerate}
-  \item
-\end{enumerate}
-endsnippet
-
 snippet () "Braces (...)" i
 (${1:${VISUAL}})$0
 endsnippet
@@ -483,48 +435,6 @@ endsnippet
 
 snippet {} "Curly {...}" i
 {${1:${VISUAL}}}$0
-endsnippet
-
-snippet infojson "Info JSON template" b
-{
-    "project": "",
-    "description": "",
-    "status": "",
-    "dates": {
-        "start": "",
-        "involved": "",
-        "updated": "",
-        "end": ""
-    },
-    "people": {
-        "Joseph Doyle": {
-            "role": "Co-investigator",
-            "institution": "MIT",
-			"title": "PhD",
-            "email": "jjdoyle@mit.edu"
-        },
-        "Mauricio Caceres": {
-            "role": "Joseph Doyle's RA",
-            "institution": "NBER",
-			"title": "MA",
-            "email": "caceres@nber"
-        }
-    },
-    "sync": {
-        "local": "./",
-        "server": "server",
-        "remote-full": "/path",
-        "remote-partial": "/path",
-        "exclude-full": ["data"],
-        "include-partial": ["code", "writeup", "admin"]
-    },
-    "self": {
-        "user": "caceres",
-        "name": "Mauricio Caceres",
-        "role": "Joseph Doyle's RA",
-        "email": "caceres@nber.org"
-    }
-}
 endsnippet
 
 snippet rct "Temp for RCTs" b
@@ -639,46 +549,12 @@ snippet logwork "Log work for ofl project" b
 }
 endsnippet
 
-###################
-#  Tmp 2016-07-19 #
-###################
-
 snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
 `date`$0
 endsnippet
 
-snippet sarah "Description" b
-Sarah:
-> $0
-endsnippet
-
 snippet joe "Description" b
 Joe:
-> $0
-endsnippet
-
-snippet saraha "Description" b
-Sarah A:
-> $0
-endsnippet
-
-snippet laura "Description" b
-Laura:
-> $0
-endsnippet
-
-snippet si "Description" b
-Sihang:
-> $0
-endsnippet
-
-snippet dir "Description" b
-Director:
-> $0
-endsnippet
-
-snippet pat "Description" b
-Patrick:
 > $0
 endsnippet
 

@@ -36,20 +36,17 @@ endif
 " Otherwise, pick your fave font
 set guifont=Anonymice\ Powerline\ 10
 set guifont=Cousine\ for\ Powerline\ 10
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
-set guifont=Fira\ Mono\ for\ Powerline\ 10
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
 set guifont=Meslo\ for\ Powerline\ 10
 set guifont=Monofur\ for\ Powerline\ 10
 set guifont=Roboto\ Mono\ for\ Powerline\ 10
-set guifont=Symbol\ Neu\ for\ Powerline\ 10
-set guifont=Hack\ 10
 set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
 set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+set guifont=Hack\ 10
 set guifont=Inconsolata\ for\ Powerline\ 11
-set guifont=Inconsolata-dz\ for\ Powerline\ 10
 set guifont=Inconsolata-g\ for\ Powerline\ 10
+set guifont=Inconsolata-dz\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10

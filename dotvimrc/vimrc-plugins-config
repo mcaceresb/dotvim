@@ -52,7 +52,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 let g:easy_align_delimiters = {
             \   '/': {
-            \     'pattern':         '//\+\|/\*\|\*/',
+            \     'pattern':         '\/\/\+',
             \     'delimiter_align': 'l',
             \     'ignore_groups':   ['!Comment']
             \   },
@@ -264,6 +264,7 @@ nmap <Leader>pm :PreviewMarkdown<CR>
 nmap <Leader>pt :PreviewTextile<CR>
 nmap <Leader>pr :PreviewRdoc<CR>
 nmap <Leader>ph :PreviewHtml<CR>
+nmap <Leader>ps :PreviewRst<CR>
 
 " Startify: Nice start screen {{{1
 
