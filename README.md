@@ -25,6 +25,10 @@ vim -g ~/.vimrc
 
 _**WARNING:**_ Change the directories from which files are sourced in `dotvimrc/vimrc` to wherever they actually are.
 
+## Color
+
+I keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently favoring [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil) with some minor tweaks (see `$DOTVIM/colors/pencil.vim`).
+
 ## Extras
 
 I keep some nice monospaced fonts in this repo, but I would much recommend cloning this repository of [powerline-patched fonts](https://github.com/powerline/fonts/) (which provides some nice symbols to use with [airline](http://github.com/vim-airline/vim-airline) and [powerline](https://github.com/powerline/powerline)).
@@ -42,23 +46,19 @@ cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/plugged/snippets/snippets/ -sf
 cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/plugged/snippets/UltiSnips/ -sf
 ```
 
-Last, I keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently trying out (and mostly enjoying) [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil). With some minor tweaks (see `$DOTVIM/colors/pencil.vim`) it looks really nice to me.
-
-Last, to get [vim-instant-markdown](https://github.com/suan/vim-instant-markdown/issues) to work you also need to do
+Add `extends juliamc` and `extends pythonmc` to the top of `julia.snippets` and `python.snippets`. Last, to get [vim-instant-markdown](https://github.com/suan/vim-instant-markdown/issues) to work you also need to do
 ```bash
-sudo apt-get install xdg-utils npm
+sudo pacman -S xdg-utils npm
 sudo npm -g install instant-markdown-d
 ```
 
 ## Structure
 
-* `./bundle` has some specific files I have modified for bundles that I install. Currently houses my mangled version of `vim-latex` as well as (most of) my custom snippets.
-* `./colors` has some colorschemes I actually use.
+* `./bundle` has some custom git plug-ins I wrote or modified forks of other plug-ins.
+* `./colors` has some nice colorschemes.
 * `./dotvimrc` has my vimrc and related files.
 * `./fonts` has some monospaced fonts I like.
 * `./spell` has dictionaries (e.g. from [Moby](http://icon.shef.ac.uk/Moby/) and [WordNet](http://wordnet.princeton.edu/), csv thesaurus, and user-defined words).
-* `./session` is just for show.
-* `./undo` is just for show.
 
 My vimrc is split into a few parts
 
