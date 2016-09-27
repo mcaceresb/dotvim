@@ -268,8 +268,7 @@ snippet psql "PROC SQL" b
 proc sql ${1:&sqlopts};
 create table tmp as
 	select *
-	from ${2:dat};
-$0
+	from ${2:dat};$0
 quit;
 endsnippet
 

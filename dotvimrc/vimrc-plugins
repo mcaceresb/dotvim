@@ -21,9 +21,9 @@ Plug 'mbbill/undotree',                {'as' : 'undotree'}
 Plug 'mhinz/vim-startify',             {'as' : 'startify'}
 Plug 'honza/vim-snippets',             {'as' : 'snippets'}
 Plug 'tomtom/tcomment_vim',            {'as' : 'tcomment'}
-Plug 'vim-airline/vim-airline',        {'as' : 'airline'}
 Plug 'scrooloose/nerdtree',            {'as' : 'nerdtree'}
 Plug 'Xuyuanp/nerdtree-git-plugin',    {'as' : 'nerdtree-git'}
+Plug 'vim-airline/vim-airline',        {'as' : 'airline'}
 Plug 'vim-airline/vim-airline-themes', {'as' : 'airline-themes'}
 Plug 'haya14busa/incsearch.vim',       {'as' : 'incsearch'}
 Plug 'haya14busa/incsearch-fuzzy.vim', {'as' : 'incsearch-fuzzy'}
@@ -81,6 +81,7 @@ Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
 
+Plug 'mileszs/ack.vim',            {'as' : 'ack'}
 Plug 'jmcantrell/vim-virtualenv',  {'as' : 'virtualenv'}
 Plug 'tpope/vim-characterize',     {'as' : 'characterize'}
 Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
@@ -88,6 +89,8 @@ Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
 Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
 Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
+
+Plug 'freitass/todo.txt-vim',      {'as' : 'todo.txt'}
 
 " Plug 'flazz/vim-colorschemes',     {'as' : 'colorschemes'}
 " Plug 'junegunn/fzf.vim',           {'as' : 'fzf.vim'}

@@ -549,6 +549,20 @@ snippet logwork "Log work for ofl project" b
 }
 endsnippet
 
+snippet logsub "Log subfolder" b
+"${1:${VISUAL:folder}}": {
+	"created": "`date`",
+	"updated": "`date`",
+	"desc": "$0"
+}
+endsnippet
+
+snippet gbox "John Graves Style Code marker" b
+`!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]` 
+`!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]`
+`!p snip.rv = getlinechar()[0]` ${1:${VISUAL:content}}
+endsnippet
+
 snippet now "Current datetime, ddd DD mmm YYYY HH:MM:SS AM/PM TZ" w
 `date`$0
 endsnippet
