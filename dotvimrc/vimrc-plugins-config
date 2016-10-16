@@ -5,6 +5,13 @@
 " Updated: Mon May 16 02:16:14 EDT 2016
 " Purpose: Configure vim plugins
 
+" Ack: Content searcher {{{1
+
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+nnoremap <leader>ag :Ack!
+
 " Airline: Awesome status indicator {{{1
 
 if !exists('g:airline_symbols')
@@ -19,8 +26,9 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.maxlinenr  = ''
 let g:airline_symbols.branch     = '⎇ '
 
-" let g:airline_theme = 'solarized'
-" let g:airline_theme = 'sol'
+" This is theoretically useful, but I don't know how to have it hide
+"
+let g:airline#extensions#whitespace#enabled = 0
 " let g:airline_theme = 'pencil'
 " let g:airline_left_sep  = '▶'
 " let g:airline_right_sep = '◀'
@@ -150,8 +158,8 @@ map g/ <Plug>(incsearch-stay)
 let g:indentLine_myToggle = 0
 let g:indentLine_enabled  = 0
 let g:indentLine_color_gui = '#d6d6d6'
-let g:indentLine_char = '¦'
 let g:indentLine_char = '┋'
+let g:indentLine_char = '│'
 
 nnoremap <F2> :call ToggleIndentLines()<CR>
 function! ToggleIndentLines()
@@ -205,6 +213,8 @@ let g:markdown_fenced_languages = [
             \ 'bash=sh', 'sh', 'javascript', 'python', 'sql',
             \ 'r', 'SAS=sas', 'sas', 'Stata=stata', 'stata'
             \ ]
+
+let g:instant_markdown_autostart = 0
 
 " NERDTree: Nice file explorer for Vim {{{1
 
@@ -368,7 +378,7 @@ nnoremap <F11> :UndotreeToggle<CR>
 
 " YouCompleteMe: Language and Auto-Completion {{{1
 
-map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>go :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -424,7 +434,7 @@ let g:pencil#conceallevel = 0
 " Quote: Curly quote support {{{2
 
 let g:textobj#quote#educate = 0
-let g:textobj#quote#matchit = 1  
+let g:textobj#quote#matchit = 1
 
 " Initialize for text files only {{{2
 

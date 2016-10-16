@@ -35,8 +35,8 @@ I keep some nice monospaced fonts in this repo, but I would much recommend cloni
 
 ```bash
 git clone https://github.com/powerline/fonts powerline-fonts
-ln -s ~/.fonts/powerline-fonts powerline-fonts
-ln -s ~/.fonts/custom-fonts $DOTVIM/fonts
+ln -s $DOTVIM/../powerline-fonts ~/.fonts/powerline-fonts
+ln -s $DOTVIM/fonts ~/.fonts/custom-fonts
 ```
 
 I also keep some useful snippets in this repo (I am a bit lazy to clean them up and create a pull request, but I find them handy):

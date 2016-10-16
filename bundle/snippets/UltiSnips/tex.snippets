@@ -233,6 +233,10 @@ endsnippet
 #----------------------------------------------------------------------
 # Formating text: italic, bold, underline, small capital, emph, etc.
 
+snippet cal "Math Calligraphy" w
+\mathcal{${1:${VISUAL}}}$0
+endsnippet
+
 snippet fi "Italics and Bold" w
 \textbf{\textit{${1:${VISUAL}}}}$0
 endsnippet
@@ -452,6 +456,18 @@ endsnippet
 snippet bibapa "Bibliography" b
 \bibliographystyle{apalike}
 \bibliography{$1}$0
+endsnippet
+
+snippet renewdisp "Renew displayoptions" b
+\renewcommand{\displayoptions}{
+	\pagenumbering{roman}
+	\maketitle
+	\tableofcontents\label{toc:toc}
+	% \listoftables\label{toc:toctab}
+	% \listoffigures\label{toc:tocfig}
+	% \clearpage
+	\pagenumbering{arabic}
+}
 endsnippet
 
 # vim: nowrap fdm=marker ft=snippets
