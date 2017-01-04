@@ -1,0 +1,60 @@
+" ----------------------------------------------------------------------------
+" Program: vimrc-lean
+" Author:  Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
+" Created: Thu Oct 20 09:13:28 EDT 2016
+" Updated: Thu Oct 20 09:13:29 EDT 2016
+" Purpose: Custom color overrides
+
+" Colors: Some hard-coded color modifications I like {{{1
+
+" Change grayness of comments of the fly (e.g. :Setgray 42)
+command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
+highlight Comment cterm=italic
+
+" Display style for misspelled words
+hi clear SpellBad
+if &background == "dark"
+    autocmd WinEnter *.sas set background=light
+    autocmd WinEnter *.sas highlight CursorLine guibg=grey96
+    autocmd WinEnter *.sas syntax on
+    autocmd WinLeave *.sas set background=dark
+    autocmd WinLeave *.sas highlight CursorLine guibg=#262626
+    autocmd WinLeave *.sas Setgray 59
+    autocmd BufWinEnter *.sas set background=light
+    autocmd BufWinEnter *.sas highlight CursorLine guibg=grey96
+    autocmd BufWinEnter *.sas syntax on
+    autocmd BufWinLeave *.sas set background=dark
+    autocmd BufWinLeave *.sas highlight CursorLine guibg=#262626
+    autocmd BufWinLeave *.sas Setgray 59
+    hi SpellBad cterm=underline ctermfg=red gui=undercurl
+    Setgray 59
+else
+    " autocmd WinEnter *.sas set background=light
+    " autocmd WinEnter *.sas syntax on
+    " autocmd WinLeave *.sas set background=light
+    " autocmd BufWinEnter *.sas set background=light
+    " autocmd BufWinEnter *.sas syntax on
+    " autocmd BufWinLeave *.sas set background=light
+    hi SpellBad cterm=underline ctermfg=red gui=undercurl
+    Setgray 48
+endif
+
+" Highlight extra white space and lines that are too long
+exec 'highlight OverLength      ctermbg=red guibg=#FFD3D3'
+exec 'highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3'
+match ExtraWhitespace /\s\+$/
+2match OverLength /\%80v.\+/
+
+" File Type highlighting
+exec 'highlight link texBeginEndName Normal'
+exec 'highlight link texRefZone Normal'
+exec 'highlight link sasMacroVar sasFunction'
+exec 'highlight markdownCode guifg=#10A778'
+exec 'highlight sasMacroVar  guifg=#0000FF gui=bold ctermfg=Blue'
+exec 'highlight stataLocal   guifg=#7ab4db gui=bold'
+exec 'highlight stataGlobal  guifg=#BE646C gui=bold'
+exec 'highlight link juliaStringVarsPla Normal'
+
+" Modelines: {{{1
+" vim: nowrap fdm=marker
+" }}}

@@ -22,6 +22,7 @@ source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins-config
 
 " Configure Vim to your liking and source your mappings
 source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean
+source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean-colors
 source $HOME/Documents/code/dotvim/dotvimrc/vimrc-mappings
 source $HOME/Documents/code/dotvim/dotvimrc/vimrc-functions
 
@@ -38,7 +39,7 @@ set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
 set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
 set guifont=Hack\ 10
 set guifont=Inconsolata\ for\ Powerline\ 11
-set guifont=Inconsolata-g\ for\ Powerline\ 10
 set guifont=Inconsolata-dz\ for\ Powerline\ 10
+set guifont=Inconsolata-g\ for\ Powerline\ 10
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 11

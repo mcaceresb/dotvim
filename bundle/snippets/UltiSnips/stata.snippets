@@ -133,7 +133,7 @@ capture log close _all
 `!p snip.rv = getlinechar()` --------------------
 
 program main
-	syntax, [capture email]
+	syntax, [CAPture NOIsily email]
 
 	`!p snip.rv = getlinechar()` Set up
 	`!p snip.rv = getlinechar()` ------
@@ -159,7 +159,7 @@ program main
 	`!p snip.rv = getlinechar()` Run the things
 	`!p snip.rv = getlinechar()` --------------
 
-	\`capture' {
+	\`capture' \`noisily' {
 		$0
 	}
 	local rc = _rc
@@ -168,27 +168,10 @@ program main
 	`!p snip.rv = getlinechar()` -------------------------------
 
 	if ("\`email'" != "") {
-		local end_time "$S_TIME $S_DATE"
-		local time     "Start: \`start_time'\nEnd: \`end_time'"
-		if \`rc' == 0 {
-			di "End: $S_TIME $S_DATE"
-			local paux	  ran [Automated Message]
-			local message = "\`progname' finished running\n\n\`time'"
-			local subject = "\`progname' \`paux'"
-		}
-		else if ("\`capture'" == "") {
-			di "WARNING: $S_TIME $S_DATE"
-			local paux	  ran with a non-0 exit status [Automated Message]
-			local message = "\`progname' ran but Stata gave error code r(\`rc')\n\n\`time'"
-			local subject = "\`progname' \`paux'"
-		}
-		else {
-			di "ERROR: $S_TIME $S_DATE"
-			local paux	  ran with errors [Automated Message]
-			local message = "\`progname' stopped with error code r(\`rc')\n\n\`time'"
-			local subject = "\`progname' \`paux'"
-		}
-		shell echo -e "\`message'" | mail -s "\`subject'" \`whoami\`@nber.org
+		mail_notify,  rc(\`rc')            ///
+			email(\`c(username)'@nber.org) ///
+			progname(\`progname')          ///
+			start_time(\`start_time') \`capture'
 	}
 
 	`!p snip.rv = getlinechar()` Cleanup
@@ -198,7 +181,34 @@ program main
 	exit \`rc'
 end
 
-`!p snip.rv = getlinechar()` Aux programs
+`!p snip.rv = getlinechar()` Email yourself
+capture program drop mail_notify
+program mail_notify
+	syntax, email(str) rc(int) progname(str) start_time(str) [CAPture]
+	local end_time "$S_TIME $S_DATE"
+	local time     "Start: \`start_time'\nEnd: \`end_time'"
+	if (\`rc' == 0) {
+		di "End: $S_TIME $S_DATE"
+		local paux	  ran [Automated Message]
+		local message = "\`progname' finished running\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	else if ("\`capture'" == "") {
+		di "WARNING: $S_TIME $S_DATE"
+		local paux ran with non-0 exit status [Automated Message]
+		local message = "\`progname' ran but Stata gave error code r(\`rc')\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	else {
+		di "ERROR: $S_TIME $S_DATE"
+		local paux ran with errors [Automated Message]
+		local message = "\`progname' stopped with error code r(\`rc')\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	di "\`subject'"
+	di "\`message'"
+	shell echo -e "\`message'" | mail -s "\`subject'" \`email'
+end
 
 `!p
 width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71

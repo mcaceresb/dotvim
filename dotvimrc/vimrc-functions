@@ -8,6 +8,9 @@
 " Function Mappings: {{{1
 " -----------------------
 
+" Color scheme toggle
+nnoremap z, :call ColorSchemeToggle()<CR>
+
 " Precision rounding
 nnoremap <leader>ro :call Rounding("%")<CR>
 vnoremap <leader>ro :call Rounding("")<CR>
@@ -40,6 +43,19 @@ nnoremap <leader><F11> :call TextEnableCodeSnip('r', '>>=', '@', 'SpecialComment
 
 " General Functions: {{{1
 " -----------------------
+
+"  ColorSchemeToggle: {{{2 Toggle light and dark colors with custom overrides
+
+function! ColorSchemeToggle()
+    if &background == "dark"
+        set background=light
+        highlight CursorLine guibg=grey96
+        source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean-colors
+    else
+        set background=dark
+        source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean-colors
+    endif
+endfunction
 
 " AutoHighlightToggle: Highlight word under cursor. n, N work as with * {{{2
 

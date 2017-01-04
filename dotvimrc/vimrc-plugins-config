@@ -47,7 +47,7 @@ let g:pencil_neutral_headings   = 1
 let g:pencil_higher_contrast_ui = 0
 let g:pencil_bolder             = 1
 colorscheme pencil
-set background=light
+set background=dark
 
 " EasyAlign: {{{1
 

@@ -558,7 +558,7 @@ snippet logsub "Log subfolder" b
 endsnippet
 
 snippet gbox "John Graves Style Code marker" b
-`!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]` 
+`!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]`
 `!p snip.rv = getlinechar()[0]``!p snip.rv = getlinechar()[0]`
 `!p snip.rv = getlinechar()[0]` ${1:${VISUAL:content}}
 endsnippet
@@ -570,6 +570,41 @@ endsnippet
 snippet joe "Description" b
 Joe:
 > $0
+endsnippet
+
+snippet changelog "Change Log" b
+Change Log
+==========
+
+## ${1}-x.y.z (`date +%Y-%m-%d`)
+
+### Features
+
+*
+
+### Backwards-Incompatible
+
+*
+
+### Bug fixes
+
+*
+
+### Known bugs
+
+*
+
+### Unconfirmed bugs
+
+*
+
+### Planned Features
+
+*
+endsnippet
+
+snippet gnames "grep names in R" w
+names(${1:df})[grep("${2:regexp?}", names($1))]
 endsnippet
 
 # vim:ft=snippets:

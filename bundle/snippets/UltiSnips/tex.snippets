@@ -470,5 +470,16 @@ snippet renewdisp "Renew displayoptions" b
 }
 endsnippet
 
-# vim: nowrap fdm=marker ft=snippets
+snippet tabcustom "Custom Tabular" b
+% <tablefill-custom tag = '${1:${VISUAL:new_tag}}'>
+%   <combine tag = '${2:existing_tag}'>
+%     ${3:[0][1]; [2][-1]}
+%   </combine>
+% </tablefill-custom>
+endsnippet
 
+snippet fa "tmp" w
+\hyperref[tab:$1]{${VISUAL}}$0
+endsnippet
+
+# vim: nowrap fdm=marker ft=snippets
