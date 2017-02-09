@@ -16,15 +16,14 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " Source plug-ins and configure them
-let g:airline#extensions#whitespace#enabled = 0
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins-config
+source $HOME/lib/dotvim/dotvimrc/vimrc-plugins
+source $HOME/lib/dotvim/dotvimrc/vimrc-plugins-config
 
 " Configure Vim to your liking and source your mappings
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean-colors
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-mappings
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-functions
+source $HOME/lib/dotvim/dotvimrc/vimrc-lean
+source $HOME/lib/dotvim/dotvimrc/vimrc-lean-colors
+source $HOME/lib/dotvim/dotvimrc/vimrc-mappings
+source $HOME/lib/dotvim/dotvimrc/vimrc-functions
 
 " Otherwise, pick your fave font
 set guifont=Anonymice\ Powerline\ 10

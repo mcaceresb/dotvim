@@ -7,7 +7,7 @@
 
 call plug#begin()
 
-" Essential: Should be 'core' functionality, IMO {{{1
+" Essential: Almost 'core' functionality, IMO {{{1
 
 Plug 'tpope/vim-fugitive',             {'as' : 'fugitive'}
 Plug 'tpope/vim-speeddating',          {'as' : 'speeddating'}
@@ -29,7 +29,7 @@ Plug 'haya14busa/incsearch.vim',       {'as' : 'incsearch'}
 Plug 'haya14busa/incsearch-fuzzy.vim', {'as' : 'incsearch-fuzzy'}
 Plug 'Valloric/YouCompleteMe',         {'do' : 'python2 ./install.py'}
 
-" Recommended: Frequently used, but not necessarily 'core' {{{1
+" Recommended: Frequently used, but not very 'core' {{{1
 
 Plug 'kana/vim-textobj-user',          {'as' : 'textobj'}
 Plug 'reedes/vim-litecorrect',         {'as' : 'litecorrect'}
@@ -71,13 +71,14 @@ Plug 'jpitblado/vim-smcl',        {'as' : 'smcl',       'for' : 'smcl'}
 Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
 Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
 Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
-Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
 Plug 'vim-scripts/vim-creole',    {'as' : 'creole',     'for' : 'creole'}
+Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
+" Plug 'lervag/vimtex',             {'as' : 'vimtex',     'for' : 'tex'}
 
-let g:bundle_path = "/home/mauricio/Documents/code/dotvim/bundle/"
-Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}
+let g:bundle_path = "/home/mauricio/lib/dotvim/bundle/"
 Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
 Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
+Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}
 
 " Testing: Plug-ins that I'm not all-in on yet {{{1
 
@@ -88,9 +89,9 @@ Plug 'KabbAmine/zeavim.vim',       {'as' : 'zeavim'}
 Plug 'junegunn/fzf',               {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'gregsexton/gitv',            {'as' : 'fugitive-gitv'}
 Plug 'junegunn/gv.vim',            {'as' : 'fugitive-gv'}
-Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
 Plug 'freitass/todo.txt-vim',      {'as' : 'todo.txt'}
 Plug 'mzlogin/vim-markdown-toc',   {'as' : 'markdown-toc'}
+Plug 'beloglazov/vim-online-thesaurus', {'as' : 'online-thesaurus'}
 
 " Plug 'flazz/vim-colorschemes',     {'as' : 'colorschemes'}
 " Plug 'junegunn/fzf.vim',           {'as' : 'fzf.vim'}

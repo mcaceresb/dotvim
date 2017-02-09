@@ -8,7 +8,11 @@ My personal Vim distribution.
 I use [Plug](https://github.com/junegunn/vim-plug) and a *ton* of plug-ins. Run `:PlugInstall` once in vim to download everything. To get started:
 
 ```bash
-export DOTVIM=$HOME/Documents/code/dotvim
+mkdir $HOME/lib
+cd $HOME/lib
+git clone github.com/mcaceresb/dotvim
+export DOTVIM=$HOME/lib/dotvim
+
 mkdir ~/.vim/
 mkdir ~/.vim/session/
 mkdir ~/.vim/spell/
@@ -34,16 +38,22 @@ I keep some nice color schemes in `$DOTVIM/colors` but they are not anything fro
 I keep some nice monospaced fonts in this repo, but I would much recommend cloning this repository of [powerline-patched fonts](https://github.com/powerline/fonts/) (which provides some nice symbols to use with [airline](http://github.com/vim-airline/vim-airline) and [powerline](https://github.com/powerline/powerline)).
 
 ```bash
+mkdir $HOME/lib
+cd $HOME/lib
 git clone https://github.com/powerline/fonts powerline-fonts
-ln -s $DOTVIM/../powerline-fonts ~/.fonts/powerline-fonts
-ln -s $DOTVIM/fonts ~/.fonts/custom-fonts
+ln -s $HOME/lib/powerline-fonts $HOME/.fonts/powerline-fonts
+```
+
+You can add any additional fonts you like; for instance
+```bash
+ln -s $DOTVIM/lib/vim-fonts $HOME/.fonts/custom-fonts
 ```
 
 I also keep some useful snippets in this repo (I am a bit lazy to clean them up and create a pull request, but I find them handy):
 
 ```bash
-cp $DOTVIM/bundle/snippets/snippets/* ~/.vim/plugged/snippets/snippets/ -sf
-cp $DOTVIM/bundle/snippets/UltiSnips/* ~/.vim/plugged/snippets/UltiSnips/ -sf
+cp $DOTVIM/bundle/snippets/snippets/*  $HOME/.vim/plugged/snippets/snippets/  -sf
+cp $DOTVIM/bundle/snippets/UltiSnips/* $HOME/.vim/plugged/snippets/UltiSnips/ -sf
 ```
 
 Add `extends juliamc` and `extends pythonmc` to the top of `julia.snippets` and `python.snippets`. Last, to get [vim-instant-markdown](https://github.com/suan/vim-instant-markdown/issues) to work you also need to do
@@ -57,8 +67,7 @@ sudo npm -g install instant-markdown-d
 * `./bundle` has some custom git plug-ins I wrote or modified forks of other plug-ins.
 * `./colors` has some nice colorschemes.
 * `./dotvimrc` has my vimrc and related files.
-* `./fonts` has some monospaced fonts I like.
-* `./spell` has dictionaries (e.g. from [Moby](http://icon.shef.ac.uk/Moby/) and [WordNet](http://wordnet.princeton.edu/), csv thesaurus, and user-defined words).
+* `./spell` has some user-defined words.
 
 My vimrc is split into a few parts
 
