@@ -58,25 +58,25 @@ Plug 'vim-scripts/utl.vim',            {'as' : 'utl'}
 
 Plug 'greyblake/vim-preview',     {'as' : 'preview'}
 Plug 'JuliaLang/julia-vim',       {'as' : 'julia'}
-Plug 'jceb/vim-orgmode',          {'as' : 'orgmode',    'for' : 'org'}
-Plug 'chrisbra/csv.vim',          {'as' : 'csv',        'for' : 'csv'}
-Plug 'vim-scripts/vbnet.vim',     {'as' : 'vbnet',      'for' : 'vb'}
-Plug 'tpope/vim-jdaddy',          {'as' : 'jaddy',      'for' : 'json'}
-Plug 'tpope/vim-markdown',        {'as' : 'markdown',   'for' : 'markdown'}
-Plug 'suan/vim-instant-markdown', {'as' : 'instant-md', 'for' : 'markdown'}
-Plug 'nvie/vim-flake8',           {'as' : 'flake8',     'for' : 'python'}
-Plug 'tmhedberg/SimpylFold',      {'as' : 'simpylfold', 'for' : 'python'}
-Plug 'jpitblado/vim-stata',       {'as' : 'stata',      'for' : 'stata'}
-Plug 'jpitblado/vim-smcl',        {'as' : 'smcl',       'for' : 'smcl'}
-Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',    'for' : 'r'}
-Plug 'adimit/prolog.vim',         {'as' : 'prolog',     'for' : 'prolog'}
-Plug 'dag/vim-fish',              {'as' : 'fish',       'for' : 'fish'}
-Plug 'vim-scripts/vim-creole',    {'as' : 'creole',     'for' : 'creole'}
-Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',  'for' : 'tex'}
+Plug 'jceb/vim-orgmode',          {'as' : 'orgmode',     'for' : 'org'}
+Plug 'chrisbra/csv.vim',          {'as' : 'csv',         'for' : 'csv'}
+Plug 'vim-scripts/vbnet.vim',     {'as' : 'vbnet',       'for' : 'vb'}
+Plug 'tpope/vim-jdaddy',          {'as' : 'jaddy',       'for' : 'json'}
+Plug 'tpope/vim-markdown',        {'as' : 'markdown',    'for' : 'markdown'}
+Plug 'suan/vim-instant-markdown', {'as' : 'instant-md',  'for' : 'markdown'}
+Plug 'nvie/vim-flake8',           {'as' : 'flake8',      'for' : 'python'}
+Plug 'tmhedberg/SimpylFold',      {'as' : 'simpylfold',  'for' : 'python'}
+Plug 'jpitblado/vim-stata',       {'as' : 'stata',       'for' : 'stata'}
+Plug 'jpitblado/vim-smcl',        {'as' : 'smcl',        'for' : 'smcl'}
+Plug 'jcfaria/Vim-R-plugin',      {'as' : 'rplugin',     'for' : 'r'}
+Plug 'adimit/prolog.vim',         {'as' : 'prolog',      'for' : 'prolog'}
+Plug 'dag/vim-fish',              {'as' : 'fish',        'for' : 'fish'}
+Plug 'vim-scripts/vim-creole',    {'as' : 'creole',      'for' : 'creole'}
+Plug 'LaTeX-Box-Team/LaTeX-Box',  {'as' : 'latex-box',   'for' : 'tex'}
+Plug 'mcaceresb/vim-latex',       {'as' : 'latex-suite', 'for' : 'tex', 'branch' : 'mangled'}
 " Plug 'lervag/vimtex',             {'as' : 'vimtex',     'for' : 'tex'}
 
 let g:bundle_path = "/home/mauricio/lib/dotvim/bundle/"
-Plug g:bundle_path . 'latex-suite-abridged',   {'for' : 'tex'}
 Plug g:bundle_path . 'latex-fenced-languages', {'for' : 'tex'}
 Plug g:bundle_path . 'stata-jump-program',     {'for' : 'stata'}
 

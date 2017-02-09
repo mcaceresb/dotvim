@@ -31,11 +31,11 @@ _**WARNING:**_ Change the directories from which files are sourced in `dotvimrc/
 
 ## Color
 
-I keep some nice color schemes in `$DOTVIM/colors` but they are not anything from another world. I am currently favoring [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil) with some minor tweaks (see `$DOTVIM/colors/pencil.vim`).
+I keep some nice color schemes in `./colors` but they are not anything from another world. I am currently favoring [vim-colors-pencil](http://github.com/reedes/vim-colors-pencil) with some minor tweaks (see `./colors/pencil.vim`).
 
 ## Extras
 
-I keep some nice monospaced fonts in this repo, but I would much recommend cloning this repository of [powerline-patched fonts](https://github.com/powerline/fonts/) (which provides some nice symbols to use with [airline](http://github.com/vim-airline/vim-airline) and [powerline](https://github.com/powerline/powerline)).
+I much recommend cloning [powerline's patched fonts](https://github.com/powerline/fonts/) (which provide some nice symbols to use with [airline](http://github.com/vim-airline/vim-airline) and [powerline](https://github.com/powerline/powerline)).
 
 ```bash
 mkdir $HOME/lib
