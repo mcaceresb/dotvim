@@ -7,7 +7,7 @@
 " Usage:   Specify a custom list of environments via g:Stata_jump_environments
 
 if !exists("g:Stata_jump_environments")
-    let g:Stata_jump_environments = ['^\s*program\s+', '^\s*use\s+', '^[a-z ]*function']
+    let g:Stata_jump_environments = ['prog(ram)', 'use', '[a-z ]*function']
 endif
 
 " Adapted from LaTeX-Box ftplugin/latex-box/mappings.vim LatexBoxNextSection

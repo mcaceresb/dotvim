@@ -10,7 +10,7 @@ I use [Plug](https://github.com/junegunn/vim-plug) and a *ton* of plug-ins. Run 
 ```bash
 mkdir $HOME/lib
 cd $HOME/lib
-git clone github.com/mcaceresb/dotvim
+git clone https://github.com/mcaceresb/dotvim
 export DOTVIM=$HOME/lib/dotvim
 
 mkdir ~/.vim/
