@@ -16,40 +16,29 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " Source plug-ins and configure them
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-plugins-config
+source $HOME/lib/dotvim/dotvimrc/vimrc-plugins
+source $HOME/lib/dotvim/dotvimrc/vimrc-plugins-config
 
 " Configure Vim to your liking and source your mappings
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-lean
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-mappings
-source $HOME/Documents/code/dotvim/dotvimrc/vimrc-functions
-
-" Use this instead of any of the fonts below if in the server
-if has("gui_running")
-    if has("gui_gtk2")
-        set guifont=Monospace\ 11
-    elseif has("gui_win32")
-        set guifont=Consolas:h11:cANSI
-    endif
-endif
+source $HOME/lib/dotvim/dotvimrc/vimrc-lean
+source $HOME/lib/dotvim/dotvimrc/vimrc-lean-colors
+source $HOME/lib/dotvim/dotvimrc/vimrc-mappings
+source $HOME/lib/dotvim/dotvimrc/vimrc-functions
 
 " Otherwise, pick your fave font
 set guifont=Anonymice\ Powerline\ 10
 set guifont=Cousine\ for\ Powerline\ 10
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
-set guifont=Fira\ Mono\ for\ Powerline\ 10
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
 set guifont=Meslo\ for\ Powerline\ 10
 set guifont=Monofur\ for\ Powerline\ 10
 set guifont=Roboto\ Mono\ for\ Powerline\ 10
-set guifont=Symbol\ Neu\ for\ Powerline\ 10
-set guifont=Hack\ 10
 set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 11
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
-set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+set guifont=Hack\ 10
 set guifont=Inconsolata\ for\ Powerline\ 11
 set guifont=Inconsolata-dz\ for\ Powerline\ 10
 set guifont=Inconsolata-g\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 10
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 11

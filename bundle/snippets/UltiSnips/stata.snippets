@@ -115,24 +115,101 @@ else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
 `!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Purpose: ${2:${VISUAL:content}}
+`!p snip.rv = getlinechar()` Author:  Mauricio Caceres <caceres@nber.org>
 `!p snip.rv = getlinechar()` Created: `date`
 `!p snip.rv = getlinechar()` Updated: `date`
-`!p snip.rv = getlinechar()` Author:  Mauricio Caceres <caceres@nber.org>
-`!p snip.rv = getlinechar()` Purpose: ${2:${VISUAL:content}}
-`!p
-width = int(vim.eval("&textwidth")) or 71
-b, m, e, i = _get_comment_format()
-sline = b
-eline = i + e
-if sline is not eline:
-	box = make_box(len(t[1]), width)
-	snip.rv = '\n' + ' ' + m + box[3][1:]`
+
+`!p snip.rv = getlinechar()` Stata start-up options
+`!p snip.rv = getlinechar()` ----------------------
+
 version 13
 clear all
 set more off
 set varabbrev off
 capture log close _all
 
+`!p snip.rv = getlinechar()` Main program wrapper
+`!p snip.rv = getlinechar()` --------------------
+
+program main
+	syntax, [CAPture NOIsily email]
+
+	`!p snip.rv = getlinechar()` Set up
+	`!p snip.rv = getlinechar()` ------
+
+	local  progname `!v expand('%:r')`
+	local  logname  `!v expand('%:r')`
+	global maindir  `!v expand('%:p:h')`
+	global datadir  $maindir/data
+	global datadir  $maindir/bulk
+	global codedir  $maindir/code
+	global outdir   $maindir/out
+	* log using "\`mainlog'", replace name(\`logname')
+
+	shell mkdir -p $outdir/fig
+	shell mkdir -p $outdir/tables
+	shell mkdir -p $outdir/data
+
+	cd  "$maindir"
+	adopath + $maindir/lib/
+	local  start_time "$S_TIME $S_DATE"
+	di "Start: \`start_time'"
+
+	`!p snip.rv = getlinechar()` Run the things
+	`!p snip.rv = getlinechar()` --------------
+
+	\`capture' \`noisily' {
+		$0
+	}
+	local rc = _rc
+
+	`!p snip.rv = getlinechar()` If requested, notify via e-mail
+	`!p snip.rv = getlinechar()` -------------------------------
+
+	if ("\`email'" != "") {
+		mail_notify,  rc(\`rc')            ///
+			email(\`c(username)'@nber.org) ///
+			progname(\`progname')          ///
+			start_time(\`start_time') \`capture'
+	}
+
+	`!p snip.rv = getlinechar()` Cleanup
+	`!p snip.rv = getlinechar()` -------
+
+	clear all
+	exit \`rc'
+end
+
+`!p snip.rv = getlinechar()` Email yourself
+capture program drop mail_notify
+program mail_notify
+	syntax, email(str) rc(int) progname(str) start_time(str) [CAPture]
+	local end_time "$S_TIME $S_DATE"
+	local time     "Start: \`start_time'\nEnd: \`end_time'"
+	if (\`rc' == 0) {
+		di "End: $S_TIME $S_DATE"
+		local paux	  ran [Automated Message]
+		local message = "\`progname' finished running\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	else if ("\`capture'" == "") {
+		di "WARNING: $S_TIME $S_DATE"
+		local paux ran with non-0 exit status [Automated Message]
+		local message = "\`progname' ran but Stata gave error code r(\`rc')\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	else {
+		di "ERROR: $S_TIME $S_DATE"
+		local paux ran with errors [Automated Message]
+		local message = "\`progname' stopped with error code r(\`rc')\n\n\`time'"
+		local subject = "\`progname' \`paux'"
+	}
+	di "\`subject'"
+	di "\`message'"
+	shell echo -e "\`message'" | mail -s "\`subject'" \`email'
+end
+
 `!p
 width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
 b, m, e, i = _get_comment_format()
@@ -143,25 +220,12 @@ if sline is eline:
 else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
-`!p snip.rv = getlinechar()` Setup
+`!p snip.rv = getlinechar()` Run the things
 
-local  progname `!v expand('%:r')`
-local  paux		ran [Automated Message]
-local  logname  `!v expand('%:r')`
-global maindir  `!v expand('%:p:h')`
-global outdir   $maindir/out
-local  mainlog  $maindir/code/\`logname'.log
-* log using "\`mainlog'", replace name(\`logname')
+main, email
+endsnippet
 
-shell mkdir -p $outdir/fig
-shell mkdir -p $outdir/tables
-shell mkdir -p $outdir/data
-
-cd  "$maindir"
-adopath + $maindir/lib/
-local  start_time "$S_TIME $S_DATE"
-di "Start: \`start_time'"
-
+snippet afinkchunk "Script template to run in afink2.mit.edu" b
 `!p
 width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
 b, m, e, i = _get_comment_format()
@@ -172,32 +236,97 @@ if sline is eline:
 else:
 	box = make_box(len(t[1]), width)
 	snip.rv = box[0]`
-`!p snip.rv = getlinechar()` Do stuff
+`!p snip.rv = getlinechar()` Program: ${1:`!v expand('%:t')`}
+`!p snip.rv = getlinechar()` Purpose: ${2:${VISUAL:content}}
+`!p snip.rv = getlinechar()` Author:  Mauricio Caceres <caceres@mit.edu>
+`!p snip.rv = getlinechar()` Created: `date`
+`!p snip.rv = getlinechar()` Updated: `date`
+`!p snip.rv = getlinechar()` Note:    Run from make.py
 
-$0
+`!p snip.rv = getlinechar()` Stata start-up options
+`!p snip.rv = getlinechar()` ----------------------
 
-`!p
-width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
-b, m, e, i = _get_comment_format()
-sline = b
-eline = i + e
-if sline is eline:
-	snip.rv = sline + ' ' + (width - 2) * '-'
-else:
-	box = make_box(len(t[1]), width)
-	snip.rv = box[0]`
-`!p snip.rv = getlinechar()` Cleanup
-
-* log close \`logname'
-di "End: $S_TIME $S_DATE"
-local end_time "$S_TIME $S_DATE"
-local message = "\`progname' finished running\n\nStart: \`start_time'\nEnd: \`end_time'"
-shell echo -e "\`message'" | mail -s "\`progname' \`paux'" \`whoami\`@nber.org
+version 12
 clear all
+set more off
+set varabbrev off
+adopath + ../external/lib/stata/gslab_misc/ado
+preliminaries
+
+`!p snip.rv = getlinechar()` Main program wrapper
+`!p snip.rv = getlinechar()` --------------------
+
+program main
+	syntax, [capture email]
+
+	`!p snip.rv = getlinechar()` Set up
+	`!p snip.rv = getlinechar()` ------
+
+	local  progname `!v expand('%:r')`
+	local  start_time "$S_TIME $S_DATE"
+	local  dir_output  ../output
+	local  dir_input   ../external
+	di "Start: \`start_time'"
+
+	`!p snip.rv = getlinechar()` Run the things
+	`!p snip.rv = getlinechar()` --------------
+
+	\`capture' {
+		$0
+	}
+	local rc = _rc
+
+	`!p snip.rv = getlinechar()` If requested, notify via e-mail
+	`!p snip.rv = getlinechar()` -------------------------------
+
+	if ("\`email'" != "") {
+		local end_time "$S_TIME $S_DATE"
+		local time     "Start: \`start_time'\nEnd: \`end_time'"
+		if \`rc' == 0 {
+			di "End: $S_TIME $S_DATE"
+			local paux	  ran [Automated Message]
+			local message = "\`progname' finished running\n\n\`time'"
+			local subject = "\`progname' \`paux'"
+		}
+		else if ("\`capture'" == "") {
+			di "WARNING: $S_TIME $S_DATE"
+			local paux	  ran with a non-0 exit status [Automated Message]
+			local message = "\`progname' ran but Stata gave error code r(\`rc')\n\n\`time'"
+			local subject = "\`progname' \`paux'"
+		}
+		else {
+			di "ERROR: $S_TIME $S_DATE"
+			local paux	  ran with errors [Automated Message]
+			local message = "\`progname' stopped with error code r(\`rc')\n\n\`time'"
+			local subject = "\`progname' \`paux'"
+		}
+		shell echo -e "\`message'" | mail -s "\`subject'" \`whoami\`@mit.edu
+	}
+
+	`!p snip.rv = getlinechar()` Cleanup
+	`!p snip.rv = getlinechar()` -------
+
+	clear all
+	exit \`rc'
+end
+
+`!p
+width = int(vim.eval("&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))")) or 71
+b, m, e, i = _get_comment_format()
+sline = b
+eline = i + e
+if sline is eline:
+	snip.rv = sline + ' ' + (width - 2) * '-'
+else:
+	box = make_box(len(t[1]), width)
+	snip.rv = box[0]`
+`!p snip.rv = getlinechar()` Run the things
+
+main, email
 endsnippet
 
 snippet prog "Stata program" b
-cap program drop ${1:myprogram}
+capture program drop ${1:myprogram}
 program $1
 	args ${2:myargs}
 	$0
@@ -238,6 +367,13 @@ endsnippet
 snippet dosyntax "Basic syntax setup for do file" b
 local 0: subinstr local 0 ";" ","
 syntax, ${1:required} [${2:optional}]
+endsnippet
+
+snippet fun "mata function" b
+${1:ftype}function ${2:fnname} (${3:argtype}${4:args}${5: | optargs})
+{
+	// function stuffs ${0}
+}
 endsnippet
 
 # vim: nowrap fdm=marker ft=snippets

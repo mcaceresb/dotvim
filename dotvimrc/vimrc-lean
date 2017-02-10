@@ -128,37 +128,13 @@ autocmd FileType tex 2match OverLength //
 autocmd FileType tex setlocal ts=2 et sw=2 sts=2
 autocmd FileType markdown setlocal nocursorline nocursorcolumn colorcolumn=
 autocmd FileType markdown 2match OverLength //
+autocmd FileType creole setlocal nocursorline nocursorcolumn colorcolumn=
+autocmd FileType creole 2match OverLength //
 autocmd FileType stata 2match OverLength /\%91v.\+/
 autocmd FileType stata setlocal comments=b:*,fb:-,s1:/*,mb:*,ex:*/,://,:*
 autocmd FileType stata setlocal commentstring=*%s
 autocmd FileType sas   setlocal comments=s0:/*,m0:*,ex0:*/
 autocmd FileType text  2match OverLength //
-
-" Colors: Some hard-coded color modifications I like {{{1
-
-" Display style for misspelled words
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=red gui=undercurl
-
-" Change grayness of comments of the fly (e.g. :Setgray 42)
-command! -nargs=1 Setgray hi Comment gui=italic guifg=grey<args>
-highlight Comment cterm=italic
-
-" Highlight extra white space and lines that are too long
-exec 'highlight OverLength      ctermbg=red guibg=#FFD3D3'
-exec 'highlight ExtraWhitespace ctermbg=red guibg=#FFD3D3'
-match ExtraWhitespace /\s\+$/
-2match OverLength /\%80v.\+/
-
-" File Type highlighting
-exec 'highlight link texBeginEndName Normal'
-exec 'highlight link texRefZone Normal'
-exec 'highlight link sasMacroVar sasFunction'
-exec 'highlight markdownCode guifg=#10A778'
-exec 'highlight sasMacroVar  guifg=#0000FF gui=bold ctermfg=Blue'
-exec 'highlight stataLocal   guifg=#7ab4db gui=bold'
-exec 'highlight stataGlobal  guifg=#BE646C gui=bold'
-exec 'highlight link juliaStringVarsPla Normal'
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker

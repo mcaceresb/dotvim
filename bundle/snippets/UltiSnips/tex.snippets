@@ -233,6 +233,10 @@ endsnippet
 #----------------------------------------------------------------------
 # Formating text: italic, bold, underline, small capital, emph, etc.
 
+snippet cal "Math Calligraphy" w
+\mathcal{${1:${VISUAL}}}$0
+endsnippet
+
 snippet fi "Italics and Bold" w
 \textbf{\textit{${1:${VISUAL}}}}$0
 endsnippet
@@ -454,5 +458,28 @@ snippet bibapa "Bibliography" b
 \bibliography{$1}$0
 endsnippet
 
-# vim: nowrap fdm=marker ft=snippets
+snippet renewdisp "Renew displayoptions" b
+\renewcommand{\displayoptions}{
+	\pagenumbering{roman}
+	\maketitle
+	\tableofcontents\label{toc:toc}
+	% \listoftables\label{toc:toctab}
+	% \listoffigures\label{toc:tocfig}
+	% \clearpage
+	\pagenumbering{arabic}
+}
+endsnippet
 
+snippet tabcustom "Custom Tabular" b
+% <tablefill-custom tag = '${1:${VISUAL:new_tag}}'>
+%   <combine tag = '${2:existing_tag}'>
+%     ${3:[0][1]; [2][-1]}
+%   </combine>
+% </tablefill-custom>
+endsnippet
+
+snippet fa "tmp" w
+\hyperref[tab:$1]{${VISUAL}}$0
+endsnippet
+
+# vim: nowrap fdm=marker ft=snippets

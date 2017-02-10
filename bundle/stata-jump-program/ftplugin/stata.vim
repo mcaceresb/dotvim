@@ -2,12 +2,12 @@
 " Program: stata-jump-program.vim
 " Author:  github.com/mcaceresb
 " Created: Fri Jun 10 12:33:59 EDT 2016
-" Updated: Fri Jun 10 12:34:01 EDT 2016
+" Updated: Tue Feb  7 23:55:38 EST 2017
 " Purpose: Jump programs and use statements in Stata file
 " Usage:   Specify a custom list of environments via g:Stata_jump_environments
 
 if !exists("g:Stata_jump_environments")
-    let g:Stata_jump_environments = ['program', 'use']
+    let g:Stata_jump_environments = ['prog(ram)', 'use', '[a-z ]*function']
 endif
 
 " Adapted from LaTeX-Box ftplugin/latex-box/mappings.vim LatexBoxNextSection

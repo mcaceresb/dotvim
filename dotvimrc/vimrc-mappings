@@ -128,7 +128,7 @@ nnoremap <C-Down> :let &guifont=substitute(&guifont, '\d\+', '\=(submatch(0)-1)'
 " Questionable: Potentially useful, but maybe not {{{1
 
 " Capitalize first letters
-vnoremap <leader>a gu:s/\v<(.)(\w*)/\u\1\L\2/g<CR>
+vnoremap <leader>a gugv:s/\v<(.)(\w*)/\u\1\L\2/g<CR>
 
 " Search and replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
