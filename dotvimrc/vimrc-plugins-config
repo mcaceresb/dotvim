@@ -458,8 +458,8 @@ let g:ycm_semantic_triggers.tex = [
 
 " Lexical: Various spell, thesaurus, and dictionary options {{{2
 
-let g:lexical#thesaurus = ['~/lib/dotvim/spell/moby-thesaurus',]
-let g:lexical#dictionary = ['~/lib/dotvim/spell/moby-single-words',]
+let g:lexical#thesaurus = ['~/lib/lib/moby-thesaurus',]
+let g:lexical#dictionary = ['~/lib/lib/moby-single-words',]
 let g:lexical#spellfile = ['~/.vim/spell/en.utf-8.add',]
 let g:lexical#spelllang = ['en_us',]
 let g:lexical#spell_key = '<leader>lu'
